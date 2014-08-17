@@ -16,8 +16,8 @@ import javax.persistence.Persistence;
  */
 public class EntityManagerHelper {
 
-    EntityManagerFactory entityManagerFactory;
-    EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
     
     public EntityManagerHelper() {
     }

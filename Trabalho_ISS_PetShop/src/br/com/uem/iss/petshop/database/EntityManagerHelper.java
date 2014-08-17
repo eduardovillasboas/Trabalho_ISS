@@ -23,6 +23,12 @@ public class EntityManagerHelper {
     }
        
     public void createEntityManager(){
+        /*
+        * TODO: testar se da erro
+        * criar mais de uma conexão
+        * fechar e tentar utilizar denovo,ou seja,
+        * entitiManagerFactory é compartilhada internamente?
+        */
         entityManagerFactory = Persistence.createEntityManagerFactory("Trabalho_ISS_PetShopPU");
         entityManager = entityManagerFactory.createEntityManager();
     }

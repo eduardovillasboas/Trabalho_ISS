@@ -4,17 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop;
+package br.com.uem.iss.petshop.Util;
 
 /**
  *
  * @author EDUARDO
- * classe principal do projeto a partir dessa classe a aplicacação é
- * iniciada
  */
-public class MainClass {
-    
-    public static void main(String args[]) {
-        
-    }
+public interface ObservableJInternalFrame {
+    public void register(ObserverJInternalFrame o);
+    public void updateObserversWasFinalized();
 }

@@ -20,9 +20,10 @@ public class EntityManagerHelper {
     private EntityManager entityManager;
     
     public EntityManagerHelper() {
+        createEntityManager();
     }
        
-    public void createEntityManager(){
+    private void createEntityManager(){
         /*
         * TODO: testar se da erro
         * criar mais de uma conexão
@@ -34,11 +35,17 @@ public class EntityManagerHelper {
     }
     
     public void persist(Object o){
+        entityManager.getTransaction().begin();
         entityManager.persist(o);
+        entityManager.getTransaction().commit();
     }
     
     public void close(){
         entityManager.close();
         entityManagerFactory.close();
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }

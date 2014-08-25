@@ -61,6 +61,14 @@ public class CustomerDAO {
         customer.setBirth(c.getBirth());
         em.getTransaction().commit();
     }
+
+    void delete(Customer c) {
+        EntityManager em = entityManagerHelper.getEntityManager();
+        Customer customer = em.find(Customer.class, c.getId());
+        em.getTransaction().begin();
+        em.remove(customer);
+        em.getTransaction().commit();
+    }
     
    
 }

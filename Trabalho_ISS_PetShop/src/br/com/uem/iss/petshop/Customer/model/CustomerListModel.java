@@ -56,9 +56,10 @@ public class CustomerListModel {
     }
 
     public void delele(int selectedRow) {
+        Customer c = customers.get(selectedRow);
         customers.remove(selectedRow);
-        /*removera aqui*/
-        throw new UnsupportedOperationException("customerlistmodel");
+        CustomerDAO customerDAO = new CustomerDAO();
+        customerDAO.delete(c);
     }
     
 }

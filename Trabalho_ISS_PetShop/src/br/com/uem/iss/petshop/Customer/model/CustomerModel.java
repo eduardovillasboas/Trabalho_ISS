@@ -18,6 +18,8 @@ import java.util.Date;
 public class CustomerModel implements ObservableModel{
 
     Customer customer;
+    CustomerDAO customerDAO; 
+
     public void setCustomer(Customer c) {
         customer = c;
     }
@@ -29,6 +31,8 @@ public class CustomerModel implements ObservableModel{
         updateObservers = new ArrayList<>();
         errorMessageObservers = new ArrayList<>();
         customer = new Customer();
+        customerDAO = new CustomerDAO();
+
     }
     
     @Override
@@ -92,8 +96,23 @@ public class CustomerModel implements ObservableModel{
         customer.setBirth(date);
     }
 
-    public void gravar() {
-        CustomerDAO customerDAO = new CustomerDAO();
+    public void persist() {
         customerDAO.persist(customer);
     }
+
+    public Long getId() {
+        return customer.getId();
+    }
+
+    public void beginTransaction() {
+        customerDAO.beginTransaction();
+    }
+    public void commit(){
+        customerDAO.commit();
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
 }

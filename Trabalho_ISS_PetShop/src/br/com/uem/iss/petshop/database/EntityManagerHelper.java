@@ -1,8 +1,10 @@
 package br.com.uem.iss.petshop.database;
 
+import br.com.uem.iss.petshop.Customer.model.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaUpdate;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

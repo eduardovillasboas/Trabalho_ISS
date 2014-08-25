@@ -11,10 +11,14 @@ import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Util.ObserverModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
+import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -36,6 +40,7 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
         initComponents();
         customerListModel = listModel;
         customerListController = c;
+        state = State.STATE_CANCEL;
     }
 
     /**
@@ -50,10 +55,10 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableCustomerTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jButtonNew = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,16 +86,16 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Editar");
+        jButtonEdit.setText("Editar");
 
-        jButton2.setText("Deletar");
+        jButtonDelete.setText("Deletar");
 
-        jButton3.setText("Cancelar");
+        jButtonCancel.setText("Cancelar");
 
-        jButton4.setText("Novo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNew.setText("Novo");
+        jButtonNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonNewActionPerformed(evt);
             }
         });
 
@@ -103,10 +108,10 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,50 +122,68 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jButton4)
+                .addComponent(jButtonNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(jButtonDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(jButtonCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonNewActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtonNew;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCustomerTable;
     // End of variables declaration//GEN-END:variables
-
+    enum State{
+        STATE_CANCEL,
+        STATE_NEW,
+        STATE_EDIT
+    }
+    State state;
     public CustomerModel configure(AbstractTableModel tableModel) {
+        createActions();
         CustomerModel customerModel;
         customerModel = new CustomerModel();
-        
+            
         if (tableModel.getRowCount() == 0){
             Customer c = new Customer();
             customerModel.setCustomer(c);
         }
         else {
             jTableCustomerTable.setModel(tableModel);
+            setLocationRelativeTo(null);
             setVisible(true);
-            if (jTableCustomerTable.getSelectedRow() == -1)
+            if (state == State.STATE_CANCEL)
                 return null;
-            int value = jTableCustomerTable.getSelectedRow();
-            Customer customer = customerListModel.getCustomerAt(value);
-            customerModel.setCustomer(customer);
+            if (jTableCustomerTable.getSelectedRow() == -1 && state != State.STATE_NEW)
+                return null;
+            if (state != State.STATE_NEW){
+                int value = jTableCustomerTable.getSelectedRow();
+                Customer customer = customerListModel.getCustomerAt(value);
+                customerModel.setCustomer(customer);
+            }else{
+                Customer c = new Customer();
+                c.setId(null);
+                c.setBirth(new Date());
+                c.setLastName("");
+                c.setName("");
+                customerModel.setCustomer(c);
+            }
         }
         return customerModel;
     }
@@ -174,4 +197,83 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
     public void errorOcurred(String error) {
         JOptionPane.showMessageDialog(this, error);
     }
+    
+    public void createActions(){
+        createNewAction();
+        createEditAction();
+        createDeleteAction();
+        createCancelAction();
+    }
+    
+    public void createNewAction(){
+        jButtonNew.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newAction();
+            }
+
+        });
+    }
+
+    private void newAction() {
+        state = State.STATE_NEW;
+        dispose();
+    }
+    
+    public void createEditAction(){
+        jButtonEdit.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editAction();
+            }
+
+        });
+    }
+
+    private void editAction() {
+        if (jTableCustomerTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
+            return;
+        }
+        state = State.STATE_EDIT;
+        dispose();
+    }
+    
+    public void createDeleteAction(){
+        jButtonDelete.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteAction();
+            }
+
+        });
+    }
+    
+    private void deleteAction() {
+        if (jTableCustomerTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
+            return;
+        }
+        customerListModel.delele(jTableCustomerTable.getSelectedRow());
+    }
+
+    public void createCancelAction(){
+        jButtonCancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cancelAction();
+            }
+
+        });
+    }
+
+    private void cancelAction() {
+        state = State.STATE_CANCEL;
+        dispose();
+    }
+    
 }

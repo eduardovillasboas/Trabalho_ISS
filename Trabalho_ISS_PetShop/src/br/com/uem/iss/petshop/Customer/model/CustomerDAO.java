@@ -19,7 +19,7 @@ public class CustomerDAO {
 
     EntityManagerHelper entityManagerHelper;
     public CustomerDAO() {
-        entityManagerHelper = null;
+        entityManagerHelper = new EntityManagerHelper();
     }
 
     List<Customer> getAllCustomers() {
@@ -30,17 +30,19 @@ public class CustomerDAO {
     }
     
     public void persist(Object o){
-        entityManagerHelper = new EntityManagerHelper();
         entityManagerHelper.persist(o);
-        entityManagerHelper.close();
     }
     
     public void close(){
-        if (entityManagerHelper == null)
-            return;
-        
         entityManagerHelper.close();
-        entityManagerHelper = null;
+    }
+
+    void beginTransaction() {
+        entityManagerHelper.getEntityManager().getTransaction().begin();
+    }
+
+    void commit() {
+        entityManagerHelper.getEntityManager().getTransaction().commit();
     }
     
 }

@@ -54,5 +54,11 @@ public class CustomerListModel {
             customerDAO.close();
         }
     }
+
+    public void delele(int selectedRow) {
+        customers.remove(selectedRow);
+        /*removera aqui*/
+        throw new UnsupportedOperationException("customerlistmodel");
+    }
     
 }

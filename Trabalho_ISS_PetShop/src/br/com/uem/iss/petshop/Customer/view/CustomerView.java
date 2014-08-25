@@ -35,6 +35,7 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
         customerControler = c;
         customerModel = m;
         observerJInternalFrames = new ArrayList<>();
+        updateViewFromModel();
     }
 
     /**
@@ -166,10 +167,8 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
         if (msg != null){
             JOptionPane.showMessageDialog(this, msg);
             return;
-        } 
-        jTextFieldName.setText(customerModel.getName());
-        jTextFieldLastName.setText(customerModel.getLastName());
-        jFormattedTextFieldBirth.setText(customerModel.getBirthDate().toString());
+        }
+        updateViewFromModel();
     }
 
     @Override
@@ -206,11 +205,31 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
     }
     
     private void gravar(){
+        if (customerModel.getId() != null)
+            customerModel.beginTransaction();
+            
         customerModel.setName(jTextFieldName.getText());
         customerModel.setLastName(jTextFieldLastName.getText());
         customerModel.setBirthDat(new Date());
-        customerModel.gravar();
+        
+        if (customerModel.getId() == null)
+            customerModel.persist();
+        else
+            customerModel.commit();
+        
         finalizeCustomerView();
+    }
+
+    private void updateViewFromModel() {
+        if (customerModel != null && customerModel.getCustomer() != null){
+            jTextFieldName.setText(customerModel.getName());
+            jTextFieldLastName.setText(customerModel.getLastName());
+            jFormattedTextFieldBirth.setText(customerModel.getBirthDate().toString());
+        } else {
+            jTextFieldName.setText("");
+            jTextFieldLastName.setText("");
+            jFormattedTextFieldBirth.setText("");
+        }
     }
     
 }

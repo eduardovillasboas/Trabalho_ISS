@@ -7,14 +7,18 @@
 package br.com.uem.iss.petshop.Customer.view;
 
 import br.com.uem.iss.petshop.Customer.controller.CustomerController;
+import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Util.ObservableJInternalFrame;
 import br.com.uem.iss.petshop.Util.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Util.ObserverModel;
+import br.com.uem.iss.petshop.database.EntityManagerHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.swing.JOptionPane;
 
 /**
@@ -194,7 +198,7 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                gravar();
+                record();
             }
         });
     }
@@ -204,19 +208,8 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
         dispose();
     }
     
-    private void gravar(){
-        if (customerModel.getId() != null)
-            customerModel.beginTransaction();
-            
-        customerModel.setName(jTextFieldName.getText());
-        customerModel.setLastName(jTextFieldLastName.getText());
-        customerModel.setBirthDat(new Date());
-        
-        if (customerModel.getId() == null)
-            customerModel.persist();
-        else
-            customerModel.commit();
-        
+    private void record(){
+        persist();
         finalizeCustomerView();
     }
 
@@ -231,5 +224,16 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
             jFormattedTextFieldBirth.setText("");
         }
     }
-    
+
+    private void persist() {
+        atualizeModelFromViewValues();
+        customerModel.persist();
+        
+    }
+
+    private void atualizeModelFromViewValues() {
+        customerModel.setName(jTextFieldName.getText());
+        customerModel.setLastName(jTextFieldLastName.getText());
+        customerModel.setBirth(new Date());
+    }
 }

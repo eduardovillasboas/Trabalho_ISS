@@ -3,6 +3,7 @@ package br.com.uem.iss.petshop.database;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaUpdate;
 
@@ -49,5 +50,9 @@ public class EntityManagerHelper {
 
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    public EntityTransaction getTransaction() {
+        return entityManager.getTransaction();
     }
 }

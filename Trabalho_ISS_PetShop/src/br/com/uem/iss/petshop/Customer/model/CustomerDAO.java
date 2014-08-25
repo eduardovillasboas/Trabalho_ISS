@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.Customer.model;
 import br.com.uem.iss.petshop.database.EntityManagerHelper;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 /**
@@ -29,20 +30,37 @@ public class CustomerDAO {
         return typedQuery.getResultList();
     }
     
-    public void persist(Object o){
-        entityManagerHelper.persist(o);
+    public void persist(Customer c){
+        if (c.getId() != null){
+            update(c);
+        }
+        else{
+            rawPersist(c);
+        }
+            
     }
     
     public void close(){
         entityManagerHelper.close();
     }
-
-    void beginTransaction() {
-        entityManagerHelper.getEntityManager().getTransaction().begin();
+    
+    public EntityTransaction getTransaction(){
+        return entityManagerHelper.getTransaction();
     }
 
-    void commit() {
-        entityManagerHelper.getEntityManager().getTransaction().commit();
+    private void rawPersist(Customer c) {
+        entityManagerHelper.persist(c);
+    }
+
+    private void update(Customer c) {
+        EntityManager em = entityManagerHelper.getEntityManager();
+        Customer customer = em.find(Customer.class, c.getId());
+        em.getTransaction().begin();
+        customer.setName(c.getName());
+        customer.setLastName(c.getLastName());
+        customer.setBirth(c.getBirth());
+        em.getTransaction().commit();
     }
     
+   
 }

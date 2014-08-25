@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Util.ObservableModel;
 import br.com.uem.iss.petshop.Util.ObserverModel;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -92,7 +93,7 @@ public class CustomerModel implements ObservableModel{
         customer.setLastName(text);
     }
     
-    public void setBirthDat(Date date){
+    public void setBirth(Date date){
         customer.setBirth(date);
     }
 
@@ -104,15 +105,12 @@ public class CustomerModel implements ObservableModel{
         return customer.getId();
     }
 
-    public void beginTransaction() {
-        customerDAO.beginTransaction();
-    }
-    public void commit(){
-        customerDAO.commit();
-    }
-
     public Customer getCustomer() {
         return customer;
+    }
+    
+    public EntityTransaction getTransaction(){
+        return customerDAO.getTransaction();
     }
 
 }

@@ -154,7 +154,7 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
         STATE_NEW,
         STATE_EDIT
     }
-    State state;
+    private State state;
     public CustomerModel configure(AbstractTableModel tableModel) {
         createActions();
         CustomerModel customerModel;

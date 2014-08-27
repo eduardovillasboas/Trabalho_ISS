@@ -10,15 +10,11 @@ import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
-import br.com.uem.iss.petshop.Util.ObserverModel;
+import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
-import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -41,6 +37,8 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
         customerListModel = listModel;
         customerListController = c;
         state = State.STATE_CANCEL;
+        customerListModel.registerErrorObserver(this);
+        customerListModel.registerUpdate(this);
     }
 
     /**
@@ -191,7 +189,8 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
     @Override
     public void updateViews(String msg) {
         JOptionPane.showMessageDialog(this, msg);
-    }
+        jTableCustomerTable.repaint();
+   }
 
     @Override
     public void errorOcurred(String error) {
@@ -257,8 +256,7 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
             JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
             return;
         }
-        customerListModel.delele(jTableCustomerTable.getSelectedRow());
-        jTableCustomerTable.repaint();
+        customerListController.delete(jTableCustomerTable.getSelectedRow());
     }
 
     public void createCancelAction(){

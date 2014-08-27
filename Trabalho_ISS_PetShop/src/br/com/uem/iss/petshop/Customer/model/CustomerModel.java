@@ -6,11 +6,10 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
-import br.com.uem.iss.petshop.Util.ObservableModel;
-import br.com.uem.iss.petshop.Util.ObserverModel;
+import br.com.uem.iss.petshop.Interfaces.ObservableModel;
+import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -107,10 +106,6 @@ public class CustomerModel implements ObservableModel{
 
     public Customer getCustomer() {
         return customer;
-    }
-    
-    public EntityTransaction getTransaction(){
-        return customerDAO.getTransaction();
     }
 
 }

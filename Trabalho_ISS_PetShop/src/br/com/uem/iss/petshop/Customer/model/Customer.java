@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
+import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,13 +29,14 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name=Customer.FIND_ALL,query = "SELECT c FROM Customer c")
 })
-public class Customer implements Serializable {
+public class Customer implements Serializable,PetshopEntity {
     private static final long serialVersionUID = 1L;
     public static final String FIND_ALL = "Customer.findAll";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -102,6 +104,14 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "br.com.uem.iss.petshop.Customer.model.Customer[ id=" + id + " ]";
+    }
+
+    @Override
+    public void setAtributes(PetshopEntity entity) {
+        Customer e = (Customer)entity;
+        setName(e.getName());
+        setLastName(e.getLastName());
+        setBirth(e.getBirth());
     }
     
 }

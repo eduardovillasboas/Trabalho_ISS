@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Util;
+package br.com.uem.iss.petshop.Interfaces;
 
 /**
  *
  * @author EDUARDO
  */
-public interface ObservableJInternalFrame {
-    public void register(ObserverJInternalFrame o);
-    public void updateObserversWasFinalized();
+public interface ObserverModel {
+    public void updateViews(String msg);
+    public void errorOcurred(String error);
 }

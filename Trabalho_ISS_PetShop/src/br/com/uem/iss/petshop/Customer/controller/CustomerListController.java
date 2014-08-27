@@ -54,5 +54,9 @@ public class CustomerListController {
         return listView.configure(tableModel);
     }
 
+    public void delete(int selectedRow) {
+        listModel.delele(selectedRow);
+    }
+
     
 }

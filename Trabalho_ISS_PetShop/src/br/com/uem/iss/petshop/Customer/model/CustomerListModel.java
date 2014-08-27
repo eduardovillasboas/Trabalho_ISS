@@ -6,6 +6,8 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
+import br.com.uem.iss.petshop.Interfaces.ObservableModel;
+import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.database.EntityManagerHelper;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +16,15 @@ import java.util.List;
  *
  * @author EDUARDO
  */
-public class CustomerListModel {
+public class CustomerListModel implements ObservableModel{
 
     List<Customer> customers;
+    ArrayList<ObserverModel> observersUpdateView;
+    ArrayList<ObserverModel> observersError;
     public CustomerListModel() {
         customers = new ArrayList<>();
+        observersError = new ArrayList<>();
+        observersUpdateView = new ArrayList<>();
     }
     
     public int length() {
@@ -60,6 +66,31 @@ public class CustomerListModel {
         customers.remove(selectedRow);
         CustomerDAO customerDAO = new CustomerDAO();
         customerDAO.delete(c);
+        updateObservers("Cliente "+c.getName().trim()+" deletado com sucesso!");
+    }
+
+    @Override
+    public void updateErrorMessage(String msg) {
+        for (ObserverModel observer : observersError) {
+            observer.errorOcurred(msg);
+        }
+    }
+
+    @Override
+    public void updateObservers(String msg) {
+        for (ObserverModel observer : observersError) {
+            observer.updateViews(msg);
+        }
+    }
+
+    @Override
+    public void registerUpdate(ObserverModel o) {
+        observersUpdateView.add(o);
+    }
+
+    @Override
+    public void registerErrorObserver(ObserverModel o) {
+        observersError.add(o);
     }
     
 }

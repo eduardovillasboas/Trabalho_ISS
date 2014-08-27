@@ -8,17 +8,19 @@
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/model/CustomerDAO.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Main/view/MainView.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/model/CustomerListModel.java</file>
-            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Util/ObservableModel.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/database/EntityManagerHelper.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/model/CustomerModel.java</file>
-            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Util/ObserverJInternalFrame.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Main/controller/MainController.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/controller/CustomerController.java</file>
+            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Interfaces/ObserverJInternalFrame.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/controller/CustomerListController.java</file>
+            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Interfaces/PetshopEntity.java</file>
+            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Interfaces/ObservableJInternalFrame.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/view/CustomerListView.java</file>
-            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Util/ObserverModel.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/META-INF/persistence.xml</file>
-            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Util/ObservableJInternalFrame.java</file>
+            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/database/AbstractDAO.java</file>
+            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Interfaces/ObservableModel.java</file>
+            <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Interfaces/ObserverModel.java</file>
             <file>file:/C:/repositorios/Trabalho_ISS/Trabalho_ISS_PetShop/src/br/com/uem/iss/petshop/Customer/model/Customer.java</file>
         </group>
     </open-files>

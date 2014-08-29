@@ -4,16 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Customer.view;
+package br.com.uem.iss.petshop.Commons.view;
 
-import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
-import br.com.uem.iss.petshop.Customer.model.Customer;
-import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
-import br.com.uem.iss.petshop.Customer.model.CustomerModel;
+import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
+import br.com.uem.iss.petshop.Interfaces.PetshopListControllerInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -21,24 +18,24 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author EDUARDO
  */
-public class CustomerListView extends javax.swing.JDialog implements ObserverModel{
+public class PetshopListView extends javax.swing.JDialog implements ObserverModel{
 
     /**
      * Creates new form CustomerListView
      */
-    CustomerListModel customerListModel;
-    CustomerListController customerListController;
-    public CustomerListView(java.awt.Frame parent, 
+    //CustomerListModel customerListModel;
+    PetshopListControllerInterface customerListController;
+    public PetshopListView(java.awt.Frame parent, 
             boolean modal,
-            CustomerListController c,
-            CustomerListModel listModel) {
+            PetshopListControllerInterface c,
+            ObservableModel listModel) {
         super(parent, modal);
         initComponents();
-        customerListModel = listModel;
+       // customerListModel = listModel;
         customerListController = c;
         state = State.STATE_CANCEL;
-        customerListModel.registerErrorObserver(this);
-        customerListModel.registerUpdate(this);
+        listModel.registerErrorObserver(this);
+        listModel.registerUpdate(this);
     }
 
     /**
@@ -147,43 +144,18 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCustomerTable;
     // End of variables declaration//GEN-END:variables
-    enum State{
+    public enum State{
         STATE_CANCEL,
         STATE_NEW,
         STATE_EDIT
     }
     private State state;
-    public CustomerModel configure(AbstractTableModel tableModel) {
+    public State getState(){
+        return state;
+    }
+    public Object configure(AbstractTableModel tableModel) {
         createActions();
-        CustomerModel customerModel;
-        customerModel = new CustomerModel();
-            
-        if (tableModel.getRowCount() == 0){
-            Customer c = new Customer();
-            customerModel.setCustomer(c);
-        }
-        else {
-            jTableCustomerTable.setModel(tableModel);
-            setLocationRelativeTo(null);
-            setVisible(true);
-            if (state == State.STATE_CANCEL)
-                return null;
-            if (jTableCustomerTable.getSelectedRow() == -1 && state != State.STATE_NEW)
-                return null;
-            if (state != State.STATE_NEW){
-                int value = jTableCustomerTable.getSelectedRow();
-                Customer customer = customerListModel.getCustomerAt(value);
-                customerModel.setCustomer(customer);
-            }else{
-                Customer c = new Customer();
-                c.setId(null);
-                c.setBirth(new Date());
-                c.setLastName("");
-                c.setName("");
-                customerModel.setCustomer(c);
-            }
-        }
-        return customerModel;
+        return customerListController.execControllerInterface(tableModel,jTableCustomerTable);
     }
 
     @Override

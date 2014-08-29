@@ -10,7 +10,7 @@ import br.com.uem.iss.petshop.Customer.controller.CustomerController;
 import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
-import br.com.uem.iss.petshop.Customer.view.CustomerListView;
+import br.com.uem.iss.petshop.Commons.view.PetshopListView;
 import br.com.uem.iss.petshop.Main.controller.MainController;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import java.awt.event.ActionEvent;

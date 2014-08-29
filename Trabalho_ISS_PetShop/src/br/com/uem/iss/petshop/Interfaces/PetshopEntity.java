@@ -11,6 +11,11 @@ package br.com.uem.iss.petshop.Interfaces;
  * @author EDUARDO
  */
 public interface PetshopEntity {
-    public Long getId();
+
+    /**
+     *
+     * @return
+     */
+    public Long getID();
     public void setAtributes(PetshopEntity entity);
 }

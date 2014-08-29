@@ -106,7 +106,7 @@ public class CustomerModel implements ObservableModel{
     }
 
     public Long getId() {
-        return customer.getId();
+        return customer.getID();
     }
 
     public Customer getCustomer() {

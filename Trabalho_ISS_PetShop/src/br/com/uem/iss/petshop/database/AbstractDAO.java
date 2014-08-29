@@ -24,7 +24,7 @@ public class AbstractDAO {
 
     public void update(PetshopEntity e, Class<PetshopEntity> classEntiy) {
         EntityManager em = entityManagerHelper.getEntityManager();
-        PetshopEntity entity =(PetshopEntity)em.find(classEntiy, e.getId());
+        PetshopEntity entity =(PetshopEntity)em.find(classEntiy, e.getID());
         em.getTransaction().begin();
         entity.setAtributes(e);
         em.getTransaction().commit();
@@ -39,7 +39,7 @@ public class AbstractDAO {
     }
 
     protected void rawPersist(PetshopEntity c){
-        if (c.getId() != null){
+        if (c.getID() != null){
             Class<PetshopEntity> pClass;
             pClass = convertClassType(Customer.class);
             update(c,pClass);
@@ -59,7 +59,7 @@ public class AbstractDAO {
 
     protected void rawDelete(Customer c) {
         EntityManager em = entityManagerHelper.getEntityManager();
-        Customer customer = em.find(Customer.class, c.getId());
+        Customer customer = em.find(Customer.class, c.getID());
         em.getTransaction().begin();
         em.remove(customer);
         em.getTransaction().commit();

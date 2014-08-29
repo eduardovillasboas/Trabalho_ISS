@@ -21,6 +21,7 @@ public class CustomerController {
     CustomerView customerView;
     public CustomerController(CustomerModel m,ObserverJInternalFrame o) {
         customerModel = m;
+        customerModel.initialize();
         customerView = new CustomerView(this,customerModel);
         customerView.register(o);
         o.addjDesktop(customerView);

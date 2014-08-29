@@ -1,4 +1,4 @@
 *.class
-/Trabalho_ISS_PetShop/nbproject/private/
-/Trabalho_ISS_PetShop/build/
+nbproject/private/
+build/
 /Trabalho_ISS_PetShop/dist/

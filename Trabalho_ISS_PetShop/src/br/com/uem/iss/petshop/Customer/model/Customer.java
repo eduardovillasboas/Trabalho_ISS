@@ -34,7 +34,7 @@ public class Customer implements Serializable,PetshopEntity {
     private Long id;
 
     @Override
-    public Long getId() {
+    public Long getID() {
         return id;
     }
 

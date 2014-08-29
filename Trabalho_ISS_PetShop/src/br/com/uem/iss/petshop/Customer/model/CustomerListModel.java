@@ -34,7 +34,7 @@ public class CustomerListModel implements ObservableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Customer customer = customers.get(rowIndex);
         if (columnIndex == 0)
-            return customer.getId();
+            return customer.getID();
         
         return customer.getName();
     }

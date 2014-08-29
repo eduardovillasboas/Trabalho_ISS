@@ -257,6 +257,7 @@ public class CustomerListView extends javax.swing.JDialog implements ObserverMod
             return;
         }
         customerListController.delete(jTableCustomerTable.getSelectedRow());
+        jTableCustomerTable.clearSelection();
     }
 
     public void createCancelAction(){

@@ -26,12 +26,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "CUSTOMER")
-@NamedQueries({
-    @NamedQuery(name=Customer.FIND_ALL,query = "SELECT c FROM Customer c")
-})
 public class Customer implements Serializable,PetshopEntity {
     private static final long serialVersionUID = 1L;
-    public static final String FIND_ALL = "Customer.findAll";
+    public static final String FIND_ALL = "SELECT c FROM Customer c";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -40,6 +40,8 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
         customerModel = m;
         observerJInternalFrames = new ArrayList<>();
         updateViewFromModel();
+        customerModel.registerErrorObserver(this);
+        customerModel.registerUpdate(this);
     }
 
     /**
@@ -281,7 +283,7 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
     }
     
     private void record(){
-        persist();
+        customerControler.persist();
         finalizeCustomerView();
     }
 
@@ -297,13 +299,7 @@ public class CustomerView extends javax.swing.JInternalFrame implements Observab
         }
     }
 
-    private void persist() {
-        atualizeModelFromViewValues();
-        customerModel.persist();
-        
-    }
-
-    private void atualizeModelFromViewValues() {
+    public void atualizeModelFromViewValues() {
         customerModel.setName(jTextFieldName.getText());
         customerModel.setLastName(jTextFieldLastName.getText());
         customerModel.setBirth(new Date());

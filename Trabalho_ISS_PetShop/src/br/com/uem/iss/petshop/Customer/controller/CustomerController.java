@@ -9,7 +9,6 @@ package br.com.uem.iss.petshop.Customer.controller;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Customer.view.CustomerView;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
-import javax.swing.JFrame;
 
 /**
  *
@@ -30,6 +29,11 @@ public class CustomerController {
     public void exec() {
         customerModel.initialize();
         customerView.configure();
+    }
+
+    public void persist() {
+        customerView.atualizeModelFromViewValues();
+        customerModel.persist();
     }
 
 }

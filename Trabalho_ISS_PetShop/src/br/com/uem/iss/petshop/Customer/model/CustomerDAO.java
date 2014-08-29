@@ -26,7 +26,7 @@ public class CustomerDAO extends AbstractDAO{
     List<Customer> getAllCustomers() {
         entityManagerHelper = new EntityManagerHelper();
         EntityManager em = entityManagerHelper.getEntityManager();
-        TypedQuery<Customer> typedQuery  = em.createQuery("SELECT c FROM Customer c",Customer.class);
+        TypedQuery<Customer> typedQuery  = em.createQuery(Customer.FIND_ALL,Customer.class);
         return typedQuery.getResultList();
     }
     

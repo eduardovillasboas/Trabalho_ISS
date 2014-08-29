@@ -97,7 +97,12 @@ public class CustomerModel implements ObservableModel{
     }
 
     public void persist() {
-        customerDAO.persist(customer);
+        try {
+            customerDAO.persist(customer);
+            updateObservers("Dados gravados com sucesso");
+        } catch (Exception e) {
+            updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+        }
     }
 
     public Long getId() {

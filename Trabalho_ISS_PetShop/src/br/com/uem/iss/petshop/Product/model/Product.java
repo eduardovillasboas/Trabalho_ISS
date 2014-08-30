@@ -38,6 +38,23 @@ public class Product implements Serializable,PetshopEntity {
     
     @Column(name = "descricao", length = 70 )
     String descricao;
+    
+    @Column(name = "unidade", length = 3 )
+    String undade;
+
+    @Column(name = "marca", length = 20 )
+    String marca;
+    
+    @Column(name = "estoque" )
+    Double estoque;
+    
+    public String getUndade() {
+        return undade;
+    }
+
+    public void setUndade(String undade) {
+        this.undade = undade;
+    }
 
     public String getDescricao() {
         return descricao;

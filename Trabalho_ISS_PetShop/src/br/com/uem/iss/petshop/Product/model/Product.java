@@ -49,6 +49,15 @@ public class Product implements Serializable,PetshopEntity {
     @Column(name = "estoque" )
     Double estoque;
     
+    @Column(name = "peso_bruto")
+    float pesoBruto;
+    
+    @Column(name = "preco")
+    float preco;
+    
+    @Column(name = "peso_liquido")
+    float pesoLiquido;
+    
     public String getUndade() {
         return undade;
     }
@@ -63,10 +72,7 @@ public class Product implements Serializable,PetshopEntity {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-    
-    @Column(name = "peso_bruto")
-    float pesoBruto;
+    }   
 
     public float getPesoBruto() {
         return pesoBruto;
@@ -91,16 +97,7 @@ public class Product implements Serializable,PetshopEntity {
     public void setPesoLiquido(float pesoLiquido) {
         this.pesoLiquido = pesoLiquido;
     }
-    
-    @Column(name = "preco")
-    float preco;
-    
-    @Column(name = "peso_liquido")
-//    @Temporal(TemporalType.DATE)        
-    float pesoLiquido;
-    
-    
-    
+     
     @Override
     public void setAtributes(PetshopEntity entity) {
         Product p;

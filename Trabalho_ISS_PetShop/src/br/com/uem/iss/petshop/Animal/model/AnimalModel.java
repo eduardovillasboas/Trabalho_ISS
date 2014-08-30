@@ -6,18 +6,15 @@
 
 package br.com.uem.iss.petshop.Animal.model;
 
-import br.com.uem.iss.petshop.Interfaces.ObservableModel;
-import br.com.uem.iss.petshop.Interfaces.ObserverModel;
-import java.util.ArrayList;
+import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
+import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 
 /**
  *
  * @author EDUARDO
  */
-public class AnimalModel implements ObservableModel{
+public class AnimalModel extends AbstractModel{
 
-    private ArrayList<ObserverModel> updateObservers;
-    private ArrayList<ObserverModel> errorMessageObservers;
     private AnimalDAO animalDAO;
     private Animal animal;
 
@@ -25,39 +22,22 @@ public class AnimalModel implements ObservableModel{
         this.animal = animal;
     }
     public AnimalModel() {
-        updateObservers = new ArrayList<>();
-        errorMessageObservers = new ArrayList<>();
         animal = new Animal();
         animalDAO = new AnimalDAO();
         
     }
-    
-    
-    @Override
-    public void updateErrorMessage(String msg) {
-        for (ObserverModel observer  : errorMessageObservers) {
-            observer.errorOcurred(msg);
-        }
-    }
-
-    @Override
-    public void updateObservers(String msg) {
-        for (ObserverModel updateObserver : updateObservers) {
-            updateObserver.updateViews(msg);
-        }
-    }
-
-    @Override
-    public void registerUpdate(ObserverModel o) {
-        updateObservers.add(o);
-    }
-
-    @Override
-    public void registerErrorObserver(ObserverModel o) {
-        errorMessageObservers.add(o);
-    }
 
     public void initialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void persist() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setEntity(PetshopEntity entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

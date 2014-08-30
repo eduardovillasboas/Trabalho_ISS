@@ -128,14 +128,12 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
     private void createCustomerAction() {
         jMenuItemCustomerRecord.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 CustomerListModel listModel;
                 listModel = new CustomerListModel();
-                CustomerListController listController = 
-                        new CustomerListController(listModel,jMainFrame);
+                CustomerListController listController;
+                listController = new CustomerListController(listModel,jMainFrame);
                 CustomerModel model;
                 model = new CustomerModel();
                 model.setEntity(listController.exec());

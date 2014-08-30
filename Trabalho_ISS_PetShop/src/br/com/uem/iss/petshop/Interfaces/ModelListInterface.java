@@ -10,8 +10,8 @@ package br.com.uem.iss.petshop.Interfaces;
  *
  * @author EDUARDO
  */
-public interface ModelListInterface extends ObservableModel {
-
+public interface ModelListInterface {
+    public void initialize();
     public PetshopEntity getPetshopEntityAt(int value);
     
 }

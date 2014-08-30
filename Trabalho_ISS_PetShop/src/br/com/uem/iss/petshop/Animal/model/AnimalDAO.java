@@ -22,19 +22,19 @@ public class AnimalDAO extends AbstractDAO{
         super();
     }
     
-    List<Animal> getAllCustomers() {
-        entityManagerHelper = new EntityManagerHelper();
-        EntityManager em = entityManagerHelper.getEntityManager();
-        TypedQuery<Animal> typedQuery  = em.createQuery(Animal.FIND_ALL,Animal.class);
-        return typedQuery.getResultList();
-    }
-    
     public void persist(Animal c){
         rawPersist(c,Animal.class);
     }
 
     void delete(Animal c){
         rawDelete(c,Animal.class);
+    }
+
+    public List<Animal> getAllAnimals() {
+        entityManagerHelper = new EntityManagerHelper();
+        EntityManager em = entityManagerHelper.getEntityManager();
+        TypedQuery<Animal> typedQuery  = em.createQuery(Animal.FIND_ALL,Animal.class);
+        return typedQuery.getResultList();
     }
 
     

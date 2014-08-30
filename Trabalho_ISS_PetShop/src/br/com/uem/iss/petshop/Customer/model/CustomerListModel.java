@@ -6,11 +6,10 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
+import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
-import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
-import br.com.uem.iss.petshop.database.EntityManagerHelper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +17,11 @@ import java.util.List;
  *
  * @author EDUARDO
  */
-public class CustomerListModel implements ModelListInterface {
+public class CustomerListModel extends AbstractModelList{
 
-    List<Customer> customers;
-    ArrayList<ObserverModel> observersUpdateView;
-    ArrayList<ObserverModel> observersError;
+    private List<Customer> customers;
     public CustomerListModel() {
         customers = new ArrayList<>();
-        observersError = new ArrayList<>();
-        observersUpdateView = new ArrayList<>();
     }
     
     public int length() {
@@ -51,6 +46,7 @@ public class CustomerListModel implements ModelListInterface {
         return customers.get(value);
     }
 
+    @Override
     public void initialize() {
         CustomerDAO customerDAO = new CustomerDAO();
         customers = customerDAO.getAllCustomers();
@@ -69,30 +65,6 @@ public class CustomerListModel implements ModelListInterface {
         CustomerDAO customerDAO = new CustomerDAO();
         customerDAO.delete(c);
         updateObservers("Cliente "+c.getName().trim()+" deletado com sucesso!");
-    }
-
-    @Override
-    public void updateErrorMessage(String msg) {
-        for (ObserverModel observer : observersError) {
-            observer.errorOcurred(msg);
-        }
-    }
-
-    @Override
-    public void updateObservers(String msg) {
-        for (ObserverModel observer : observersError) {
-            observer.updateViews(msg);
-        }
-    }
-
-    @Override
-    public void registerUpdate(ObserverModel o) {
-        observersUpdateView.add(o);
-    }
-
-    @Override
-    public void registerErrorObserver(ObserverModel o) {
-        observersError.add(o);
     }
 
     @Override

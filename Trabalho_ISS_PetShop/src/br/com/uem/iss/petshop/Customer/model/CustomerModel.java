@@ -7,7 +7,6 @@
 package br.com.uem.iss.petshop.Customer.model;
 
 import br.com.uem.iss.petshop.Interfaces.ModelInterface;
-import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
@@ -22,11 +21,6 @@ public class CustomerModel implements ModelInterface{
     private Customer customer;
     final private CustomerDAO customerDAO; 
 
-    @Override
-    public void setCustomer(PetshopEntity c) {
-        customer = (Customer)c;
-    }
-    
     final private ArrayList<ObserverModel> updateObservers;
     final private ArrayList<ObserverModel> errorMessageObservers;
 
@@ -116,6 +110,11 @@ public class CustomerModel implements ModelInterface{
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    @Override
+    public void setEntity(PetshopEntity entity) {
+        customer = (Customer)entity;
     }
 
 }

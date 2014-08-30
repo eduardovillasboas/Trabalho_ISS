@@ -6,8 +6,10 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
+import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
+import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.database.EntityManagerHelper;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
  *
  * @author EDUARDO
  */
-public class CustomerListModel implements ObservableModel{
+public class CustomerListModel implements ModelListInterface {
 
     List<Customer> customers;
     ArrayList<ObserverModel> observersUpdateView;
@@ -91,6 +93,11 @@ public class CustomerListModel implements ObservableModel{
     @Override
     public void registerErrorObserver(ObserverModel o) {
         observersError.add(o);
+    }
+
+    @Override
+    public PetshopEntity getPetshopEntityAt(int value) {
+        return customers.get(value);
     }
     
 }

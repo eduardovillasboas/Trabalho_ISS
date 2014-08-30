@@ -135,9 +135,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
                 CustomerListController controller = 
                         new CustomerListController(listModel,jMainFrame);
                 CustomerModel model;
-                model = controller.exec();
-                if (model == null)
-                    return; 
+                model = new CustomerModel();
+                model.setEntity(controller.exec());
                 
                 CustomerController c;
                 c = new CustomerController(model, (ObserverJInternalFrame)jMainFrame);

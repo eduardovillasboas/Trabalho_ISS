@@ -10,9 +10,8 @@ package br.com.uem.iss.petshop.Interfaces;
  *
  * @author EDUARDO
  */
-public interface ModelInterface extends ObservableModel{
-
-    public void initialize();
-    public void persist();
-    public void setEntity(PetshopEntity entity);
+public interface ControllerListInterface {
+    //public ModelInterface execControllerInterface(AbstractTableModel tableModel, JTable jTableCustomerTable);
+    public void delete(int selectedRow);
+    
 }

@@ -6,12 +6,19 @@
 
 package br.com.uem.iss.petshop.Commons.view;
 
+import br.com.uem.iss.petshop.Customer.model.Customer;
+import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
-import br.com.uem.iss.petshop.Interfaces.PetshopListControllerInterface;
+import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
+import br.com.uem.iss.petshop.Interfaces.ModelInterface;
+import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
+import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -23,19 +30,21 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
     /**
      * Creates new form CustomerListView
      */
-    //CustomerListModel customerListModel;
-    PetshopListControllerInterface customerListController;
+    private ModelListInterface listModel;
+    final private ControllerListInterface controllerList;
+    private ModelInterface model;
+    
     public PetshopListView(java.awt.Frame parent, 
             boolean modal,
-            PetshopListControllerInterface c,
-            ObservableModel listModel) {
+            ControllerListInterface c,
+            ModelListInterface l) {
         super(parent, modal);
         initComponents();
-       // customerListModel = listModel;
-        customerListController = c;
+        listModel = l;
+        controllerList = c;
         state = State.STATE_CANCEL;
-        listModel.registerErrorObserver(this);
-        listModel.registerUpdate(this);
+        ((ObservableModel)listModel).registerErrorObserver(this);
+        ((ObservableModel)listModel).registerUpdate(this);
     }
 
     /**
@@ -184,11 +193,30 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
     public State getState(){
         return state;
     }
-    public Object configure(AbstractTableModel tableModel) {
+    
+    public PetshopEntity configure(AbstractTableModel tableModel) {
         createActions();
-        return customerListController.execControllerInterface(tableModel,jTableCustomerTable);
+        return execControllerInterface(tableModel,jTableCustomerTable);
     }
 
+    public PetshopEntity execControllerInterface(AbstractTableModel tableModel, JTable jTableCustomerTable){
+        PetshopEntity entity = null;
+        if (tableModel.getRowCount() != 0) {
+            jTableCustomerTable.setModel(tableModel);
+            setLocationRelativeTo(null);
+            setVisible(true);
+            if (getState() == PetshopListView.State.STATE_CANCEL)
+                return null;
+            if (jTableCustomerTable.getSelectedRow() == -1 && getState() != PetshopListView.State.STATE_NEW)
+                return null;
+            if (getState() == PetshopListView.State.STATE_EDIT){
+                int value = jTableCustomerTable.getSelectedRow();
+                entity = listModel.getPetshopEntityAt(value);
+            }
+        }
+        return entity;
+    }
+            
     @Override
     public void updateViews(String msg) {
         JOptionPane.showMessageDialog(this, msg);
@@ -260,7 +288,7 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
             JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
             return;
         }
-        customerListController.delete(jTableCustomerTable.getSelectedRow());
+        controllerList.delete(jTableCustomerTable.getSelectedRow());
         jTableCustomerTable.revalidate();
         jTableCustomerTable.clearSelection();
     }

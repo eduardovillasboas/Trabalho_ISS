@@ -6,11 +6,10 @@
 
 package br.com.uem.iss.petshop.Animal.view;
 
-import br.com.uem.iss.petshop.Interfaces.ObservableJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
-import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Animal.controller.AnimalController;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
+import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -18,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author EDUARDO
  */
-public class AnimalView extends javax.swing.JInternalFrame implements ObservableJInternalFrame, ObserverModel{
+public class AnimalView extends javax.swing.JInternalFrame implements ViewInterface{
 
     /**
      * Creates new form AnimalView
@@ -43,15 +42,32 @@ public class AnimalView extends javax.swing.JInternalFrame implements Observable
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldName = new javax.swing.JTextField();
+
+        jLabel1.setText("Nome:");
+
+        jTextFieldName.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         pack();
@@ -59,6 +75,8 @@ public class AnimalView extends javax.swing.JInternalFrame implements Observable
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -91,6 +109,16 @@ public class AnimalView extends javax.swing.JInternalFrame implements Observable
     }
 
     private void updateViewFromModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createActions() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void configure() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

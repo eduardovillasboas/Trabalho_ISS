@@ -6,16 +6,12 @@
 
 package br.com.uem.iss.petshop.Interfaces;
 
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-
 /**
  *
  * @author EDUARDO
  */
-public interface PetshopListControllerInterface {
+public interface ModelListInterface extends ObservableModel {
 
-    public Object execControllerInterface(AbstractTableModel tableModel, JTable jTableCustomerTable);
-    public void delete(int selectedRow);
+    public PetshopEntity getPetshopEntityAt(int value);
     
 }

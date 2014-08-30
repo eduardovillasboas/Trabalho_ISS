@@ -19,9 +19,11 @@ public class AnimalModel extends AbstractModel{
     private Animal animal;
 
     public void setAnimal(Animal animal) {
+        
         this.animal = animal;
     }
     public AnimalModel() {
+        super();
         animal = new Animal();
         animalDAO = new AnimalDAO();
         

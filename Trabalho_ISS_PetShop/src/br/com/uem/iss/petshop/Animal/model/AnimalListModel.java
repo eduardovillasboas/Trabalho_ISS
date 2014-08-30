@@ -20,7 +20,7 @@ public class AnimalListModel extends AbstractModelList{
     private List<Animal> animals;
 
     public AnimalListModel() {
-        
+        super();
         animals = new ArrayList<>();
     }
     

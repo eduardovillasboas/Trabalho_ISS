@@ -33,7 +33,6 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
      */
     private ModelListInterface listModel;
     final private ControllerListInterface controllerList;
-    private ModelInterface model;
     
     public PetshopListView(java.awt.Frame parent, 
             boolean modal,
@@ -209,7 +208,8 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
                 int value = jTableCustomerTable.getSelectedRow();
                 entity = listModel.getPetshopEntityAt(value);
             }
-        }
+        } else
+            state = State.STATE_NEW;
         return entity;
     }
             

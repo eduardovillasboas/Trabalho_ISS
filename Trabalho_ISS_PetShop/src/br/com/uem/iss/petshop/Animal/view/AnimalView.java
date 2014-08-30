@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.petshop.Animal.view;
+package br.com.uem.iss.petshop.Animal.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObservableJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
-import br.com.uem.petshop.Animal.controller.AnimalController;
-import br.com.uem.petshop.Animal.model.AnimalModel;
+import br.com.uem.iss.petshop.Animal.controller.AnimalController;
+import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

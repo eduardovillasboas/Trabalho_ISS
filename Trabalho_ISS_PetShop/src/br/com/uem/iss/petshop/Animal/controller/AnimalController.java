@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.petshop.Animal.controller;
+package br.com.uem.iss.petshop.Animal.controller;
 
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
-import br.com.uem.petshop.Animal.model.AnimalModel;
-import br.com.uem.petshop.Animal.view.AnimalView;
+import br.com.uem.iss.petshop.Animal.model.AnimalModel;
+import br.com.uem.iss.petshop.Animal.view.AnimalView;
 
 /**
  *

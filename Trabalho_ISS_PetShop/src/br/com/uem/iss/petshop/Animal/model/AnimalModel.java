@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.petshop.Animal.model;
+package br.com.uem.iss.petshop.Animal.model;
 
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;

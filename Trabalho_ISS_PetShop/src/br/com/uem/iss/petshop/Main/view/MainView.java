@@ -13,6 +13,8 @@ import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Commons.view.PetshopListView;
 import br.com.uem.iss.petshop.Main.controller.MainController;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Utils.State;
+import com.sun.naming.internal.VersionHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -132,12 +134,13 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
                 
                 CustomerListModel listModel;
                 listModel = new CustomerListModel();
-                CustomerListController controller = 
+                CustomerListController listController = 
                         new CustomerListController(listModel,jMainFrame);
                 CustomerModel model;
                 model = new CustomerModel();
-                model.setEntity(controller.exec());
-                
+                model.setEntity(listController.exec());
+                if (listController.getState() == State.STATE_CANCEL)
+                    return;
                 CustomerController c;
                 c = new CustomerController(model, (ObserverJInternalFrame)jMainFrame);
                 c.exec();

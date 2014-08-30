@@ -6,12 +6,7 @@
 
 package br.com.uem.iss.petshop.Main;
 
-import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Main.controller.MainController;
-import br.com.uem.iss.petshop.database.EntityManagerHelper;
-import java.util.Date;
-import javax.persistence.EntityManager;
-import javax.sound.midi.ControllerEventListener;
 
 /**
  *

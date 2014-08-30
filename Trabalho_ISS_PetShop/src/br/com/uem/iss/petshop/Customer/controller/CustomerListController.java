@@ -6,16 +6,12 @@
 
 package br.com.uem.iss.petshop.Customer.controller;
 
-import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
-import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Commons.view.PetshopListView;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
-import br.com.uem.iss.petshop.Interfaces.ModelInterface;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
-import java.util.Date;
+import br.com.uem.iss.petshop.Utils.State;
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -65,6 +61,11 @@ public class CustomerListController implements ControllerListInterface{
     @Override
     public void delete(int selectedRow) {
         listModel.delele(selectedRow);
+    }
+
+    @Override
+    public State getState() {
+        return listView.getState();
     }
     
 }

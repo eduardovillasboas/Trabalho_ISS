@@ -4,17 +4,14 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Interfaces;
-
-import br.com.uem.iss.petshop.Utils.State;
+package br.com.uem.iss.petshop.Utils;
 
 /**
  *
  * @author EDUARDO
  */
-public interface ControllerListInterface {
-    
-    public void delete(int selectedRow);
-    public State getState();
-    
+public enum State {
+    STATE_CANCEL,
+    STATE_NEW,
+    STATE_EDIT
 }

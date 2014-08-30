@@ -8,12 +8,13 @@ package br.com.uem.iss.petshop.Commons.view;
 
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
-import br.com.uem.iss.petshop.Interfaces.ObservableModel;
-import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
 import br.com.uem.iss.petshop.Interfaces.ModelInterface;
 import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
+import br.com.uem.iss.petshop.Interfaces.ObservableModel;
+import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Utils.State;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -184,11 +185,6 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCustomerTable;
     // End of variables declaration//GEN-END:variables
-    public enum State{
-        STATE_CANCEL,
-        STATE_NEW,
-        STATE_EDIT
-    }
     private State state;
     public State getState(){
         return state;
@@ -205,11 +201,11 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
             jTableCustomerTable.setModel(tableModel);
             setLocationRelativeTo(null);
             setVisible(true);
-            if (getState() == PetshopListView.State.STATE_CANCEL)
+            if (getState() == State.STATE_CANCEL)
                 return null;
-            if (jTableCustomerTable.getSelectedRow() == -1 && getState() != PetshopListView.State.STATE_NEW)
+            if (jTableCustomerTable.getSelectedRow() == -1 && getState() != State.STATE_NEW)
                 return null;
-            if (getState() == PetshopListView.State.STATE_EDIT){
+            if (getState() == State.STATE_EDIT){
                 int value = jTableCustomerTable.getSelectedRow();
                 entity = listModel.getPetshopEntityAt(value);
             }

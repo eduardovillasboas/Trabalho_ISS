@@ -8,13 +8,14 @@ package br.com.uem.iss.petshop.Customer.controller;
 
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Customer.view.CustomerView;
+import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 
 /**
  *
  * @author EDUARDO
  */
-public class CustomerController {
+public class CustomerController implements ControllerInterface{
 
     CustomerModel customerModel;
     CustomerView customerView;
@@ -26,11 +27,13 @@ public class CustomerController {
         o.addjDesktop(customerView);
     }
 
+    @Override
     public void exec() {
         customerModel.initialize();
         customerView.configure();
     }
 
+    @Override
     public void persist() {
         customerView.atualizeModelFromViewValues();
         customerModel.persist();

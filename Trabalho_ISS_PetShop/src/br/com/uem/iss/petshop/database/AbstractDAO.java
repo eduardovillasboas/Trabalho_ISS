@@ -38,10 +38,10 @@ public class AbstractDAO {
         entityManagerHelper.persist(c);
     }
 
-    protected void rawPersist(PetshopEntity c){
+    protected void rawPersist(PetshopEntity c, Object typeClass){
         if (c.getID() != null){
             Class<PetshopEntity> pClass;
-            pClass = convertClassType(Customer.class);
+            pClass = convertClassType(typeClass);
             update(c,pClass);
         }
         else{
@@ -57,9 +57,10 @@ public class AbstractDAO {
         entityManagerHelper.close();
     }
 
-    protected void rawDelete(Customer c) {
+    protected void rawDelete(PetshopEntity c, Object typObject) {
         EntityManager em = entityManagerHelper.getEntityManager();
-        Customer customer = em.find(Customer.class, c.getID());
+        Class<PetshopEntity> typeEntity = convertClassType(typObject);
+        PetshopEntity customer = em.find(typeEntity, c.getID());
         em.getTransaction().begin();
         em.remove(customer);
         em.getTransaction().commit();

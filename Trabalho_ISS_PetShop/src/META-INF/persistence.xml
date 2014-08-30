@@ -3,6 +3,7 @@
   <persistence-unit name="Trabalho_ISS_PetShopPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.com.uem.iss.petshop.Customer.model.Customer</class>
+    <class>br.com.uem.petshop.Animal.model.Animal</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

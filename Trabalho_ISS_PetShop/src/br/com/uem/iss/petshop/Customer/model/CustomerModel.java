@@ -6,8 +6,10 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
+import br.com.uem.iss.petshop.Interfaces.ModelInterface;
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
+import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,17 +17,18 @@ import java.util.Date;
  *
  * @author EDUARDO
  */
-public class CustomerModel implements ObservableModel{
+public class CustomerModel implements ModelInterface{
 
-    Customer customer;
-    CustomerDAO customerDAO; 
+    private Customer customer;
+    final private CustomerDAO customerDAO; 
 
-    public void setCustomer(Customer c) {
-        customer = c;
+    @Override
+    public void setCustomer(PetshopEntity c) {
+        customer = (Customer)c;
     }
     
-    ArrayList<ObserverModel> updateObservers;
-    ArrayList<ObserverModel> errorMessageObservers;
+    final private ArrayList<ObserverModel> updateObservers;
+    final private ArrayList<ObserverModel> errorMessageObservers;
 
     public CustomerModel() {
         updateObservers = new ArrayList<>();
@@ -59,6 +62,7 @@ public class CustomerModel implements ObservableModel{
         }
     }
 
+    @Override
     public void initialize() {
         if (customer == null)
             customer = new Customer();
@@ -96,6 +100,7 @@ public class CustomerModel implements ObservableModel{
         customer.setBirth(date);
     }
 
+    @Override
     public void persist() {
         try {
             customerDAO.persist(customer);

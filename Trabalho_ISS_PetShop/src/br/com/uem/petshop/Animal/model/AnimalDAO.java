@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Customer.model;
+package br.com.uem.petshop.Animal.model;
 
 import br.com.uem.iss.petshop.database.AbstractDAO;
 import br.com.uem.iss.petshop.database.EntityManagerHelper;
@@ -16,26 +16,26 @@ import javax.persistence.TypedQuery;
  *
  * @author EDUARDO
  */
-public class CustomerDAO extends AbstractDAO{
+public class AnimalDAO extends AbstractDAO{
 
-    
-    public CustomerDAO() {
+    public AnimalDAO() {
         super();
     }
-
-    List<Customer> getAllCustomers() {
+    
+    List<Animal> getAllCustomers() {
         entityManagerHelper = new EntityManagerHelper();
         EntityManager em = entityManagerHelper.getEntityManager();
-        TypedQuery<Customer> typedQuery  = em.createQuery(Customer.FIND_ALL,Customer.class);
+        TypedQuery<Animal> typedQuery  = em.createQuery(Animal.FIND_ALL,Animal.class);
         return typedQuery.getResultList();
     }
     
-    public void persist(Customer c){
-        rawPersist(c,Customer.class);
+    public void persist(Animal c){
+        rawPersist(c,Animal.class);
     }
 
-    void delete(Customer c){
-        rawDelete(c,Customer.class);
+    void delete(Animal c){
+        rawDelete(c,Animal.class);
     }
-   
+
+    
 }

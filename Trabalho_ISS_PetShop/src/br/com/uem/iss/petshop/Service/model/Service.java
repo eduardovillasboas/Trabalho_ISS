@@ -8,7 +8,10 @@ package br.com.uem.iss.petshop.Service.model;
 
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -21,7 +24,30 @@ import javax.persistence.Table;
 public class Service implements PetshopEntity,Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
+    
+    @Column(name = "descricao", length = 70 )
+    String descricao;
+    
+    @Column(name = "preco")
+    float preco;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
 
     @Override
     public Long getID() {

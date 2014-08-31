@@ -126,5 +126,9 @@ public class ProductModel implements ModelInterface {
     public void setPesoLiquido(float pesoLiquido) {
         product.setPesoLiquido(pesoLiquido);
     }
+    
+    public Product getProduct() {
+        return product;
+    }
 
 }

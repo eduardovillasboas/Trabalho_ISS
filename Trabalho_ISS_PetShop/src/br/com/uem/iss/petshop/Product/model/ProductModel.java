@@ -30,6 +30,7 @@ public class ProductModel implements ModelInterface {
         errorMessageObservers = new ArrayList<>();
         product = new Product();
         productDAO = new ProductDAO();
+        //initialize();
 
     }
 
@@ -44,6 +45,21 @@ public class ProductModel implements ModelInterface {
         }
         if (product.getUndade() == null) {
             product.setUndade("");
+        }
+        if (product.getEstoque() == null) {
+            product.setEstoque(Double.NaN);
+        }
+        if (product.getMarca() == null) {
+            product.setMarca("");
+        }
+        if (product.getPesoBruto() == null){
+            product.setPesoBruto(Float.NaN);
+        }
+        if (product.getPesoLiquido() == null){
+            product.setPesoLiquido(Float.NaN);
+        }
+        if (product.getPreco() == null){
+            product.setPreco(Float.NaN);
         }
         updateObservers(null);
     }
@@ -126,25 +142,25 @@ public class ProductModel implements ModelInterface {
     public void setPesoLiquido(Float pesoLiquido) {
         product.setPesoLiquido(pesoLiquido);
     }
-    public Double getEstoque(){
+
+    public Double getEstoque() {
         return product.getEstoque();
-    }     
-    
-    public void setEstoque( Double estoque ){
+    }
+
+    public void setEstoque(Double estoque) {
         product.setEstoque(estoque);
-    }     
-    
-    public String getMarca(){
+    }
+
+    public String getMarca() {
         return product.getMarca();
-    }     
-    
-    public void setMarca( String marca ){
+    }
+
+    public void setMarca(String marca) {
         product.setMarca(marca);
     }
-    
+
     public Product getProduct() {
         return product;
-    }  
-    
+    }
 
 }

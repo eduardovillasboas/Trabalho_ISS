@@ -90,27 +90,27 @@ public class Product implements Serializable,PetshopEntity {
         this.descricao = descricao;
     }   
 
-    public float getPesoBruto() {
+    public Float getPesoBruto() {
         return pesoBruto;
     }
 
-    public void setPesoBruto(float pesoBruto) {
+    public void setPesoBruto(Float pesoBruto) {
         this.pesoBruto = pesoBruto;
     }
 
-    public float getPreco() {
+    public Float getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(Float preco) {
         this.preco = preco;
     }
 
-    public float getPesoLiquido() {
+    public Float getPesoLiquido() {
         return pesoLiquido;
     }
 
-    public void setPesoLiquido(float pesoLiquido) {
+    public void setPesoLiquido(Float pesoLiquido) {
         this.pesoLiquido = pesoLiquido;
     }
      
@@ -146,3 +146,4 @@ public class Product implements Serializable,PetshopEntity {
     }
     
 }
+    

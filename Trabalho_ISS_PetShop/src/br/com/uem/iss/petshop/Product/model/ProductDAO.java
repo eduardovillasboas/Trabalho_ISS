@@ -37,7 +37,8 @@ public class ProductDAO extends AbstractDAO {
     public List<Product> getAllProducts() {
         entityManagerHelper = new EntityManagerHelper();
         EntityManager em = entityManagerHelper.getEntityManager();
-        TypedQuery<Product> typedQuery  = em.createQuery(Product.FIND_ALL,Product.class);
+        TypedQuery<Product> typedQuery;
+        typedQuery = em.createQuery(Product.FIND_ALL,Product.class);
         return typedQuery.getResultList();
     }
             

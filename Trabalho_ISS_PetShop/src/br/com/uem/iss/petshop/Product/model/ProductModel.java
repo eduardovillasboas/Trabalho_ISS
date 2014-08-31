@@ -103,32 +103,48 @@ public class ProductModel implements ModelInterface {
         product.setDescricao(descricao);
     }
 
-    public float getPesoBruto() {
+    public Float getPesoBruto() {
         return product.getPesoBruto();
     }
 
-    public void setPesoBruto(float pesoBruto) {
+    public void setPesoBruto(Float pesoBruto) {
         product.setPesoBruto(pesoBruto);
     }
 
-    public float getPreco() {
+    public Float getPreco() {
         return product.getPreco();
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(Float preco) {
         product.setPreco(preco);
     }
 
-    public float getPesoLiquido() {
+    public Float getPesoLiquido() {
         return product.getPesoLiquido();
     }
 
-    public void setPesoLiquido(float pesoLiquido) {
+    public void setPesoLiquido(Float pesoLiquido) {
         product.setPesoLiquido(pesoLiquido);
+    }
+    public Double getEstoque(){
+        return product.getEstoque();
+    }     
+    
+    public void setEstoque( Double estoque ){
+        product.setEstoque(estoque);
+    }     
+    
+    public String getMarca(){
+        return product.getMarca();
+    }     
+    
+    public void setMarca( String marca ){
+        product.setMarca(marca);
     }
     
     public Product getProduct() {
         return product;
-    }
+    }  
+    
 
 }

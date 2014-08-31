@@ -43,4 +43,35 @@ public class ProductListModel extends AbstractModelList {
         return products.get(value);
     }
     
+    
+    public int length() {
+        return products.size();
+    }
+
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Product product = products.get(rowIndex);
+        if (columnIndex == 0)
+            return product.getID();
+        
+        return product.getDescricao();
+    }
+
+    public String columnName(int col) {
+        if (col == 0)
+            return "Código";
+        return "Descrição";
+    }
+
+    public Product getCustomerAt(int value) {
+        return products.get(value);
+    }
+
+    public void delele(int selectedRow) {
+        Product p = products.get(selectedRow);
+        products.remove(selectedRow);
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.delete(p);
+        updateObservers( "Produto " + p.getDescricao().trim()+" deletado com sucesso!" );
+    }
+    
 }

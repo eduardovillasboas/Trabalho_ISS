@@ -10,8 +10,12 @@ import br.com.uem.iss.petshop.Customer.controller.CustomerController;
 import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
-import br.com.uem.iss.petshop.Main.controller.MainController;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Main.controller.MainController;
+import br.com.uem.iss.petshop.Product.controller.ProductController;
+import br.com.uem.iss.petshop.Product.controller.ProductListController;
+import br.com.uem.iss.petshop.Product.model.ProductListModel;
+import br.com.uem.iss.petshop.Product.model.ProductModel;
 import br.com.uem.iss.petshop.Utils.State;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,6 +51,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemCustomerRecord = new javax.swing.JMenuItem();
+        jMenuItemProductRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -67,7 +72,20 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu1.setText("Manutencao");
 
         jMenuItemCustomerRecord.setText("Cadastro de Clientes");
+        jMenuItemCustomerRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCustomerRecordActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItemCustomerRecord);
+
+        jMenuItemProductRecord.setText("Cadastro de Produtos");
+        jMenuItemProductRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProductRecordActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemProductRecord);
 
         jMenuBar1.add(jMenu1);
 
@@ -102,6 +120,14 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItemCustomerRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCustomerRecordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCustomerRecordActionPerformed
+
+    private void jMenuItemProductRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProductRecordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemProductRecordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -111,6 +137,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
+    private javax.swing.JMenuItem jMenuItemProductRecord;
     // End of variables declaration//GEN-END:variables
 
     
@@ -118,6 +145,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     public void createControls() {
         jMainFrame = this;
         createCustomerAction();
+        createProductAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -149,6 +177,26 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         
     }
 
+    private void createProductAction() {
+        jMenuItemProductRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ProductListModel listModel;
+                listModel = new ProductListModel();
+                ProductListController listController;
+                listController = new ProductListController(listModel,jMainFrame);
+                ProductModel model;
+                model = new ProductModel();
+                model.setEntity(listController.exec());
+                if (listController.getState() == State.STATE_CANCEL)
+                    return;
+                ProductController p;
+                p = new ProductController(model, (ObserverJInternalFrame)jMainFrame);
+                p.exec();
+            }
+        });
+    }
+    
     @Override
     public void addjDesktop(JInternalFrame customerView) {
         jDesktopPane1.add(customerView);

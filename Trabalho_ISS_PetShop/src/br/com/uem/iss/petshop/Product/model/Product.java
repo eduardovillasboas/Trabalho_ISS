@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PRODUCT")
 public class Product implements Serializable,PetshopEntity {    
-    public static final String FIND_ALL = "SELECT p FROM PRODUCT p";
+    public static final String FIND_ALL = "SELECT p FROM Product p";
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,13 +50,29 @@ public class Product implements Serializable,PetshopEntity {
     Double estoque;
     
     @Column(name = "peso_bruto")
-    float pesoBruto;
+    Float pesoBruto;
     
     @Column(name = "preco")
-    float preco;
+    Float preco;
     
     @Column(name = "peso_liquido")
-    float pesoLiquido;
+    Float pesoLiquido;
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public Double getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Double estoque) {
+        this.estoque = estoque;
+    }
     
     public String getUndade() {
         return undade;

@@ -148,6 +148,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     public void createControls() {
         jMainFrame = this;
         createCustomerAction();
+        createProductAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);

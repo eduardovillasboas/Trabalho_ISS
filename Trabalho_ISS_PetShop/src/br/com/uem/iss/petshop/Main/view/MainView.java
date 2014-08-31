@@ -146,6 +146,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMainFrame = this;
         createCustomerAction();
         createProductAction();
+        
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -160,7 +161,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
     }
     
-    public void customerAction(){
+    private void customerAction(){
         CustomerListModel listModel;
         listModel = new CustomerListModel();
         CustomerListController listController;

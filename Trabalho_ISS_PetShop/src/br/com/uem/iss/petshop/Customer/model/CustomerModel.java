@@ -6,7 +6,7 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
-import br.com.uem.iss.petshop.Interfaces.ModelInterface;
+import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
@@ -16,46 +16,18 @@ import java.util.Date;
  *
  * @author EDUARDO
  */
-public class CustomerModel implements ModelInterface{
+public class CustomerModel extends AbstractModel{
 
     private Customer customer;
     final private CustomerDAO customerDAO; 
 
-    final private ArrayList<ObserverModel> updateObservers;
-    final private ArrayList<ObserverModel> errorMessageObservers;
 
     public CustomerModel() {
-        updateObservers = new ArrayList<>();
-        errorMessageObservers = new ArrayList<>();
         customer = new Customer();
         customerDAO = new CustomerDAO();
 
     }
     
-    @Override
-    public void registerErrorObserver(ObserverModel e) {
-        errorMessageObservers.add(e);
-    }
-    
-    @Override
-    public void registerUpdate(ObserverModel e) {
-        updateObservers.add(e);
-    }
-    
-    @Override
-    public  void updateErrorMessage(String msg){
-        for (ObserverModel observer  : errorMessageObservers) {
-            observer.errorOcurred(msg);
-        }
-    }
-    
-    @Override
-    public void updateObservers(String msg){
-        for (ObserverModel updateObserver : updateObservers) {
-            updateObserver.updateViews(msg);
-        }
-    }
-
     @Override
     public void initialize() {
         if (customer == null)

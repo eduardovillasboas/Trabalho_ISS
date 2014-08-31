@@ -6,10 +6,7 @@
 
 package br.com.uem.iss.petshop.Commons.view;
 
-import br.com.uem.iss.petshop.Customer.model.Customer;
-import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
-import br.com.uem.iss.petshop.Interfaces.ModelInterface;
 import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
@@ -17,7 +14,6 @@ import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Utils.State;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;

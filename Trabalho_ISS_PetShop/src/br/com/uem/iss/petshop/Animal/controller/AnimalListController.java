@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Animal.controller;
 
+import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
 import br.com.uem.iss.petshop.Commons.view.PetshopListView;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
@@ -41,30 +42,7 @@ public class AnimalListController implements ControllerListInterface{
     @Override
     public PetshopEntity exec() {
         listModel.initialize();
-        AbstractTableModel tableModel = new AbstractTableModel() {
-
-            @Override
-            public String getColumnName(int col){
-                return listModel.columnName(col);
-            }
-            
-            @Override
-            public int getRowCount() {
-                return listModel.length();
-            }
-
-            @Override
-            public int getColumnCount() {
-                return 2;
-            }
-
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                return listModel.getValueAt(rowIndex,columnIndex);
-            }
-        };
-
-        return listView.configure(tableModel);
+        return listView.configure(listModel.createModel());
     }
     
     

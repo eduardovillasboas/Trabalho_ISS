@@ -11,6 +11,8 @@ import br.com.uem.iss.petshop.Animal.controller.AnimalController;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.Utils.DateUtil;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -18,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author EDUARDO
  */
-public class AnimalView extends javax.swing.JInternalFrame implements ViewInterface{
+public final class AnimalView extends javax.swing.JInternalFrame implements ViewInterface{
 
     /**
      * Creates new form AnimalView
@@ -53,15 +55,20 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
         jLabel3 = new javax.swing.JLabel();
         jTextFieldBreed = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonAddPatology = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jFormattedTextFieldWeight = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jFormattedTextFieldHeight = new javax.swing.JFormattedTextField();
-        jButton3 = new javax.swing.JButton();
+        jButtonRemovePatology = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jButtonRecord = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Cadastro de Animais");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -82,7 +89,7 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Patologias");
 
-        jButton2.setText("Adicionar");
+        jButtonAddPatology.setText("Adicionar");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Peso:");
@@ -94,7 +101,7 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
 
         jFormattedTextFieldHeight.setText("jFormattedTextField3");
 
-        jButton3.setText("Remover");
+        jButtonRemovePatology.setText("Remover");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -103,6 +110,10 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
         });
         jScrollPane1.setViewportView(jList1);
 
+        jButtonRecord.setText("Gravar");
+
+        jButtonCancel.setText("Cancelar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,39 +121,41 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonAddPatology)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(jButtonRemovePatology)
+                        .addGap(115, 115, 115))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldBreed, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldBirth))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldBreed, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonRecord)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonCancel)
+                .addGap(77, 77, 77))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,11 +177,15 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonAddPatology)
+                    .addComponent(jButtonRemovePatology))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRecord)
+                    .addComponent(jButtonCancel))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,8 +193,10 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAddPatology;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonRecord;
+    private javax.swing.JButton jButtonRemovePatology;
     private javax.swing.JFormattedTextField jFormattedTextFieldBirth;
     private javax.swing.JFormattedTextField jFormattedTextFieldHeight;
     private javax.swing.JFormattedTextField jFormattedTextFieldWeight;
@@ -233,21 +252,59 @@ public class AnimalView extends javax.swing.JInternalFrame implements ViewInterf
         jFormattedTextFieldWeight.setText(Double.toString(animalModel.getWeight()));
         
         
+        
     }
 
     @Override
     public void createActions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        createActionRecord();
+        createActionCancel();
     }
 
     @Override
     public void configure() {
         createActions();
-        
+        setVisible(true);
     }
 
     @Override
     public void updateModelFromViewValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DateUtil dateUtil = new DateUtil();
+        animalModel.setName(jTextFieldName.getText());
+        animalModel.setBirth(dateUtil.toDate(jFormattedTextFieldBirth.getText()));
+        animalModel.setBreed(jTextFieldBreed.getText());
+        animalModel.setHeight(new Double(jFormattedTextFieldHeight.getText()));
+        animalModel.setWeight(new Double(jFormattedTextFieldWeight.getText()));
+        
+    }
+
+    private void createActionRecord() {
+        jButtonRecord.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionRecord();
+            }
+        });
+    }
+
+    private void actionRecord(){
+        animalController.persist();
+        finalizeView();
+    }
+    
+    private void finalizeView() {
+        updateObserversWasFinalized();
+        dispose();
+    }
+
+    private void createActionCancel() {
+        jButtonCancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finalizeView();
+            }
+        });
     }
 }

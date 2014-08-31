@@ -14,14 +14,13 @@ import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author EDUARDO
  */
-public class CustomerView extends javax.swing.JInternalFrame implements ViewInterface{
+public final class CustomerView extends javax.swing.JInternalFrame implements ViewInterface{
 
     /**
      * Creates new form CustomerView
@@ -354,5 +353,6 @@ public class CustomerView extends javax.swing.JInternalFrame implements ViewInte
         customerModel.setCpf(jFormattedTextFieldCPF.getText());
         customerModel.setAddress(jTextFieldAddress.getText());
         customerModel.setNumber(new Long(jTextFieldNumber.getText()));
+        
     }
 }

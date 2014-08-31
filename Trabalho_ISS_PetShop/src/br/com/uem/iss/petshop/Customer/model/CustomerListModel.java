@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -73,5 +74,32 @@ public class CustomerListModel extends AbstractModelList{
     public PetshopEntity getPetshopEntityAt(int value) {
         return customers.get(value);
     }
-    
+        public AbstractTableModel createModel(){
+        return new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col){
+                return columnName(col);
+            }
+            
+            @Override
+            public int getRowCount() {
+                return customers.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Customer c = customers.get(rowIndex);
+                if (columnIndex == 0)
+                    return c.getID();
+                return c.getName();
+            }
+        };
+    }
+
 }

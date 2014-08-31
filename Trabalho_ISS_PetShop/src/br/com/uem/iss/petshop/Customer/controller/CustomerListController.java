@@ -30,32 +30,10 @@ public class CustomerListController implements ControllerListInterface{
                 listModel);
     }
 
+    @Override
     public PetshopEntity exec() {
         listModel.initialize();
-        AbstractTableModel tableModel = new AbstractTableModel() {
-
-            @Override
-            public String getColumnName(int col){
-                return listModel.columnName(col);
-            }
-            
-            @Override
-            public int getRowCount() {
-                return listModel.length();
-            }
-
-            @Override
-            public int getColumnCount() {
-                return 2;
-            }
-
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                return listModel.getValueAt(rowIndex,columnIndex);
-            }
-        };
-
-        return listView.configure(tableModel);
+        return listView.configure(listModel.createModel());
     }
 
     @Override

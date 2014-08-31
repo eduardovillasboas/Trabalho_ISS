@@ -49,6 +49,11 @@ public class AnimalListModel extends AbstractModelList{
         return new AbstractTableModel() {
 
             @Override
+            public String getColumnName(int col){
+                return columnName(col);
+            }
+
+            @Override
             public int getRowCount() {
                 return animals.size();
             }

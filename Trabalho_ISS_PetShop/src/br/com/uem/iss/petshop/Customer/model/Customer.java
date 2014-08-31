@@ -6,16 +6,18 @@
 
 package br.com.uem.iss.petshop.Customer.model;
 
+import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -68,14 +70,36 @@ public class Customer implements Serializable,PetshopEntity {
 
     
     @Column(name = "name")
-    String name;
+    private String name;
     
     @Column(name = "sobrenome")
-    String lastName;
+    private String lastName;
     
     @Column(name = "nascimento")
     @Temporal(TemporalType.DATE)        
-    Date birth;
+    private Date birth;
+    
+    @Column(name = "peso")
+    private Double weight;
+    
+    @Column(name = "altura")
+    private Double height;
+    
+    @Column(name = "rg")
+    private String rg;
+    
+    @Column(name = "cpf")
+    private String cpf;
+    
+    @Column(name = "endereco")
+    private String address;
+    
+    @Column(name = "numero")
+    private Long number;
+    
+    @ManyToMany()
+    @JoinTable(name="ANIMAL_CLIENT")
+    private List<Animal> animals;
     
     
     @Override
@@ -109,6 +133,62 @@ public class Customer implements Serializable,PetshopEntity {
         setName(e.getName());
         setLastName(e.getLastName());
         setBirth(e.getBirth());
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
     }
     
 }

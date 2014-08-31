@@ -6,7 +6,6 @@
 
 package br.com.uem.iss.petshop.Main.view;
 
-import br.com.uem.iss.petshop.Commons.view.PetshopListView;
 import br.com.uem.iss.petshop.Customer.controller.CustomerController;
 import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
@@ -18,10 +17,8 @@ import br.com.uem.iss.petshop.Product.controller.ProductListController;
 import br.com.uem.iss.petshop.Product.model.ProductListModel;
 import br.com.uem.iss.petshop.Product.model.ProductModel;
 import br.com.uem.iss.petshop.Utils.State;
-import com.sun.naming.internal.VersionHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
@@ -158,20 +155,26 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemCustomerRecord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CustomerListModel listModel;
-                listModel = new CustomerListModel();
-                CustomerListController listController;
-                listController = new CustomerListController(listModel,jMainFrame);
-                CustomerModel model;
-                model = new CustomerModel();
-                model.setEntity(listController.exec());
-                if (listController.getState() == State.STATE_CANCEL)
-                    return;
-                CustomerController c;
-                c = new CustomerController(model, (ObserverJInternalFrame)jMainFrame);
-                c.exec();
+                customerAction();
             }
         });
+    }
+    
+    public void customerAction(){
+        CustomerListModel listModel;
+        listModel = new CustomerListModel();
+        CustomerListController listController;
+        listController = new CustomerListController(listModel,jMainFrame);
+        CustomerModel model;
+        model = new CustomerModel();
+        model.setEntity(listController.exec());
+        if (listController.getState() == State.STATE_CANCEL)
+            return;
+        
+        CustomerController c;
+        c = new CustomerController(model, (ObserverJInternalFrame)jMainFrame);
+        c.exec();
+        
     }
 
     private void createProductAction() {

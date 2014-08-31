@@ -6,12 +6,16 @@
 
 package br.com.uem.iss.petshop.Animal.model;
 
+import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import org.eclipse.persistence.annotations.Customizer;
 
 /**
  *
@@ -33,6 +37,13 @@ public class Animal implements Serializable, PetshopEntity {
         this.id = id;
     }
 
+    @ManyToMany(mappedBy = "animals")
+    private List<Customer> customer;
+    
+    private String name;
+    
+    private String breed;
+    
     @Override
     public int hashCode() {
         int hash = 0;

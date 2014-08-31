@@ -47,19 +47,19 @@ public class ProductModel implements ModelInterface {
             product.setUndade("");
         }
         if (product.getEstoque() == null) {
-            product.setEstoque(Double.NaN);
+            product.setEstoque(new Double(0));
         }
         if (product.getMarca() == null) {
             product.setMarca("");
         }
         if (product.getPesoBruto() == null){
-            product.setPesoBruto(Float.NaN);
+            product.setPesoBruto(new Float(0));
         }
         if (product.getPesoLiquido() == null){
-            product.setPesoLiquido(Float.NaN);
+            product.setPesoLiquido(new Float(0));
         }
         if (product.getPreco() == null){
-            product.setPreco(Float.NaN);
+            product.setPreco(new Float(0));
         }
         updateObservers(null);
     }

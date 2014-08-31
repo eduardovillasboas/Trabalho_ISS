@@ -12,7 +12,6 @@ import br.com.uem.iss.petshop.Product.model.ProductModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -302,11 +301,23 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
     private void updateViewFromModel() {
         if (productModel != null && productModel.getProduct() != null) {
-//            jTextFieldName.setText(customerModel.getName());
-//            jTextFieldLastName.setText(customerModel.getLastName());
-//            jFormattedTextFieldBirth.setText(customerModel.getBirthDate().toString());
+            jFormattedTextFieldCodigo.setText("0");
+            jFormattedTextFieldEstoque.setText(productModel.getEstoque().toString());
+            jFormattedTextFieldPesoBruto.setText(productModel.getPesoBruto().toString());
+            jFormattedTextFieldPesoLiquido.setText(productModel.getPesoLiquido().toString());
+            jFormattedTextFieldPreco.setText(productModel.getPreco().toString());
+            jTextFieldDescricao.setText(productModel.getDescricao());
+            jTextFieldMarca.setText(productModel.getMarca());
+            jTextFieldUnidade.setText(productModel.getUndade());
         } else {
-
+            jFormattedTextFieldCodigo.setText("0");
+            jFormattedTextFieldEstoque.setText("");
+            jFormattedTextFieldPesoBruto.setText("");
+            jFormattedTextFieldPesoLiquido.setText("");
+            jFormattedTextFieldPreco.setText("");
+            jTextFieldDescricao.setText("");
+            jTextFieldMarca.setText("");
+            jTextFieldUnidade.setText("");
         }
     }
 
@@ -384,9 +395,13 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
     }
 
     public void atualizeModelFromViewValues() {
-//        productModel.setName(jTextFieldName.getText());
-//        productModel.setLastName(jTextFieldLastName.getText());
-//        productModel.setBirth(new Date());
+        productModel.setEstoque(Double.parseDouble(jFormattedTextFieldEstoque.getText()));
+        productModel.setPesoBruto(Float.parseFloat(jFormattedTextFieldPesoBruto.getText()));
+        productModel.setPesoLiquido(Float.parseFloat(jFormattedTextFieldPesoLiquido.getText()));
+        productModel.setPreco(Float.parseFloat(jFormattedTextFieldPreco.getText()));
+        productModel.setDescricao(jTextFieldDescricao.getText());
+        productModel.setMarca(jTextFieldMarca.getText());
+        productModel.setUndade(jTextFieldUnidade.getText());
     }
 
 }

@@ -10,6 +10,8 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ListModel;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -41,6 +43,60 @@ public class AnimalListModel extends AbstractModelList{
             animalDAO.close();
         }
         
+    }
+
+    public AbstractTableModel createModel() {
+        return new AbstractTableModel() {
+
+            @Override
+            public int getRowCount() {
+                return animals.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Animal animal = animals.get(rowIndex);
+                if (columnIndex == 0)
+                    return animal.getId();
+                
+                return animal.getName();
+            }
+        };
+    }
+
+    public void delete(int selectedRow) {
+        try {
+            Animal a = animals.get(selectedRow);
+            animals.remove(selectedRow);
+            AnimalDAO animalDAO = new AnimalDAO();
+            animalDAO.delete(a);
+            updateObservers("O Animal "+a.getName().trim()+" deletado com sucesso!");
+        } catch (Exception e) {
+            updateObservers(e.getMessage());
+        }
+    }
+
+    public String columnName(int col) {
+        if (col == 0)
+            return "Código";
+        
+        return "Nome";
+    }
+
+    public int length() {
+        return animals.size();
+    }
+
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Animal a = animals.get(rowIndex);
+        if (columnIndex == 0)
+            return a.getID();
+        return a.getName();
     }
     
 }

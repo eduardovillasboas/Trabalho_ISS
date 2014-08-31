@@ -29,12 +29,14 @@ public class AnimalController implements ControllerInterface{
 
     @Override
     public void exec() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        animalModel.initialize();
+        animalView.configure();
     }
 
     @Override
     public void persist() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        animalView.updateModelFromViewValues();
+        animalModel.persist();
     }
     
     

@@ -6,6 +6,10 @@
 
 package br.com.uem.iss.petshop.Main.view;
 
+import br.com.uem.iss.petshop.Animal.controller.AnimalController;
+import br.com.uem.iss.petshop.Animal.controller.AnimalListController;
+import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
+import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import br.com.uem.iss.petshop.Customer.controller.CustomerController;
 import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
@@ -52,6 +56,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu1 = new javax.swing.JMenu();
         jMenuItemCustomerRecord = new javax.swing.JMenuItem();
         jMenuItemProductRecord = new javax.swing.JMenuItem();
+        jMenuItemAnimalRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -86,6 +91,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
         jMenu1.add(jMenuItemProductRecord);
+
+        jMenuItemAnimalRecord.setText("Cadastro de Animais");
+        jMenu1.add(jMenuItemAnimalRecord);
 
         jMenuBar1.add(jMenu1);
 
@@ -136,6 +144,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     // End of variables declaration//GEN-END:variables
@@ -146,7 +155,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMainFrame = this;
         createCustomerAction();
         createProductAction();
-        
+        createAnimalAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -211,5 +220,32 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     public void wasFinalized(JInternalFrame view) {
         jDesktopPane1.remove(view);
         jDesktopPane1.repaint();
+    }
+
+    private void createAnimalAction() {
+        jMenuItemAnimalRecord.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                animalAction();
+            }
+        });
+    }
+    
+    private void animalAction(){
+        AnimalListModel listModel;
+        listModel = new AnimalListModel();
+        AnimalListController listController;
+        listController = new AnimalListController(listModel,jMainFrame);
+        AnimalModel model;
+        model = new AnimalModel();
+        model.setEntity(listController.exec());
+        if (listController.getState() == State.STATE_CANCEL)
+            return;
+        
+        AnimalController c;
+        c = new AnimalController(model, (ObserverJInternalFrame)this);
+        c.exec();
+
     }
 }

@@ -27,7 +27,7 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
     /**
      * Creates new form CustomerListView
      */
-    private ModelListInterface listModel;
+    final private ModelListInterface listModel;
     final private ControllerListInterface controllerList;
     
     public PetshopListView(java.awt.Frame parent, 

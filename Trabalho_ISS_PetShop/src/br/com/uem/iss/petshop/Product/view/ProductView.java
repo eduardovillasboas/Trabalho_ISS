@@ -293,7 +293,8 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 
-    private void updateViewFromModel() {
+    @Override
+    public void updateViewFromModel() {
         if (productModel != null && productModel.getProduct() != null) {
             jFormattedTextFieldCodigo.setText("0");
             jFormattedTextFieldEstoque.setText(productModel.getEstoque().toString());
@@ -396,6 +397,11 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
         productModel.setDescricao(jTextFieldDescricao.getText());
         productModel.setMarca(jTextFieldMarca.getText());
         productModel.setUndade(jTextFieldUnidade.getText());
+    }
+
+    @Override
+    public void updateModelFromViewValues() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

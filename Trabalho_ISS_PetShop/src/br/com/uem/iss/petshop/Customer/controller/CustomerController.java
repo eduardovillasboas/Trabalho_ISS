@@ -35,7 +35,7 @@ public class CustomerController implements ControllerInterface{
 
     @Override
     public void persist() {
-        customerView.atualizeModelFromViewValues();
+        customerView.updateModelFromViewValues();
         customerModel.persist();
     }
 

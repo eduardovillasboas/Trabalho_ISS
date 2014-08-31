@@ -7,10 +7,15 @@
 package br.com.uem.iss.petshop.Customer.model;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
-import br.com.uem.iss.petshop.Interfaces.ObserverModel;
+import br.com.uem.iss.petshop.Animal.model.Animal;
+import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
+import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.swing.ListModel;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -32,13 +37,24 @@ public class CustomerModel extends AbstractModel{
     public void initialize() {
         if (customer == null)
             customer = new Customer();
-        
         if (customer.getName() == null)
             customer.setName("");
         if (customer.getLastName() == null)
             customer.setLastName("");
-        if (customer.getBirth() == null)
-            customer.setBirth(new Date());
+        if (customer.getBirth() == null){
+            customer.setBirth(new Date(0,0,0));
+        }
+        if (customer.getAddress() == null)
+            customer.setAddress("");
+        if (customer.getAnimals() == null)
+            customer.setAnimals(new ArrayList<>());
+        if (customer.getCpf() == null)
+            customer.setCpf("");
+        if (customer.getRg() == null)
+            customer.setRg("");
+        if (customer.getNumber() == null)
+            customer.setNumber(new Long(0));
+        
         updateObservers(null);
     }
 
@@ -89,4 +105,53 @@ public class CustomerModel extends AbstractModel{
         customer = (Customer)entity;
     }
 
+    public String getCPF() {
+        return customer.getCpf();
+    }
+
+    public String getRg() {
+        return customer.getRg();
+    }
+
+    public void setRg(String rg) {
+        customer.setRg(rg);
+    }
+
+    public void setCpf(String cpf) {
+        customer.setCpf(cpf);
+    }
+
+    public String getAddress() {
+        return customer.getAddress();
+    }
+
+    public void setAddress(String address) {
+        customer.setAddress(address);
+    }
+
+    public Long getNumber() {
+        return customer.getNumber();
+    }
+
+    public void setNumber(Long number) {
+        customer.setNumber(number);
+    }
+
+    public List<Animal> getAnimals() {
+        return customer.getAnimals();
+    }
+
+    public boolean add(Animal e) {
+        return customer.add(e);
+    }
+
+    public boolean remove(Animal a) {
+        return customer.remove(a);
+    }
+
+    public AbstractTableModel getCreateModel() {
+        AnimalListModel animalListModel = new AnimalListModel();
+        return animalListModel.createModel();
+    }
+    
 }

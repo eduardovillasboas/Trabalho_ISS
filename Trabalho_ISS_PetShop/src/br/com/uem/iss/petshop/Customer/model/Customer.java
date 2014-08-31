@@ -67,7 +67,6 @@ public class Customer implements Serializable,PetshopEntity {
     public void setBirth(Date birth) {
         this.birth = birth;
     }
-
     
     @Column(name = "name")
     private String name;
@@ -78,13 +77,7 @@ public class Customer implements Serializable,PetshopEntity {
     @Column(name = "nascimento")
     @Temporal(TemporalType.DATE)        
     private Date birth;
-    
-    @Column(name = "peso")
-    private Double weight;
-    
-    @Column(name = "altura")
-    private Double height;
-    
+   
     @Column(name = "rg")
     private String rg;
     
@@ -133,23 +126,13 @@ public class Customer implements Serializable,PetshopEntity {
         setName(e.getName());
         setLastName(e.getLastName());
         setBirth(e.getBirth());
+        setAddress(e.getAddress());
+        setAnimals(e.getAnimals());
+        setCpf(e.getCpf());
+        setRg(e.getRg());
+        setNumber(e.getNumber());
     }
 
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public Double getHeight() {
-        return height;
-    }
-
-    public void setHeight(Double height) {
-        this.height = height;
-    }
 
     public String getRg() {
         return rg;
@@ -190,5 +173,14 @@ public class Customer implements Serializable,PetshopEntity {
     public void setAnimals(List<Animal> animals) {
         this.animals = animals;
     }
+
+    public boolean add(Animal e) {
+        return animals.add(e);
+    }
+
+    public boolean remove(Animal a) {
+        return animals.remove(a);
+    }
+ 
     
 }

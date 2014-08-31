@@ -58,11 +58,15 @@ public class CustomerListModel extends AbstractModelList{
     }
 
     public void delele(int selectedRow) {
-        Customer c = customers.get(selectedRow);
-        customers.remove(selectedRow);
-        CustomerDAO customerDAO = new CustomerDAO();
-        customerDAO.delete(c);
-        updateObservers("Cliente "+c.getName().trim()+" deletado com sucesso!");
+        try {
+            Customer c = customers.get(selectedRow);
+            customers.remove(selectedRow);
+            CustomerDAO customerDAO = new CustomerDAO();
+            customerDAO.delete(c);
+            updateObservers("Cliente "+c.getName().trim()+" deletado com sucesso!");
+        } catch (Exception e) {
+            updateErrorMessage(e.getMessage());
+        }
     }
 
     @Override

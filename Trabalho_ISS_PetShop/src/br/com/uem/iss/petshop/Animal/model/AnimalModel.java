@@ -7,7 +7,12 @@
 package br.com.uem.iss.petshop.Animal.model;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
+import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Utils.DateUtil;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -15,13 +20,53 @@ import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
  */
 public class AnimalModel extends AbstractModel{
 
-    private AnimalDAO animalDAO;
+    final private AnimalDAO animalDAO;
     private Animal animal;
 
-    public void setAnimal(Animal animal) {
-        
-        this.animal = animal;
+    public void setCustomer(List<Customer> customer) {
+        animal.setCustomer(customer);
     }
+
+    public String getName() {
+        return animal.getName();
+    }
+
+    public void setName(String name) {
+        animal.setName(name);
+    }
+
+    public String getBreed() {
+        return animal.getBreed();
+    }
+
+    public void setBreed(String breed) {
+        animal.setBreed(breed);
+    }
+
+    public Date getBirth() {
+        return animal.getBirth();
+    }
+
+    public void setBirth(Date birth) {
+        animal.setBirth(birth);
+    }
+
+    public Double getHeight() {
+        return animal.getHeight();
+    }
+
+    public void setHeight(Double height) {
+        animal.setHeight(height);
+    }
+
+    public Double getWeight() {
+        return animal.getWeight();
+    }
+
+    public void setWeight(Double weight) {
+        animal.setWeight(weight);
+    }
+    
     public AnimalModel() {
         super();
         animal = new Animal();
@@ -29,18 +74,42 @@ public class AnimalModel extends AbstractModel{
         
     }
 
+    
+    @Override
     public void initialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DateUtil dateUtil = new DateUtil();
+        if (animal == null)
+            animal = new Animal();
+        if (animal.getName() == null)
+            animal.setName("");
+        if (animal.getBirth() == null)
+            animal.setBirth(new Date(0,0,0));
+        
+        if (animal.getBreed() == null)
+            animal.setBreed("");
+        if (animal.getCustomer() == null)
+            animal.setCustomer(new ArrayList<>());
+        if (animal.getHeight() == null)
+            animal.setHeight(new Double(0));
+        if (animal.getWeight() == null)
+            animal.setWeight(new Double(0));
+        
     }
 
     @Override
     public void persist() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            animalDAO.persist(animal);
+            updateObservers("Dados gravados com sucesso");
+        } catch (Exception e) {
+            updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+        }
+        
     }
 
     @Override
     public void setEntity(PetshopEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        animal = (Animal)entity;
     }
     
 }

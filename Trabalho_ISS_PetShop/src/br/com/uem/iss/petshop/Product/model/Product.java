@@ -121,6 +121,9 @@ public class Product implements Serializable,PetshopEntity {
         setDescricao(p.getDescricao());
         setPesoBruto(p.getPesoBruto());
         setPesoLiquido(p.getPesoLiquido());
+        setPreco(p.getPreco());
+        setMarca(p.getMarca());
+        setUndade(p.getUndade());
     }
     
     @Override

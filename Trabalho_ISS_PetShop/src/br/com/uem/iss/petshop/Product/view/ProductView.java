@@ -102,19 +102,17 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
         jLabel5.setText("Peso Liquido:");
 
-        jFormattedTextFieldPesoLiquido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
-        jFormattedTextFieldPesoLiquido.setText("0,000");
+        jFormattedTextFieldPesoLiquido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jFormattedTextFieldPesoLiquido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldPesoLiquidoActionPerformed(evt);
             }
         });
 
-        jFormattedTextFieldPesoBruto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
-        jFormattedTextFieldPesoBruto.setText("0,000");
+        jFormattedTextFieldPesoBruto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jFormattedTextFieldEstoque.setEditable(false);
-        jFormattedTextFieldEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
+        jFormattedTextFieldEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jLabel7.setText("Estoque:");
 
@@ -129,8 +127,7 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
         jLabel8.setText("Preço:");
 
-        jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-        jFormattedTextFieldPreco.setText("0,00");
+        jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jLabel9.setText("Marca:");
 
@@ -390,10 +387,10 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
     }
 
     public void atualizeModelFromViewValues() {
-        productModel.setEstoque(Double.parseDouble(jFormattedTextFieldEstoque.getText()));
-        productModel.setPesoBruto(Float.parseFloat(jFormattedTextFieldPesoBruto.getText()));
-        productModel.setPesoLiquido(Float.parseFloat(jFormattedTextFieldPesoLiquido.getText()));
-        productModel.setPreco(Float.parseFloat(jFormattedTextFieldPreco.getText()));
+        productModel.setEstoque(new Double(jFormattedTextFieldEstoque.getText()));
+        productModel.setPesoBruto(new Float(jFormattedTextFieldPesoBruto.getText()));
+        productModel.setPesoLiquido(new Float(jFormattedTextFieldPesoLiquido.getText()));
+        productModel.setPreco(new Float(jFormattedTextFieldPreco.getText()));
         productModel.setDescricao(jTextFieldDescricao.getText());
         productModel.setMarca(jTextFieldMarca.getText());
         productModel.setUndade(jTextFieldUnidade.getText());

@@ -9,6 +9,7 @@ import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.Product.controller.ProductController;
 import br.com.uem.iss.petshop.Product.model.ProductModel;
+import br.com.uem.iss.petshop.Utils.NumberUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -102,17 +103,20 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
         jLabel5.setText("Peso Liquido:");
 
-        jFormattedTextFieldPesoLiquido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextFieldPesoLiquido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0,00"))));
+        jFormattedTextFieldPesoLiquido.setText("0,00");
         jFormattedTextFieldPesoLiquido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldPesoLiquidoActionPerformed(evt);
             }
         });
 
-        jFormattedTextFieldPesoBruto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextFieldPesoBruto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0,00"))));
+        jFormattedTextFieldPesoBruto.setText("0,00");
 
         jFormattedTextFieldEstoque.setEditable(false);
         jFormattedTextFieldEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextFieldEstoque.setText("0,00");
 
         jLabel7.setText("Estoque:");
 
@@ -127,7 +131,8 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
         jLabel8.setText("Preço:");
 
-        jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0,00"))));
+        jFormattedTextFieldPreco.setText("0,00");
 
         jLabel9.setText("Marca:");
 
@@ -192,11 +197,11 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFormattedTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,15 +223,15 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextFieldPesoBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,9 +380,9 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
     public void atualizeModelFromViewValues() {
         productModel.setEstoque(new Double(jFormattedTextFieldEstoque.getText()));
-        productModel.setPesoBruto(new Float(jFormattedTextFieldPesoBruto.getText().replace(",", ".")));
-        productModel.setPesoLiquido(new Float(jFormattedTextFieldPesoLiquido.getText().replace(",", ".")));
-        productModel.setPreco(new Float(jFormattedTextFieldPreco.getText().replace(",", ".")));
+        productModel.setPesoBruto(NumberUtil.toFloat(jFormattedTextFieldPesoBruto.getText()));
+        productModel.setPesoLiquido(NumberUtil.toFloat(jFormattedTextFieldPesoLiquido.getText()));
+        productModel.setPreco(NumberUtil.toFloat(jFormattedTextFieldPreco.getText()));
         productModel.setDescricao(jTextFieldDescricao.getText());
         productModel.setMarca(jTextFieldMarca.getText());
         productModel.setUndade(jTextFieldUnidade.getText());

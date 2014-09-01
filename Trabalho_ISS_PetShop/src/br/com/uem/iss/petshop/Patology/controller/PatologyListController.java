@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Customer.controller;
+package br.com.uem.iss.petshop.Patology.controller;
 
-import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Commons.view.PetshopListView;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
 import br.com.uem.iss.petshop.Utils.State;
 import javax.swing.JFrame;
 
@@ -17,22 +17,16 @@ import javax.swing.JFrame;
  *
  * @author EDUARDO
  */
-public class CustomerListController implements ControllerListInterface{
+public class PatologyListController implements ControllerListInterface{
 
-    CustomerListModel listModel;
+    PatologyListModel listModel;
     PetshopListView listView;
-    public CustomerListController(CustomerListModel lm, JFrame jframe) {
+    public PatologyListController(PatologyListModel lm, JFrame jFrame) {
         listModel = lm;
-        listView = new PetshopListView(jframe, 
+        listView = new PetshopListView(jFrame, 
                 true,
                 this,
                 listModel);
-    }
-
-    @Override
-    public PetshopEntity exec() {
-        listModel.initialize();
-        return listView.configure(listModel.createModel());
     }
 
     @Override
@@ -43,6 +37,12 @@ public class CustomerListController implements ControllerListInterface{
     @Override
     public State getState() {
         return listView.getState();
+    }
+
+    @Override
+    public PetshopEntity exec() {
+        listModel.initialize();
+        return listView.configure(listModel.createModel());
     }
     
 }

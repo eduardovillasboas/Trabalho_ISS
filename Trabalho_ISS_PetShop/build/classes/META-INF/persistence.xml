@@ -6,6 +6,7 @@
     <class>br.com.uem.iss.petshop.Animal.model.Animal</class>
     <class>br.com.uem.iss.petshop.Product.model.Product</class>
     <class>br.com.uem.iss.petshop.Patology.model.Patology</class>
+    <class>br.com.uem.iss.petshop.Service.model.Service</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

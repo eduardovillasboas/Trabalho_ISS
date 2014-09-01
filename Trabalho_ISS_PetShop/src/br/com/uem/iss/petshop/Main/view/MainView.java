@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.Main.view;
 
 import br.com.uem.iss.petshop.Animal.controller.AnimalController;
@@ -24,6 +23,10 @@ import br.com.uem.iss.petshop.Product.controller.ProductController;
 import br.com.uem.iss.petshop.Product.controller.ProductListController;
 import br.com.uem.iss.petshop.Product.model.ProductListModel;
 import br.com.uem.iss.petshop.Product.model.ProductModel;
+import br.com.uem.iss.petshop.Service.controller.ServiceController;
+import br.com.uem.iss.petshop.Service.controller.ServiceListController;
+import br.com.uem.iss.petshop.Service.model.ServiceListModel;
+import br.com.uem.iss.petshop.Service.model.ServiceModel;
 import br.com.uem.iss.petshop.Utils.State;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,13 +37,13 @@ import javax.swing.JInternalFrame;
  *
  * @author EDUARDO
  */
-public class MainView extends javax.swing.JFrame implements ObserverJInternalFrame{
+public class MainView extends javax.swing.JFrame implements ObserverJInternalFrame {
 
     /**
      * Creates new form MainView
      */
     MainController mainController;
-    
+
     public MainView(MainController m) {
         initComponents();
         mainController = m;
@@ -60,6 +63,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu1 = new javax.swing.JMenu();
         jMenuItemCustomerRecord = new javax.swing.JMenuItem();
         jMenuItemProductRecord = new javax.swing.JMenuItem();
+        jMenuItemServiceRecord = new javax.swing.JMenuItem();
         jMenuItemAnimalRecord = new javax.swing.JMenuItem();
         jMenuItemPatologyRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -81,6 +85,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenu1.setText("Manutencao");
 
+        jMenuItemCustomerRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCustomerRecord.setText("Cadastro de Clientes");
         jMenuItemCustomerRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +94,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
         jMenu1.add(jMenuItemCustomerRecord);
 
+        jMenuItemProductRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemProductRecord.setText("Cadastro de Produtos");
         jMenuItemProductRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +103,16 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
         jMenu1.add(jMenuItemProductRecord);
 
+        jMenuItemServiceRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemServiceRecord.setText("Cadastro de Serviços");
+        jMenuItemServiceRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemServiceRecordActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemServiceRecord);
+
+        jMenuItemAnimalRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemAnimalRecord.setText("Cadastro de Animais");
         jMenu1.add(jMenuItemAnimalRecord);
 
@@ -144,6 +160,10 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemProductRecordActionPerformed
 
+    private void jMenuItemServiceRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemServiceRecordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemServiceRecordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -156,16 +176,18 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
+    private javax.swing.JMenuItem jMenuItemServiceRecord;
     // End of variables declaration//GEN-END:variables
 
-    
     JFrame jMainFrame;
+
     public void createControls() {
         jMainFrame = this;
         createCustomerAction();
         createProductAction();
         createAnimalAction();
         createPatologyAction();
+        createServiceAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -179,22 +201,23 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
-    private void customerAction(){
+
+    private void customerAction() {
         CustomerListModel listModel;
         listModel = new CustomerListModel();
         CustomerListController listController;
-        listController = new CustomerListController(listModel,jMainFrame);
+        listController = new CustomerListController(listModel, jMainFrame);
         CustomerModel model;
         model = new CustomerModel();
         model.setEntity(listController.exec());
-        if (listController.getState() == State.STATE_CANCEL)
+        if (listController.getState() == State.STATE_CANCEL) {
             return;
-        
+        }
+
         CustomerController c;
-        c = new CustomerController(model, (ObserverJInternalFrame)jMainFrame);
+        c = new CustomerController(model, (ObserverJInternalFrame) jMainFrame);
         c.exec();
-        
+
     }
 
     private void createProductAction() {
@@ -204,19 +227,41 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
                 ProductListModel listModel;
                 listModel = new ProductListModel();
                 ProductListController listController;
-                listController = new ProductListController(listModel,jMainFrame);
+                listController = new ProductListController(listModel, jMainFrame);
                 ProductModel model;
                 model = new ProductModel();
                 model.setEntity(listController.exec());
-                if (listController.getState() == State.STATE_CANCEL)
+                if (listController.getState() == State.STATE_CANCEL) {
                     return;
+                }
                 ProductController p;
-                p = new ProductController(model, (ObserverJInternalFrame)jMainFrame);
+                p = new ProductController(model, (ObserverJInternalFrame) jMainFrame);
                 p.exec();
             }
         });
     }
-    
+
+    private void createServiceAction() {
+        jMenuItemServiceRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ServiceListModel listModel;
+                listModel = new ServiceListModel();
+                ServiceListController listController;
+                listController = new ServiceListController(listModel, jMainFrame);
+                ServiceModel model;
+                model = new ServiceModel();
+                model.setEntity(listController.exec());
+                if (listController.getState() == State.STATE_CANCEL) {
+                    return;
+                }
+                ServiceController p;
+                p = new ServiceController(model, (ObserverJInternalFrame) jMainFrame);
+                p.exec();
+            }
+        });
+    }
+
     @Override
     public void addjDesktop(JInternalFrame customerView) {
         jDesktopPane1.add(customerView);
@@ -224,8 +269,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             customerView.setSelected(true);
         } catch (java.beans.PropertyVetoException e) {
         }
-        
+
     }
+
     @Override
     public void wasFinalized(JInternalFrame view) {
         jDesktopPane1.remove(view);
@@ -241,8 +287,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
-    private void animalAction(){
+
+    private void animalAction() {
         AnimalListModel listModel;
         listModel = new AnimalListModel();
         AnimalListController listController;
@@ -250,11 +296,12 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         AnimalModel model;
         model = new AnimalModel();
         model.setEntity(listController.exec());
-        if (listController.getState() == State.STATE_CANCEL)
+        if (listController.getState() == State.STATE_CANCEL) {
             return;
-        
+        }
+
         AnimalController c;
-        c = new AnimalController(model, (ObserverJInternalFrame)this);
+        c = new AnimalController(model, (ObserverJInternalFrame) this);
         c.exec();
 
     }

@@ -22,6 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SERVICE")
 public class Service implements PetshopEntity,Serializable {
+    public static final String FIND_ALL = "SELECT s FROM Service s";
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +33,7 @@ public class Service implements PetshopEntity,Serializable {
     String descricao;
     
     @Column(name = "preco")
-    float preco;
+    Float preco;
 
     public String getDescricao() {
         return descricao;
@@ -41,22 +43,55 @@ public class Service implements PetshopEntity,Serializable {
         this.descricao = descricao;
     }
 
-    public float getPreco() {
+    public Float getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(Float preco) {
         this.preco = preco;
     }
 
     @Override
     public Long getID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ID;
+    }
+    
+    public void setID( Long ID ){
+        this.ID = ID;
+    }
+            
+    @Override
+    public void setAtributes(PetshopEntity entity) {
+        Service s;
+        
+        s = (Service)entity;
+        
+        setDescricao(s.getDescricao());
+        setPreco(s.getPreco());
+        setID(s.getID());
+        
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (ID != null ? ID.hashCode() : 0);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Service)) {
+            return false;
+        }
+        Service other = (Service) object;
+        return (this.ID != null || other.ID == null) && (this.ID == null || this.ID.equals(other.ID));
     }
 
     @Override
-    public void setAtributes(PetshopEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String toString() {
+        return "br.com.uem.iss.petshop.Service.model.Service[ ID=" + ID + " ]";
     }
     
 }

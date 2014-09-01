@@ -5,7 +5,7 @@
  */
 package br.com.uem.iss.petshop.Product.model;
 
-import br.com.uem.iss.petshop.Interfaces.ModelInterface;
+import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Lucas
  */
-public class ProductModel implements ModelInterface {
+public class ProductModel extends AbstractModel {
 
     private Product product;
     final private ProductDAO productDAO;
@@ -77,30 +77,6 @@ public class ProductModel implements ModelInterface {
     @Override
     public void setEntity(PetshopEntity entity) {
         product = (Product) entity;
-    }
-
-    @Override
-    public void updateErrorMessage(String msg) {
-        errorMessageObservers.stream().forEach((observer) -> {
-            observer.errorOcurred(msg);
-        });
-    }
-
-    @Override
-    public void updateObservers(String msg) {
-        updateObservers.stream().forEach((updateObserver) -> {
-            updateObserver.updateViews(msg);
-        });
-    }
-
-    @Override
-    public void registerUpdate(ObserverModel o) {
-        updateObservers.add(o);
-    }
-
-    @Override
-    public void registerErrorObserver(ObserverModel o) {
-        errorMessageObservers.add(o);
     }
 
     public String getUndade() {

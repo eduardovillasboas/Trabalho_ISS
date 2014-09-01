@@ -145,7 +145,7 @@ public class Product implements Serializable,PetshopEntity {
 
     @Override
     public String toString() {
-        return "br.com.uem.iss.petshop.Customer.model.Customer[ ID=" + ID + " ]";
+        return "br.com.uem.iss.petshop.Product.model.Product[ ID=" + ID + " ]";
     }
     
 }

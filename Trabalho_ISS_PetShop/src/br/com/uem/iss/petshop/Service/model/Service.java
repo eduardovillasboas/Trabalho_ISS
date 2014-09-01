@@ -33,7 +33,7 @@ public class Service implements PetshopEntity,Serializable {
     String descricao;
     
     @Column(name = "preco")
-    float preco;
+    Float preco;
 
     public String getDescricao() {
         return descricao;
@@ -43,11 +43,11 @@ public class Service implements PetshopEntity,Serializable {
         this.descricao = descricao;
     }
 
-    public float getPreco() {
+    public Float getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(Float preco) {
         this.preco = preco;
     }
 

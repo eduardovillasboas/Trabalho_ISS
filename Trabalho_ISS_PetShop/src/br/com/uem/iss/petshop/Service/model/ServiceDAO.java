@@ -5,7 +5,6 @@
  */
 package br.com.uem.iss.petshop.Service.model;
 
-import br.com.uem.iss.petshop.Product.model.Product;
 import br.com.uem.iss.petshop.database.AbstractDAO;
 import br.com.uem.iss.petshop.database.EntityManagerHelper;
 import java.util.List;

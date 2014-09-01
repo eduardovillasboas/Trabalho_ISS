@@ -6,8 +6,6 @@
 
 package br.com.uem.iss.petshop.Utils;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Lucas
@@ -19,9 +17,7 @@ public class NumberUtil {
     }
     
     public static Float toFloat(String s){
-        JOptionPane.showConfirmDialog(null, s);
-        JOptionPane.showConfirmDialog(null, s.replace(",", "."));       
-        
+               
         return new Float( s.replace(",", ".") );
         
     }

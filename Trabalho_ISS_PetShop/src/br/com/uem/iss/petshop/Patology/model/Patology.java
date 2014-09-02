@@ -8,19 +8,19 @@ package br.com.uem.iss.petshop.Patology.model;
 
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
-import java.sql.Blob;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.Table;
 
 /**
  *
  * @author EDUARDO
  */
 @Entity
+@Table(name = "PATOLOGY")
 public class Patology implements Serializable, PetshopEntity {
     
     public static String FIND_ALL = "SELECT c FROM Patology c"; 
@@ -75,9 +75,8 @@ public class Patology implements Serializable, PetshopEntity {
     @Column(name = "nome")
     private String name;
     
-    @Lob
-    @Column(name = "descricao",length=100000)
-    private Byte description[];
+    @Column(name = "descricao")
+    private String description;
 
     public String getName() {
         return name;
@@ -87,11 +86,11 @@ public class Patology implements Serializable, PetshopEntity {
         this.name = name;
     }
 
-    public Byte[] getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Byte description[]) {
+    public void setDescription(String description) {
         this.description = description;
     }
     

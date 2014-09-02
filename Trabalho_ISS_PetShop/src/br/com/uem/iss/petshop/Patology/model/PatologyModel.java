@@ -26,10 +26,9 @@ public class PatologyModel extends AbstractModel{
         if (patology == null)
             patology = new Patology();
         
-        Byte values[] = new Byte[] {32};
         
         if (patology.getDescription() == null)
-            patology.setDescription(values);
+            patology.setDescription("");
         if (patology.getName() == null)
             patology.setName("");
                  
@@ -59,11 +58,11 @@ public class PatologyModel extends AbstractModel{
         patology.setName(name);
     }
 
-    public Byte[] getDescription() {
+    public String getDescription() {
         return patology.getDescription();
     }
 
-    public void setDescription(Byte description[]) {
+    public void setDescription(String description) {
         patology.setDescription(description);
     }
     

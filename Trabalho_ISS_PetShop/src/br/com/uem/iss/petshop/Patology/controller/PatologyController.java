@@ -23,17 +23,21 @@ public class PatologyController implements ControllerInterface{
         patologyModel = m;
         m.initialize();
         patologyView = new PatologyView(this,patologyModel);
+        patologyView.register(o);
+        o.addjDesktop(patologyView);
     }
 
     
     @Override
     public void exec() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        patologyModel.initialize();
+        patologyView.configure();
     }
 
     @Override
     public void persist() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        patologyView.updateModelFromViewValues();
+        patologyModel.persist();
     }
     
 }

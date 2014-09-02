@@ -137,14 +137,13 @@ public final class PatologyView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void updateModelFromViewValues() {
-  //      patologyModel.setDescription(new Byte(jTextPaneDescription.getText()));
+        patologyModel.setDescription(jTextPaneDescription.getText());
         patologyModel.setName(jTextFieldName.getText());
     }
 
     @Override
     public void updateViewFromModel() {
-   //     Byte patologyDescription = patologyModel.getDescription();
-  //      jTextPaneDescription.setText(patologyDescription.toString());
+        jTextPaneDescription.setText(patologyModel.getDescription());
         jTextFieldName.setText(patologyModel.getName());
     }
 

@@ -33,16 +33,12 @@ public class DrugDAO extends AbstractDAO {
      *
      * @return
      */
-    public List<Drug> getDrugs() {
+    public List<Drug> getAllDrugs() {
         entityManagerHelper = new EntityManagerHelper();
         EntityManager em = entityManagerHelper.getEntityManager();
         TypedQuery<Drug> typedQuery;
         typedQuery = em.createQuery(Drug.FIND_ALL, Drug.class);
         return typedQuery.getResultList();
-    }
-
-    List<Drug> getAllDrugs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

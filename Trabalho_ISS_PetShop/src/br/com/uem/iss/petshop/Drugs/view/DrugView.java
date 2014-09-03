@@ -3,28 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.Drugs.view;
 
 import br.com.uem.iss.petshop.Drugs.controller.DrugController;
 import br.com.uem.iss.petshop.Drugs.model.DrugModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Interfaces.ViewInterface;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import sun.util.resources.cldr.CalendarData;
 
 /**
  *
  * @author Rafael
  */
-public class DrugView extends javax.swing.JInternalFrame {
+public class DrugView extends javax.swing.JInternalFrame implements ViewInterface {
 
     /**
      * Creates new form DrugView
      */
-    public DrugView() {
-        initComponents();
-    }
+    DrugController drugControler;
+    DrugModel drugModel;
 
-    public DrugView(DrugController aThis, DrugModel drugModel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    ArrayList<ObserverJInternalFrame> observerJInternalFrames;
+
+    public DrugView(DrugController c, DrugModel m) {
+        initComponents();
+        drugControler = c;
+        drugModel = m;
+        observerJInternalFrames = new ArrayList<>();
+        updateViewFromModel();
+        drugModel.registerErrorObserver(this);
+        drugModel.registerUpdate(this);
+
     }
 
     /**
@@ -243,15 +257,111 @@ public class DrugView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldDescricao3;
     // End of variables declaration//GEN-END:variables
 
-    public void register(ObserverJInternalFrame o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public void updateViewFromModel() {
+        if (drugModel != null && drugModel.getDrug() != null) {
+            jTextFieldDescricao.setText(drugModel.getNome());
+            jTextFieldDescricao1.setText(drugModel.getDescricao());
+            jTextFieldDescricao3.setText(drugModel.getFornecedor());
+            jTextFieldDescricao2.setText(drugModel.getQuantidade());
+
+        } else {
+            jTextFieldDescricao.setText("");
+            jTextFieldDescricao1.setText("");
+            jTextFieldDescricao3.setText("");
+            jTextFieldDescricao2.setText("");
+        }
     }
 
+    private void finalizeDrugView() {
+        updateObserversWasFinalized();
+        dispose();
+    }
+
+    private void record() {
+        if (drugControler.persist()) {
+            finalizeDrugView();
+        }
+
+    }
+
+    private void createActionCancel() {
+        jButtonCancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finalizeDrugView();
+            }
+
+        });
+    }
+
+    private void createActionRecord() {
+        jButtonRecord.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                record();
+            }
+        });
+    }
+
+    @Override
+    public void createActions() {
+        createActionRecord();
+        createActionCancel();
+    }
+
+    @Override
     public void configure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        createActions();
+        setVisible(true);
+    }
+
+    @Override
+    public void register(ObserverJInternalFrame o) {
+        observerJInternalFrames.add(o);
+    }
+
+    @Override
+    public void updateObserversWasFinalized() {
+        observerJInternalFrames.stream().forEach((observerJInternalFrame) -> {
+            observerJInternalFrame.wasFinalized(this);
+        });
+    }
+
+    @Override
+    public void updateViews(String msg) {
+        if (msg != null) {
+            JOptionPane.showMessageDialog(this, msg);
+            return;
+        }
+        updateViewFromModel();
+    }
+
+    @Override
+    public void errorOcurred(String error) {
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        } else {
+            JOptionPane.showMessageDialog(this, error);
+        }
     }
 
     public void atualizeModelFromViewValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       drugModel.setNome(jTextFieldDescricao.getText());
+        drugModel.setDescricao(jTextFieldDescricao1.getText());
+        drugModel.setFornecedor(jTextFieldDescricao3.getText());
+        drugModel.setQuantidade(jTextFieldDescricao2.getText());
     }
+
+    @Override
+    public void updateModelFromViewValues() {
+        drugModel.setNome(jTextFieldDescricao.getText());
+        drugModel.setDescricao(jTextFieldDescricao1.getText());
+        drugModel.setFornecedor(jTextFieldDescricao3.getText());
+        drugModel.setQuantidade(jTextFieldDescricao2.getText());
+
+    }
+
 }

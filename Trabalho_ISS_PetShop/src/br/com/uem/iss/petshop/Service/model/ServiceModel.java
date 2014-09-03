@@ -50,11 +50,14 @@ public class ServiceModel extends AbstractModel {
     @Override
     public Boolean persist() {
         try {
+            if ( service.getDescricao().isEmpty() || service.getPreco() <= 0 ) {
+                throw new Exception( "Algum campo obrigatório não está preenchido!" );
+            }
             serviceDAO.persist(service);
-            updateObservers("Dados gravados com sucesso");
+            updateObservers("Dados gravados com sucesso.o Código do serviço é: " + service.getID());
             return true;
         } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados" + e.getMessage());
+            updateErrorMessage("Erro ao gravar os dados no banco de dados. " + e.getMessage());
             return false;
         }
     }

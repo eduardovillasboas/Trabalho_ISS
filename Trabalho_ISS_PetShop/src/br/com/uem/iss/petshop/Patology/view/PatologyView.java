@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.Patology.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
@@ -19,15 +18,16 @@ import javax.swing.JOptionPane;
  *
  * @author EDUARDO
  */
-public final class PatologyView extends javax.swing.JInternalFrame implements ViewInterface{
+public final class PatologyView extends javax.swing.JInternalFrame implements ViewInterface {
 
     /**
      * Creates new form PatologyView
      */
     PatologyController patologyController;
     PatologyModel patologyModel;
-    
+
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
+
     public PatologyView(PatologyController c, PatologyModel m) {
         initComponents();
         patologyController = c;
@@ -126,7 +126,7 @@ public final class PatologyView extends javax.swing.JInternalFrame implements Vi
     public void createActions() {
         createActionRecord();
         createActionCancel();
-        
+
     }
 
     @Override
@@ -161,7 +161,7 @@ public final class PatologyView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void updateViews(String msg) {
-        if (msg != null){
+        if (msg != null) {
             JOptionPane.showMessageDialog(this, msg);
             return;
         }
@@ -170,10 +170,11 @@ public final class PatologyView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void errorOcurred(String error) {
-        if (error != null)
+        if (error != null) {
             JOptionPane.showMessageDialog(this, error);
-        else
+        } else {
             JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        }
     }
 
     private void finalizeView() {
@@ -190,10 +191,12 @@ public final class PatologyView extends javax.swing.JInternalFrame implements Vi
             }
         });
     }
-    
+
     private void actionRecord() {
-        patologyController.persist();
-        finalizeView();
+        if (patologyController.persist()) {
+            finalizeView();
+        }
+
     }
 
     private void createActionCancel() {
@@ -205,7 +208,7 @@ public final class PatologyView extends javax.swing.JInternalFrame implements Vi
             }
         });
     }
-    
+
     private void actionCancel() {
         finalizeView();
     }

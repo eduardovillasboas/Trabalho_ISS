@@ -71,10 +71,10 @@ public class ProductModel extends AbstractModel {
                 throw new Exception("Algum campo obrigatório está vazio!");                                
             }
             productDAO.persist(product);
-            updateObservers("Dados gravados com sucesso");
+            updateObservers("Dados gravados com sucesso. " + "Poduto com código " + product.getID());
             return true;
         } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados " + e.getMessage());
+            updateErrorMessage("Erro ao gravar os dados no banco de dados. " + e.getMessage());
             return false;
         }
     }
@@ -82,6 +82,10 @@ public class ProductModel extends AbstractModel {
     @Override
     public void setEntity(PetshopEntity entity) {
         product = (Product) entity;
+    }
+    
+    public Long getID() {
+        return product.getID();        
     }
 
     public String getUndade() {

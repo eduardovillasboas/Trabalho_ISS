@@ -48,13 +48,11 @@ public class CustomerListModel extends AbstractModelList{
     @Override
     public void initialize() {
         CustomerDAO customerDAO = new CustomerDAO();
-        customers = customerDAO.getAllCustomers();
         try {
-            
+            customers = customerDAO.getAllCustomers();
         } catch (Exception e) {
             customers = new ArrayList<>();
         } finally {
-            customerDAO.close();
         }
     }
 
@@ -74,7 +72,7 @@ public class CustomerListModel extends AbstractModelList{
     public PetshopEntity getPetshopEntityAt(int value) {
         return customers.get(value);
     }
-        public AbstractTableModel createModel(){
+    public AbstractTableModel createModel(){
         return new AbstractTableModel() {
 
             @Override

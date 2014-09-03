@@ -31,7 +31,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
     public CustomerView(CustomerController c, CustomerModel m) {
         initComponents();
-        customerControler = c;
+        customerControler = c;  
         customerModel = m;
         observerJInternalFrames = new ArrayList<>();
         updateViewFromModel();
@@ -275,6 +275,8 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     public void createActions(){
         createActionRecord();
         createActionCancel();
+        createActionAddAnimal();
+        createActionRemoveAnimal();
     }
 
     @Override
@@ -355,4 +357,33 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
         customerModel.setNumber(new Long(jTextFieldNumber.getText()));
         
     }
+
+    private void createActionAddAnimal() {
+        jButtonAddAnimal.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addAnimal();
+            }
+        });
+    }
+
+    private void addAnimal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void createActionRemoveAnimal() {
+        jButtonRemoveAnimal.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAnimal();
+            }
+        });
+    }
+    
+    private void removeAnimal(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

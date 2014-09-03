@@ -9,12 +9,10 @@ package br.com.uem.iss.petshop.Customer.model;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
-import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.ListModel;
 import javax.swing.table.AbstractTableModel;
 
 /**

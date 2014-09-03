@@ -15,6 +15,10 @@ import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Main.controller.MainController;
+import br.com.uem.iss.petshop.Patology.controller.PatologyController;
+import br.com.uem.iss.petshop.Patology.controller.PatologyListController;
+import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
+import br.com.uem.iss.petshop.Patology.model.PatologyModel;
 import br.com.uem.iss.petshop.Product.controller.ProductController;
 import br.com.uem.iss.petshop.Product.controller.ProductListController;
 import br.com.uem.iss.petshop.Product.model.ProductListModel;
@@ -61,6 +65,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemProductRecord = new javax.swing.JMenuItem();
         jMenuItemServiceRecord = new javax.swing.JMenuItem();
         jMenuItemAnimalRecord = new javax.swing.JMenuItem();
+        jMenuItemPatologyRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -110,6 +115,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemAnimalRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemAnimalRecord.setText("Cadastro de Animais");
         jMenu1.add(jMenuItemAnimalRecord);
+
+        jMenuItemPatologyRecord.setText("Cadastro de Patologias");
+        jMenu1.add(jMenuItemPatologyRecord);
 
         jMenuBar1.add(jMenu1);
 
@@ -166,6 +174,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
+    private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
     // End of variables declaration//GEN-END:variables
@@ -177,6 +186,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createCustomerAction();
         createProductAction();
         createAnimalAction();
+        createPatologyAction();
         createServiceAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -282,7 +292,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         AnimalListModel listModel;
         listModel = new AnimalListModel();
         AnimalListController listController;
-        listController = new AnimalListController(listModel, jMainFrame);
+        listController = new AnimalListController(listModel,this);
         AnimalModel model;
         model = new AnimalModel();
         model.setEntity(listController.exec());
@@ -294,5 +304,32 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         c = new AnimalController(model, (ObserverJInternalFrame) this);
         c.exec();
 
+    }
+
+    private void createPatologyAction() {
+        jMenuItemPatologyRecord.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                patologyAction();
+            }
+        });
+    }
+    
+    private void patologyAction() {
+        PatologyListModel listModel;
+        listModel = new PatologyListModel();
+        PatologyListController listController;
+        listController = new PatologyListController(listModel, this);
+        PatologyModel model;
+        model = new PatologyModel();
+        model.setEntity(listController.exec());
+        if (listController.getState() == State.STATE_CANCEL)
+            return;
+        
+        PatologyController c;
+        c = new PatologyController(model, (ObserverJInternalFrame)this);
+        c.exec();
+        
     }
 }

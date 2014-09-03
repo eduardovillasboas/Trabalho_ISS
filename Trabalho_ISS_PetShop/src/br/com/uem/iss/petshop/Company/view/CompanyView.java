@@ -6,28 +6,31 @@
 
 package br.com.uem.iss.petshop.Company.view;
 
-import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
-import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.Company.controller.CompanyController;
 import br.com.uem.iss.petshop.Company.model.CompanyModel;
+import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Interfaces.ViewInterface;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Rafael
  */
-public final class CompanyView extends javax.swing.JInternalFrame implements ViewInterface {
+public class CompanyView extends javax.swing.JInternalFrame implements ViewInterface {
 
     /**
-     * Creates new form PatologyView
+     * Creates new form CompanyView
      */
-    CompanyController companyController;
+    CompanyController companyControler;
     CompanyModel companyModel;
 
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
 
     public CompanyView(CompanyController c, CompanyModel m) {
         initComponents();
-        companyController = c;
+        companyControler = c;
         companyModel = m;
         observerJInternalFrames = new ArrayList<>();
         updateViewFromModel();
@@ -384,44 +387,124 @@ public final class CompanyView extends javax.swing.JInternalFrame implements Vie
     private javax.swing.JTextField jTextFieldDescricao7;
     // End of variables declaration//GEN-END:variables
 
-    public void register(ObserverJInternalFrame o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void configure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void atualizeModelFromViewValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+     @Override
     public void updateViewFromModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (companyModel != null && companyModel.getCompany() != null) {
+            jTextFieldDescricao.setText(companyModel.getNome());
+            jTextFieldDescricao6.setText(companyModel.getTelefone());
+            jTextFieldDescricao3.setText(companyModel.getEmail());
+            jTextFieldDescricao4.setText(companyModel.getEndereco());
+            jTextFieldDescricao7.setText(companyModel.getCidade());
+            jTextFieldDescricao5.setText(companyModel.getEstado());
+            jTextFieldDescricao2.setText(companyModel.getCep());
+
+        } else {
+            jTextFieldDescricao.setText("");
+            jTextFieldDescricao6.setText("");
+            jTextFieldDescricao3.setText("");
+            jTextFieldDescricao4.setText("");
+            jTextFieldDescricao7.setText("");
+            jTextFieldDescricao5.setText("");
+            jTextFieldDescricao2.setText("");
+        }
+    }
+
+    private void finalizeCompanyView() {
+        updateObserversWasFinalized();
+        dispose();
+    }
+
+    private void record() {
+        if (companyControler.persist()) {
+            finalizeCompanyView();
+        }
+
+    }
+
+    private void createActionCancel() {
+        jButtonCancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finalizeCompanyView();
+            }
+
+        });
+    }
+
+    private void createActionRecord() {
+        jButtonRecord.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                record();
+            }
+        });
     }
 
     @Override
     public void createActions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        createActionRecord();
+        createActionCancel();
     }
 
     @Override
-    public void updateModelFromViewValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void configure() {
+        createActions();
+        setVisible(true);
+    }
+
+    @Override
+    public void register(ObserverJInternalFrame o) {
+        observerJInternalFrames.add(o);
     }
 
     @Override
     public void updateObserversWasFinalized() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        observerJInternalFrames.stream().forEach((observerJInternalFrame) -> {
+            observerJInternalFrame.wasFinalized(this);
+        });
     }
 
     @Override
     public void updateViews(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (msg != null) {
+            JOptionPane.showMessageDialog(this, msg);
+            return;
+        }
+        updateViewFromModel();
     }
 
     @Override
     public void errorOcurred(String error) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        } else {
+            JOptionPane.showMessageDialog(this, error);
+        }
     }
+
+    public void atualizeModelFromViewValues() {
+        companyModel.setNome(jTextFieldDescricao.getText());
+        companyModel.setTelefone(jTextFieldDescricao6.getText());
+        companyModel.setEmail(jTextFieldDescricao3.getText());
+        companyModel.setEndereco(jTextFieldDescricao4.getText());
+        companyModel.setCidade(jTextFieldDescricao7.getText());
+        companyModel.setEstado(jTextFieldDescricao5.getText());
+        companyModel.setCep(jTextFieldDescricao2.getText());
+    }
+
+    @Override
+    public void updateModelFromViewValues() {
+        companyModel.setNome(jTextFieldDescricao.getText());
+        companyModel.setTelefone(jTextFieldDescricao6.getText());
+        companyModel.setEmail(jTextFieldDescricao3.getText());
+        companyModel.setEndereco(jTextFieldDescricao4.getText());
+        companyModel.setCidade(jTextFieldDescricao7.getText());
+        companyModel.setEstado(jTextFieldDescricao5.getText());
+        companyModel.setCep(jTextFieldDescricao2.getText());
+
+    }
+
 }
+

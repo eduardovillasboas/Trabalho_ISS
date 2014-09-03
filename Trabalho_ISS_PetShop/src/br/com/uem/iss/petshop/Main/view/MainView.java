@@ -31,6 +31,12 @@ import br.com.uem.iss.petshop.Service.controller.ServiceController;
 import br.com.uem.iss.petshop.Service.controller.ServiceListController;
 import br.com.uem.iss.petshop.Service.model.ServiceListModel;
 import br.com.uem.iss.petshop.Service.model.ServiceModel;
+
+import br.com.uem.iss.petshop.Drugs.controller.DrugController;
+import br.com.uem.iss.petshop.Drugs.controller.DrugListController;
+import br.com.uem.iss.petshop.Drugs.model.DrugListModel;
+import br.com.uem.iss.petshop.Drugs.model.DrugModel;
+
 import br.com.uem.iss.petshop.Utils.State;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,6 +77,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemAnimalRecord = new javax.swing.JMenuItem();
         jMenuItemPatologyRecord = new javax.swing.JMenuItem();
         jMenuItemCompanyRecord = new javax.swing.JMenuItem();
+        jMenuItemDrugsRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -134,6 +141,15 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
         jMenu1.add(jMenuItemCompanyRecord);
 
+        jMenuItemDrugsRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemDrugsRecord.setText("Cadastro de Medicamentos");
+        jMenuItemDrugsRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDrugsRecordActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemDrugsRecord);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
@@ -183,6 +199,10 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemCompanyRecordActionPerformed
 
+    private void jMenuItemDrugsRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDrugsRecordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemDrugsRecordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -194,6 +214,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemCompanyRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
+    private javax.swing.JMenuItem jMenuItemDrugsRecord;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
@@ -208,6 +229,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createAnimalAction();
         createPatologyAction();
         createCompanyAction();
+        createDrugAction();
         createServiceAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -380,4 +402,27 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         c.exec();
         
     }
+    
+    private void createDrugAction() {
+        jMenuItemDrugsRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DrugListModel listModel;
+                listModel = new DrugListModel();
+                DrugListController listController;
+                listController = new DrugListController(listModel, jMainFrame);
+                DrugModel model;
+                model = new DrugModel();
+                model.setEntity(listController.exec());
+                if (listController.getState() == State.STATE_CANCEL) {
+                    return;
+                }
+                DrugController p;
+                p = new DrugController(model, (ObserverJInternalFrame) jMainFrame);
+                p.exec();
+            }
+        });
+    }
+    
+    
 }

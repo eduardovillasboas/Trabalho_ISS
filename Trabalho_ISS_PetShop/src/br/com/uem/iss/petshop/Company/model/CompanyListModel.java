@@ -10,71 +10,97 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Rafael
  */
-public class CompanyListModel extends AbstractModelList {
-    
-    private List<Company> companies;
+public class CompanyListModel extends AbstractModelList{
+
+    private List<Company> companys;
 
     public CompanyListModel() {
         super();
-        companies = new ArrayList<>();
+        companys = new ArrayList<>();
+    }
+    
+    @Override
+    public PetshopEntity getPetshopEntityAt(int value) {
+        return companys.get(value);
     }
 
     @Override
     public void initialize() {
         CompanyDAO companyDAO = new CompanyDAO();
-        companies = companyDAO.getAllCompanies();
+        companys = companyDAO.getAllCompanys();
         try {
             
         } catch (Exception e) {
-            companies = new ArrayList<>();
+            companys = new ArrayList<>();
         } finally {
             companyDAO.close();
         }
-
-    }
-
-    @Override
-    public PetshopEntity getPetshopEntityAt(int value) {
-        return companies.get(value);
-    }
-    
-    
-    public int length() {
-        return companies.size();
-    }
-
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Company company = companies.get(rowIndex);
-        if (columnIndex == 0)
-            return company.getID();
         
-        return company.getNome();
+    }
+
+    public AbstractTableModel createModel() {
+        return new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col){
+                return columnName(col);
+            }
+
+            @Override
+            public int getRowCount() {
+                return companys.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Company company = companys.get(rowIndex);
+                if (columnIndex == 0)
+                    return company.getID();
+                
+                return company.getNome();
+            }
+        };
+    }
+
+    public void delete(int selectedRow) {
+        try {
+            Company a = companys.get(selectedRow);
+            companys.remove(selectedRow);
+            CompanyDAO companyDAO = new CompanyDAO();
+            companyDAO.delete(a);
+            updateObservers("A Empresa "+a.getNome().trim()+" deletado com sucesso!");
+        } catch (Exception e) {
+            updateObservers(e.getMessage());
+        }
     }
 
     public String columnName(int col) {
         if (col == 0)
             return "Código";
-//        else if (col == 1 ){
-//            return "Nome";            
-//        }
+        
         return "Nome";
     }
 
-    public Company getCustomerAt(int value) {
-        return companies.get(value);
+    public int length() {
+        return companys.size();
     }
 
-    public void delele(int selectedRow) {
-        Company p = companies.get(selectedRow);
-        companies.remove(selectedRow);
-        CompanyDAO companyDAO = new CompanyDAO();
-        companyDAO.delete(p);
-        updateObservers( "Empresa " + p.getNome().trim()+" deletado com sucesso!" );
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Company a = companys.get(rowIndex);
+        if (columnIndex == 0)
+            return a.getID();
+        return a.getNome();
     }
     
 }

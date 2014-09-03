@@ -34,7 +34,7 @@ public class CompanyDAO extends AbstractDAO {
      *
      * @return
      */
-    public List<Company> getAllCompanies() {
+    public List<Company> getAllCompanys() {
         entityManagerHelper = new EntityManagerHelper();
         EntityManager em = entityManagerHelper.getEntityManager();
         TypedQuery<Company> typedQuery;

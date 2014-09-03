@@ -41,6 +41,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemServiceRecordActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="MainView_jMenuItemServiceRecord"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAnimalRecord">
               <Properties>
@@ -52,8 +55,22 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPatologyRecord">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+5"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cadastro de Patologias"/>
               </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCompanyRecord">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+6"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Cadastro de Empresas&#xa;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCompanyRecordActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

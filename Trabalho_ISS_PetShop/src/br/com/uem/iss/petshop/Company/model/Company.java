@@ -29,16 +29,16 @@ public class Company implements PetshopEntity,Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
     
-    @Column(name = "nome", length = 70 )
+    @Column(name = "nome", length = 50 )
     String nome;
     
-    @Column(name = "telefone", length =  10 )
+    @Column(name = "telefone", length =  50 )
     String telefone;
     
-    @Column(name = "email", length =  30 )
+    @Column(name = "email", length =  50 )
     String email;
     
-    @Column(name = "endereco", length =  90 )
+    @Column(name = "endereco", length =  50 )
     String endereco;
     
     @Column(name = "cidade", length =  50 )
@@ -47,7 +47,7 @@ public class Company implements PetshopEntity,Serializable {
     @Column(name = "estado", length =  50 )
     String estado;
     
-    @Column(name = "cep", length =  20 )
+    @Column(name = "cep", length =  50 )
     String cep;
 
     public String getNome() {

@@ -310,8 +310,10 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
     }
 
     private void record() {
-        productControler.persist();
-        finalizeProductView();
+        if (productControler.persist()) {
+            finalizeProductView();
+        }
+
     }
 
     private void createActionCancel() {

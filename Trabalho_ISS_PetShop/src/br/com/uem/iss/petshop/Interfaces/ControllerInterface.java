@@ -12,5 +12,10 @@ package br.com.uem.iss.petshop.Interfaces;
  */
 public interface ControllerInterface {
     public void exec();
-    public void persist();
+
+    /**
+     *
+     * @return Boolean
+     */
+    public Boolean persist();
 }

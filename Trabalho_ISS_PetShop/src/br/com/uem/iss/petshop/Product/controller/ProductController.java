@@ -34,9 +34,9 @@ public class ProductController implements ControllerInterface {
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         productView.atualizeModelFromViewValues();
-        productModel.persist();
+        return productModel.persist();
     }
 
 }

@@ -35,9 +35,9 @@ public class PatologyController implements ControllerInterface{
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         patologyView.updateModelFromViewValues();
-        patologyModel.persist();
+        return patologyModel.persist();
     }
     
 }

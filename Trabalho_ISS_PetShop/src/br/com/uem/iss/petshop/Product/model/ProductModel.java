@@ -52,25 +52,30 @@ public class ProductModel extends AbstractModel {
         if (product.getMarca() == null) {
             product.setMarca("");
         }
-        if (product.getPesoBruto() == null){
+        if (product.getPesoBruto() == null) {
             product.setPesoBruto(new Float(0));
         }
-        if (product.getPesoLiquido() == null){
+        if (product.getPesoLiquido() == null) {
             product.setPesoLiquido(new Float(0));
         }
-        if (product.getPreco() == null){
+        if (product.getPreco() == null) {
             product.setPreco(new Float(0));
         }
         updateObservers(null);
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         try {
+            if (product.getDescricao().isEmpty() || product.getMarca().isEmpty() || product.getPreco() <= 0 || product.getUndade().isEmpty()) {
+                throw new Exception("Algum campo obrigatório está vazio!");                                
+            }
             productDAO.persist(product);
             updateObservers("Dados gravados com sucesso");
+            return true;
         } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados" + e.getMessage());
+            updateErrorMessage("Erro ao gravar os dados no banco de dados " + e.getMessage());
+            return false;
         }
     }
 

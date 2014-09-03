@@ -13,6 +13,6 @@ package br.com.uem.iss.petshop.Interfaces;
 public interface ModelInterface extends ObservableModel{
 
     public void initialize();
-    public void persist();
+    public Boolean persist();
     public void setEntity(PetshopEntity entity);
 }

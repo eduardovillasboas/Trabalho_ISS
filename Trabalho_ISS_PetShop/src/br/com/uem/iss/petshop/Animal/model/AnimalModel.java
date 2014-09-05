@@ -97,12 +97,14 @@ public class AnimalModel extends AbstractModel{
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         try {
             animalDAO.persist(animal);
             updateObservers("Dados gravados com sucesso");
+            return true;
         } catch (Exception e) {
             updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+            return false;
         }
         
     }

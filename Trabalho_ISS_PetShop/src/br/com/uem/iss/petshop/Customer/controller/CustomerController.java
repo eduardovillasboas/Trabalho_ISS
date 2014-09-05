@@ -34,9 +34,9 @@ public class CustomerController implements ControllerInterface{
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         customerView.updateModelFromViewValues();
-        customerModel.persist();
+        return customerModel.persist();        
     }
 
 }

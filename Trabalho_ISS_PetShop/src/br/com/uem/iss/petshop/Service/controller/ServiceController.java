@@ -34,9 +34,9 @@ public class ServiceController implements ControllerInterface {
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         serviceView.atualizeModelFromViewValues();
-        serviceModel.persist();
+        return serviceModel.persist();
     }
 
 }

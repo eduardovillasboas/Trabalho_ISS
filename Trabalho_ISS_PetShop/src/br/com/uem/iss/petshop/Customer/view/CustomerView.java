@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.Customer.view;
 
 import br.com.uem.iss.petshop.Customer.controller.CustomerController;
@@ -20,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author EDUARDO
  */
-public final class CustomerView extends javax.swing.JInternalFrame implements ViewInterface{
+public final class CustomerView extends javax.swing.JInternalFrame implements ViewInterface {
 
     /**
      * Creates new form CustomerView
@@ -29,9 +28,10 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     CustomerModel customerModel;
 
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
+
     public CustomerView(CustomerController c, CustomerModel m) {
         initComponents();
-        customerControler = c;  
+        customerControler = c;
         customerModel = m;
         observerJInternalFrames = new ArrayList<>();
         updateViewFromModel();
@@ -265,14 +265,14 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     }
 
     @Override
-    public void updateObserversWasFinalized(){
+    public void updateObserversWasFinalized() {
         for (ObserverJInternalFrame observerJInternalFrame : observerJInternalFrames) {
             observerJInternalFrame.wasFinalized(this);
         }
     }
-    
+
     @Override
-    public void createActions(){
+    public void createActions() {
         createActionRecord();
         createActionCancel();
         createActionAddAnimal();
@@ -287,7 +287,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void updateViews(String msg) {
-        if (msg != null){
+        if (msg != null) {
             JOptionPane.showMessageDialog(this, msg);
             return;
         }
@@ -296,10 +296,11 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void errorOcurred(String error) {
-        if (error != null)
+        if (error != null) {
             JOptionPane.showMessageDialog(this, error);
-        else
+        } else {
             JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        }
     }
 
     private void createActionCancel() {
@@ -312,6 +313,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
 
         });
     }
+
     private void createActionRecord() {
         jButtonGravar.addActionListener(new ActionListener() {
 
@@ -321,21 +323,23 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
             }
         });
     }
-    
+
     private void finalizeCustomerView() {
         updateObserversWasFinalized();
         dispose();
     }
-    
-    private void record(){
-        customerControler.persist();
-        finalizeCustomerView();
+
+    private void record() {
+        if (customerControler.persist()) {
+            finalizeCustomerView();
+        }
+
     }
 
     @Override
     public void updateViewFromModel() {
         DateUtil dateUtil = new DateUtil();
-        
+
         jTextFieldName.setText(customerModel.getName());
         jTextFieldLastName.setText(customerModel.getLastName());
         jFormattedTextFieldBirth.setText(dateUtil.toString(customerModel.getBirthDate()));
@@ -355,7 +359,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
         customerModel.setCpf(jFormattedTextFieldCPF.getText());
         customerModel.setAddress(jTextFieldAddress.getText());
         customerModel.setNumber(new Long(jTextFieldNumber.getText()));
-        
+
     }
 
     private void createActionAddAnimal() {
@@ -371,7 +375,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     private void addAnimal() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     private void createActionRemoveAnimal() {
         jButtonRemoveAnimal.addActionListener(new ActionListener() {
 
@@ -381,9 +385,9 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
             }
         });
     }
-    
-    private void removeAnimal(){
+
+    private void removeAnimal() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

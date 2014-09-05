@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.com.uem.iss.petshop.Animal.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author EDUARDO
  */
-public final class AnimalView extends javax.swing.JInternalFrame implements ViewInterface {
+public final class AnimalView extends javax.swing.JInternalFrame implements ViewInterface{
 
     /**
      * Creates new form AnimalView
@@ -27,9 +28,8 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     ArrayList<ObserverJInternalFrame> oberverInternalFrames;
     AnimalController animalController;
     AnimalModel animalModel;
-
     public AnimalView(AnimalController c,
-            AnimalModel m) {
+                      AnimalModel m) {
         initComponents();
         animalController = c;
         animalModel = m;
@@ -226,7 +226,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
 
     @Override
     public void updateViews(String msg) {
-        if (msg != null) {
+        if (msg != null){
             JOptionPane.showMessageDialog(this, msg);
             return;
         }
@@ -235,23 +235,24 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
 
     @Override
     public void errorOcurred(String error) {
-        if (error != null) {
+        if (error != null)
             JOptionPane.showMessageDialog(this, error);
-        } else {
+        else
             JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
-        }
     }
 
     @Override
     public void updateViewFromModel() {
         DateUtil dateUtil = new DateUtil();
-
+        
         jTextFieldName.setText(animalModel.getName());
         jTextFieldBreed.setText(animalModel.getBreed());
         jFormattedTextFieldBirth.setText(dateUtil.toString(animalModel.getBirth()));
         jFormattedTextFieldHeight.setText(Double.toString(animalModel.getHeight()));
         jFormattedTextFieldWeight.setText(Double.toString(animalModel.getWeight()));
-
+        
+        
+        
     }
 
     @Override
@@ -274,7 +275,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         animalModel.setBreed(jTextFieldBreed.getText());
         animalModel.setHeight(new Double(jFormattedTextFieldHeight.getText()));
         animalModel.setWeight(new Double(jFormattedTextFieldWeight.getText()));
-
+        
     }
 
     private void createActionRecord() {
@@ -287,13 +288,11 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         });
     }
 
-    private void actionRecord() {
-        if (animalController.persist()) {
-            finalizeView();
-        }
-
+    private void actionRecord(){
+        animalController.persist();
+        finalizeView();
     }
-
+    
     private void finalizeView() {
         updateObserversWasFinalized();
         dispose();

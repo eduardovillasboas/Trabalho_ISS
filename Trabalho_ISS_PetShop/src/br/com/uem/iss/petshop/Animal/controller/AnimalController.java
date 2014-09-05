@@ -34,9 +34,9 @@ public class AnimalController implements ControllerInterface{
     }
 
     @Override
-    public Boolean persist() {
+    public void persist() {
         animalView.updateModelFromViewValues();
-        return animalModel.persist();        
+        animalModel.persist();
     }
     
     

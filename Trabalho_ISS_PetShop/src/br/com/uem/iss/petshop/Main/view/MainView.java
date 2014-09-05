@@ -14,6 +14,11 @@ import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Login.controller.LoginController;
+import br.com.uem.iss.petshop.Login.controller.LoginListController;
+import br.com.uem.iss.petshop.Login.model.LoginListModel;
+import br.com.uem.iss.petshop.Login.model.LoginModel;
+import br.com.uem.iss.petshop.Login.view.LoginView;
 import br.com.uem.iss.petshop.Main.controller.MainController;
 import br.com.uem.iss.petshop.Patology.controller.PatologyController;
 import br.com.uem.iss.petshop.Patology.controller.PatologyListController;
@@ -28,6 +33,10 @@ import br.com.uem.iss.petshop.Service.controller.ServiceListController;
 import br.com.uem.iss.petshop.Service.model.ServiceListModel;
 import br.com.uem.iss.petshop.Service.model.ServiceModel;
 import br.com.uem.iss.petshop.Utils.State;
+import br.com.uem.iss.petshop.Vacina.controller.VacinaController;
+import br.com.uem.iss.petshop.Vacina.controller.VacinaListController;
+import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
+import br.com.uem.iss.petshop.Vacina.model.VacinaModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -66,6 +75,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemServiceRecord = new javax.swing.JMenuItem();
         jMenuItemAnimalRecord = new javax.swing.JMenuItem();
         jMenuItemPatologyRecord = new javax.swing.JMenuItem();
+        jMenuItemVacinaRecord = new javax.swing.JMenuItem();
+        jMenuItemLoginRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -118,6 +129,14 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenuItemPatologyRecord.setText("Cadastro de Patologias");
         jMenu1.add(jMenuItemPatologyRecord);
+
+        jMenuItemVacinaRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemVacinaRecord.setText("Cadastro de Vacinas");
+        jMenu1.add(jMenuItemVacinaRecord);
+
+        jMenuItemLoginRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemLoginRecord.setText("Cadastro de Login");
+        jMenu1.add(jMenuItemLoginRecord);
 
         jMenuBar1.add(jMenu1);
 
@@ -174,9 +193,11 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
+    private javax.swing.JMenuItem jMenuItemLoginRecord;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
+    private javax.swing.JMenuItem jMenuItemVacinaRecord;
     // End of variables declaration//GEN-END:variables
 
     JFrame jMainFrame;
@@ -188,6 +209,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createAnimalAction();
         createPatologyAction();
         createServiceAction();
+        createVacinaAction();
+        createLoginAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -332,4 +355,52 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         c.exec();
         
     }
+    private void createVacinaAction() {
+        jMenuItemVacinaRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VacinaListModel listModel;
+                listModel = new VacinaListModel();
+                VacinaListController listController;
+                listController = new VacinaListController(listModel, jMainFrame);
+                VacinaModel model;
+                model = new VacinaModel();
+                model.setEntity(listController.exec());
+                if (listController.getState() == State.STATE_CANCEL) {
+                    return;
+                }
+                VacinaController v;
+                v = new VacinaController(model, (ObserverJInternalFrame) jMainFrame);
+                v.exec();
+            }
+        });
+    }
+    
+    private void createLoginAction() {
+        jMenuItemLoginRecord.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginListModel listModel;
+                listModel = new LoginListModel();
+                LoginListController listController;
+                listController = new LoginListController(listModel, jMainFrame);
+                LoginModel model;
+                model = new LoginModel();
+                model.setEntity(listController.exec());
+                if (listController.getState() == State.STATE_CANCEL) {
+                    return;
+                }
+                LoginController l;
+                l = new LoginController(model, (ObserverJInternalFrame) jMainFrame);
+                l.exec();
+            }
+        });
+    }
+
+    @Override
+    public void addjDesktop(LoginView loginView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }

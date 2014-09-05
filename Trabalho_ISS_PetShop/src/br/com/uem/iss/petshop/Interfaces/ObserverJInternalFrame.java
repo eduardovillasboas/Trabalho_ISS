@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Interfaces;
 
+import br.com.uem.iss.petshop.Login.view.LoginView;
 import javax.swing.JInternalFrame;
 
 /**
@@ -15,4 +16,6 @@ import javax.swing.JInternalFrame;
 public interface ObserverJInternalFrame {
     public void wasFinalized(JInternalFrame view);
     public void addjDesktop(JInternalFrame customerView);
+
+    public void addjDesktop(LoginView loginView);
 }

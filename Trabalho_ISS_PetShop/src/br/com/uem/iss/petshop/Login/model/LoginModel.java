@@ -21,10 +21,6 @@ public class LoginModel extends AbstractModel{
     final private LoginDAO loginDAO;
     private Login login;
 
-    public void setCustomer(List<Customer> customer) {
-        login.setCustomer(customer);
-    }
-
     public String getName() {
         return login.getName();
     }
@@ -70,14 +66,15 @@ public class LoginModel extends AbstractModel{
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         try {
             loginDAO.persist(login);
             updateObservers("Dados gravados com sucesso");
+            return true;
         } catch (Exception e) {
             updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
         }
-        
+        return false;   
     }
 
     @Override

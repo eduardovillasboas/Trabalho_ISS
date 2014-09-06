@@ -17,5 +17,5 @@ public interface ObserverJInternalFrame {
     public void wasFinalized(JInternalFrame view);
     public void addjDesktop(JInternalFrame customerView);
 
-    public void addjDesktop(LoginView loginView);
+    
 }

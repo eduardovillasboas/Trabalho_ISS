@@ -38,10 +38,7 @@ public class LoginView extends javax.swing.JInternalFrame implements ViewInterfa
     /**
      * Creates new form LoginView
      */
-    public LoginView() {
-        initComponents();
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,16 +237,11 @@ public class LoginView extends javax.swing.JInternalFrame implements ViewInterfa
             JOptionPane.showMessageDialog(this, error);
         }
     }
-
-    public void atualizeModelFromViewValues() {
+    @Override
+    public void updateModelFromViewValues() {
         loginModel.setName(jFormattedTextFieldName.getText());
         loginModel.setLogin(jFormattedTextFieldLogin.getText());
         loginModel.setSenha(jPasswordFieldSenha.getText());
-    }
-
-    @Override
-    public void updateModelFromViewValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

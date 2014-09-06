@@ -35,9 +35,9 @@ public class VacinaController implements ControllerInterface {
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         vacinaView.atualizeModelFromViewValues();
-        vacinaModel.persist();
+        return vacinaModel.persist();
     }
     
 }

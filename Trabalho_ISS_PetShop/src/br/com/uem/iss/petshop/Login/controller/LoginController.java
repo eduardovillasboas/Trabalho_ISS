@@ -34,9 +34,9 @@ public class LoginController implements ControllerInterface{
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         loginView.updateModelFromViewValues();
-        loginModel.persist();
+        return loginModel.persist();
     }
     
 }

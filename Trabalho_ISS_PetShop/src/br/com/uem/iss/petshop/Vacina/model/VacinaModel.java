@@ -57,13 +57,15 @@ public class VacinaModel extends AbstractModel {
     }
 
     @Override
-    public void persist() {
+    public Boolean persist() {
         try {
             vacinaDAO.persist(vacina);
             updateObservers("Dados gravados com sucesso");
+            return true;
         } catch (Exception e) {
             updateErrorMessage("Erro ao gravar os dados no banco de dados" + e.getMessage());
         }
+        return false;
     }
 
     @Override

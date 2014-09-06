@@ -15,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -40,8 +39,6 @@ public class Login implements Serializable,PetshopEntity {
     public void setId(Long id) {
         this.id = id;
     }
-    @ManyToMany(mappedBy = "login")
-    private List<Customer> customer;
     
     @Column(name = "nome")
     private String name;
@@ -101,15 +98,7 @@ public class Login implements Serializable,PetshopEntity {
         return "br.com.uem.iss.petshop.Login.model.Login[ id=" + id + " ]";
     }
 
-    public List<Customer> getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(List<Customer> customer) {
-        this.customer = customer;
-        }
-
-    @Override
+       @Override
     public void setAtributes(PetshopEntity entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

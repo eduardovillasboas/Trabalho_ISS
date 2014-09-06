@@ -397,10 +397,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
     }
 
-    @Override
-    public void addjDesktop(LoginView loginView) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     
 }

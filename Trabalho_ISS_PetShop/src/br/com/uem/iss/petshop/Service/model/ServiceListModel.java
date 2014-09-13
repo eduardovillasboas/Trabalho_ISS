@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ServiceListModel extends AbstractModelList {
         return services.size();
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Object getRawValueAt(int rowIndex, int columnIndex) {
         Service service = services.get(rowIndex);
         if (columnIndex == 0)
             return service.getID();
@@ -69,12 +70,39 @@ public class ServiceListModel extends AbstractModelList {
         return services.get(value);
     }
 
+    @Override
     public void delele(int selectedRow) {
         Service p = services.get(selectedRow);
         services.remove(selectedRow);
         ServiceDAO serviceDAO = new ServiceDAO();
         serviceDAO.delete(p);
         updateObservers( "Servico " + p.getDescricao().trim()+" deletado com sucesso!" );
+    }
+
+    @Override
+    public AbstractTableModel createModel() {
+        return new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col) {
+                return columnName(col);
+            }
+
+            @Override
+            public int getRowCount() {
+                return length();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                return getRawValueAt(rowIndex, columnIndex);
+            }
+        };
     }
     
 }

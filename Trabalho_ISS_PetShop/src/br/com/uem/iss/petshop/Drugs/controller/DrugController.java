@@ -20,11 +20,14 @@ public class DrugController implements ControllerInterface {
     DrugModel drugModel;
     DrugView drugView;
 
-    public DrugController(DrugModel m, ObserverJInternalFrame o) {
+    public DrugController(DrugModel m, 
+                          ObserverJInternalFrame o,
+                          ObserverJInternalFrame o2) {
         drugModel = m;
         drugModel.initialize();
         drugView = new DrugView(this, drugModel);
         drugView.register(o);
+        drugView.register(o2);
         o.addjDesktop(drugView);
     }
 

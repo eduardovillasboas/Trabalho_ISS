@@ -19,11 +19,14 @@ public class PatologyController implements ControllerInterface{
 
     PatologyView patologyView;
     PatologyModel patologyModel;
-    public PatologyController(PatologyModel m,ObserverJInternalFrame o) {
+    public PatologyController(  PatologyModel m,
+                                ObserverJInternalFrame o,
+                                ObserverJInternalFrame o2) {
         patologyModel = m;
         m.initialize();
         patologyView = new PatologyView(this,patologyModel);
         patologyView.register(o);
+        patologyView.register(o2);
         o.addjDesktop(patologyView);
     }
 

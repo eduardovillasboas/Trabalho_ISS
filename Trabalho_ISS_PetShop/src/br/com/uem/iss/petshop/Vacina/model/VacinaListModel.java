@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -48,7 +49,7 @@ public class VacinaListModel extends AbstractModelList {
         return vacina.size();
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Object getRawValueAt(int rowIndex, int columnIndex) {
         Vacina v = vacina.get(rowIndex);
         if (columnIndex == 0)
             return v.getID();
@@ -72,6 +73,32 @@ public class VacinaListModel extends AbstractModelList {
         VacinaDAO vacinaDAO = new VacinaDAO();
         vacinaDAO.delete(v);
         updateObservers( "Vacina " + v.getDescricao().trim()+" deletada com sucesso!" );
+    }
+
+    @Override
+    public AbstractTableModel createModel() {
+        return new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col) {
+                return columnName(col);
+            }
+
+            @Override
+            public int getRowCount() {
+                return length();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                return getRawValueAt(rowIndex, columnIndex);
+            }
+        };
     }
     
 }

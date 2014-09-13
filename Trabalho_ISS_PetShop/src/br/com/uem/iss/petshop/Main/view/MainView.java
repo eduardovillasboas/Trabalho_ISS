@@ -5,38 +5,8 @@
  */
 package br.com.uem.iss.petshop.Main.view;
 
-import br.com.uem.iss.petshop.Animal.controller.AnimalController;
-import br.com.uem.iss.petshop.Animal.controller.AnimalListController;
-import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
-import br.com.uem.iss.petshop.Animal.model.AnimalModel;
-import br.com.uem.iss.petshop.Customer.controller.CustomerController;
-import br.com.uem.iss.petshop.Customer.controller.CustomerListController;
-import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
-import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
-import br.com.uem.iss.petshop.Login.controller.LoginController;
-import br.com.uem.iss.petshop.Login.controller.LoginListController;
-import br.com.uem.iss.petshop.Login.model.LoginListModel;
-import br.com.uem.iss.petshop.Login.model.LoginModel;
-import br.com.uem.iss.petshop.Login.view.LoginView;
 import br.com.uem.iss.petshop.Main.controller.MainController;
-import br.com.uem.iss.petshop.Patology.controller.PatologyController;
-import br.com.uem.iss.petshop.Patology.controller.PatologyListController;
-import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
-import br.com.uem.iss.petshop.Patology.model.PatologyModel;
-import br.com.uem.iss.petshop.Product.controller.ProductController;
-import br.com.uem.iss.petshop.Product.controller.ProductListController;
-import br.com.uem.iss.petshop.Product.model.ProductListModel;
-import br.com.uem.iss.petshop.Product.model.ProductModel;
-import br.com.uem.iss.petshop.Service.controller.ServiceController;
-import br.com.uem.iss.petshop.Service.controller.ServiceListController;
-import br.com.uem.iss.petshop.Service.model.ServiceListModel;
-import br.com.uem.iss.petshop.Service.model.ServiceModel;
-import br.com.uem.iss.petshop.Utils.State;
-import br.com.uem.iss.petshop.Vacina.controller.VacinaController;
-import br.com.uem.iss.petshop.Vacina.controller.VacinaListController;
-import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
-import br.com.uem.iss.petshop.Vacina.model.VacinaModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -226,65 +196,35 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     }
 
     private void customerAction() {
-        CustomerListModel listModel;
-        listModel = new CustomerListModel();
-        CustomerListController listController;
-        listController = new CustomerListController(listModel, jMainFrame);
-        CustomerModel model;
-        model = new CustomerModel();
-        model.setEntity(listController.exec());
-        if (listController.getState() == State.STATE_CANCEL) {
-            return;
-        }
-
-        CustomerController c;
-        c = new CustomerController(model, (ObserverJInternalFrame) jMainFrame);
-        c.exec();
-
+        mainController.customerAction();
     }
 
     private void createProductAction() {
         jMenuItemProductRecord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductListModel listModel;
-                listModel = new ProductListModel();
-                ProductListController listController;
-                listController = new ProductListController(listModel, jMainFrame);
-                ProductModel model;
-                model = new ProductModel();
-                model.setEntity(listController.exec());
-                if (listController.getState() == State.STATE_CANCEL) {
-                    return;
-                }
-                ProductController p;
-                p = new ProductController(model, (ObserverJInternalFrame) jMainFrame);
-                p.exec();
+                productAction();
             }
         });
     }
-
+    
+    private void productAction() {
+        mainController.productAction();
+    }
+    
     private void createServiceAction() {
         jMenuItemServiceRecord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ServiceListModel listModel;
-                listModel = new ServiceListModel();
-                ServiceListController listController;
-                listController = new ServiceListController(listModel, jMainFrame);
-                ServiceModel model;
-                model = new ServiceModel();
-                model.setEntity(listController.exec());
-                if (listController.getState() == State.STATE_CANCEL) {
-                    return;
-                }
-                ServiceController p;
-                p = new ServiceController(model, (ObserverJInternalFrame) jMainFrame);
-                p.exec();
+                serviceAction();
             }
         });
     }
 
+    private void serviceAction(){
+        mainController.serviceAction();
+    }
+    
     @Override
     public void addjDesktop(JInternalFrame customerView) {
         jDesktopPane1.add(customerView);
@@ -312,21 +252,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     }
 
     private void animalAction() {
-        AnimalListModel listModel;
-        listModel = new AnimalListModel();
-        AnimalListController listController;
-        listController = new AnimalListController(listModel,this);
-        AnimalModel model;
-        model = new AnimalModel();
-        model.setEntity(listController.exec());
-        if (listController.getState() == State.STATE_CANCEL) {
-            return;
-        }
-
-        AnimalController c;
-        c = new AnimalController(model, (ObserverJInternalFrame) this);
-        c.exec();
-
+        mainController.animalAction();
     }
 
     private void createPatologyAction() {
@@ -340,64 +266,33 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     }
     
     private void patologyAction() {
-        PatologyListModel listModel;
-        listModel = new PatologyListModel();
-        PatologyListController listController;
-        listController = new PatologyListController(listModel, this);
-        PatologyModel model;
-        model = new PatologyModel();
-        model.setEntity(listController.exec());
-        if (listController.getState() == State.STATE_CANCEL)
-            return;
-        
-        PatologyController c;
-        c = new PatologyController(model, (ObserverJInternalFrame)this);
-        c.exec();
-        
+        mainController.patologyAction();
     }
     private void createVacinaAction() {
         jMenuItemVacinaRecord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VacinaListModel listModel;
-                listModel = new VacinaListModel();
-                VacinaListController listController;
-                listController = new VacinaListController(listModel, jMainFrame);
-                VacinaModel model;
-                model = new VacinaModel();
-                model.setEntity(listController.exec());
-                if (listController.getState() == State.STATE_CANCEL) {
-                    return;
-                }
-                VacinaController v;
-                v = new VacinaController(model, (ObserverJInternalFrame) jMainFrame);
-                v.exec();
+                vacinaAction();
             }
         });
+    }
+    
+    private void vacinaAction(){
+        mainController.vacinaAction();
     }
     
     private void createLoginAction() {
         jMenuItemLoginRecord.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginListModel listModel;
-                listModel = new LoginListModel();
-                LoginListController listController;
-                listController = new LoginListController(listModel, jMainFrame);
-                LoginModel model;
-                model = new LoginModel();
-                model.setEntity(listController.exec());
-                if (listController.getState() == State.STATE_CANCEL) {
-                    return;
-                }
-                LoginController l;
-                l = new LoginController(model, (ObserverJInternalFrame) jMainFrame);
-                l.exec();
+                loginAction();
             }
         });
     }
 
     
-
+    private void loginAction(){
+        mainController.loginAction();
+    }
     
 }

@@ -10,7 +10,13 @@ import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
 import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
+import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Utils.State;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -51,7 +57,7 @@ public class PetshopListConsultView extends javax.swing.JDialog implements Obser
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableCustomerTable = new javax.swing.JTable();
         jButtonCancel = new javax.swing.JButton();
-        jButtonNew = new javax.swing.JButton();
+        jButtonVisualize = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,13 +95,13 @@ public class PetshopListConsultView extends javax.swing.JDialog implements Obser
         jButtonCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jButtonNew.setText("Visualizar");
-        jButtonNew.setFocusable(false);
-        jButtonNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonNew.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVisualize.setText("Visualizar");
+        jButtonVisualize.setFocusable(false);
+        jButtonVisualize.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonVisualize.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonVisualize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNewActionPerformed(evt);
+                jButtonVisualizeActionPerformed(evt);
             }
         });
 
@@ -108,7 +114,7 @@ public class PetshopListConsultView extends javax.swing.JDialog implements Obser
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonNew)
+                    .addComponent(jButtonVisualize)
                     .addComponent(jButtonCancel))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -116,7 +122,7 @@ public class PetshopListConsultView extends javax.swing.JDialog implements Obser
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonNew)
+                .addComponent(jButtonVisualize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -129,9 +135,9 @@ public class PetshopListConsultView extends javax.swing.JDialog implements Obser
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
+    private void jButtonVisualizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonNewActionPerformed
+    }//GEN-LAST:event_jButtonVisualizeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,19 +145,78 @@ public class PetshopListConsultView extends javax.swing.JDialog implements Obser
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonNew;
+    private javax.swing.JButton jButtonVisualize;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCustomerTable;
     // End of variables declaration//GEN-END:variables
 
+    public State getState(){
+        return state;
+    }
+    
+    public PetshopEntity configure(AbstractTableModel tableModel) {
+        createActions();
+        return execControllerInterface(tableModel,jTableCustomerTable);
+    }
+
+    public PetshopEntity execControllerInterface(AbstractTableModel tableModel, JTable jTableCustomerTable){
+        PetshopEntity entity = null;
+        if (tableModel.getRowCount() != 0) {
+            jTableCustomerTable.setModel(tableModel);
+            setLocationRelativeTo(null);
+            setVisible(true);
+            if (getState() == State.STATE_CANCEL)
+                return null;
+            if (getState() == State.STATE_EDIT){
+                int value = jTableCustomerTable.getSelectedRow();
+                entity = listModel.getPetshopEntityAt(value);
+            }
+        } else
+            state = State.STATE_CANCEL;
+        
+        return entity;
+    }
+    
+    
     @Override
     public void updateViews(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(this, msg);
+        jTableCustomerTable.repaint();
     }
 
     @Override
     public void errorOcurred(String error) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(this, error);
     }
+    
+    public void createActions(){
+        createVisualizeAction();
+        createCancelAction();
+    }
+
+    private void createVisualizeAction() {
+        jButtonVisualize.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                visualizeAction();
+            }
+        });
+    }
+
+    private void visualizeAction(){
+        if (jTableCustomerTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
+            return;
+        }
+        state = State.STATE_EDIT;
+        dispose();
+    }
+    
+    private void createCancelAction() {
+        state = State.STATE_CANCEL;
+        dispose();
+    }
+
 }

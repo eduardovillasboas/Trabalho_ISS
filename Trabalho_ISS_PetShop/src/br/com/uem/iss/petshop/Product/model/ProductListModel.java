@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ProductListModel extends AbstractModelList {
         return products.size();
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Object rawGetValueAt(int rowIndex, int columnIndex) {
         Product product = products.get(rowIndex);
         if (columnIndex == 0)
             return product.getID();
@@ -72,6 +73,33 @@ public class ProductListModel extends AbstractModelList {
         ProductDAO productDAO = new ProductDAO();
         productDAO.delete(p);
         updateObservers( "Produto " + p.getDescricao().trim()+" deletado com sucesso!" );
+    }
+
+    @Override
+    public AbstractTableModel createModel() {
+        return new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col) {
+                return columnName(col);
+            }
+
+            @Override
+            public int getRowCount() {
+                return length();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                return rawGetValueAt(rowIndex, columnIndex);
+            }
+        };
+
     }
     
 }

@@ -43,7 +43,8 @@ public class CompanyListModel extends AbstractModelList{
         }
         
     }
-
+    
+    @Override
     public AbstractTableModel createModel() {
         return new AbstractTableModel() {
 
@@ -73,18 +74,6 @@ public class CompanyListModel extends AbstractModelList{
         };
     }
 
-    public void delete(int selectedRow) {
-        try {
-            Company a = companys.get(selectedRow);
-            companys.remove(selectedRow);
-            CompanyDAO companyDAO = new CompanyDAO();
-            companyDAO.delete(a);
-            updateObservers("A Empresa "+a.getNome().trim()+" deletado com sucesso!");
-        } catch (Exception e) {
-            updateObservers(e.getMessage());
-        }
-    }
-
     public String columnName(int col) {
         if (col == 0)
             return "Código";
@@ -102,5 +91,18 @@ public class CompanyListModel extends AbstractModelList{
             return a.getID();
         return a.getNome();
     }
-    
+
+    @Override
+    public void delele(int selectedRow) {
+        try {
+            Company a = companys.get(selectedRow);
+            companys.remove(selectedRow);
+            CompanyDAO companyDAO = new CompanyDAO();
+            companyDAO.delete(a);
+            updateObservers("A Empresa "+a.getNome().trim()+" deletado com sucesso!");
+        } catch (Exception e) {
+            updateObservers(e.getMessage());
+        }
+    }
+
 }

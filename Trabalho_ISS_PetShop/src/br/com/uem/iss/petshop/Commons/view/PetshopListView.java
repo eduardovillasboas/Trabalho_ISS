@@ -6,37 +6,38 @@
 
 package br.com.uem.iss.petshop.Commons.view;
 
+import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
 import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
 import br.com.uem.iss.petshop.Interfaces.ObservableModel;
+import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
-import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Utils.State;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author EDUARDO
  */
-public class PetshopListView extends javax.swing.JDialog implements ObserverModel{
+public class PetshopListView extends javax.swing.JDialog implements ObserverModel, ObserverJInternalFrame{
 
     /**
      * Creates new form CustomerListView
      */
-    final private ModelListInterface listModel;
+    final private AbstractModelList listModel;
     final private ControllerListInterface controllerList;
     
     public PetshopListView(java.awt.Frame parent, 
             boolean modal,
             ControllerListInterface c,
             ModelListInterface l) {
+        
         super(parent, modal);
         initComponents();
-        listModel = l;
+        listModel = (AbstractModelList)l;
         controllerList = c;
         state = State.STATE_CANCEL;
         ((ObservableModel)listModel).registerErrorObserver(this);
@@ -185,28 +186,18 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
         return state;
     }
     
-    public PetshopEntity configure(AbstractTableModel tableModel) {
+    public void configure() {
         createActions();
-        return execControllerInterface(tableModel,jTableCustomerTable);
+        execControllerInterface();
     }
 
-    public PetshopEntity execControllerInterface(AbstractTableModel tableModel, JTable jTableCustomerTable){
-        PetshopEntity entity = null;
-        if (tableModel.getRowCount() != 0) {
-            jTableCustomerTable.setModel(tableModel);
-            setLocationRelativeTo(null);
-            setVisible(true);
-            if (getState() == State.STATE_CANCEL)
-                return null;
-            if (jTableCustomerTable.getSelectedRow() == -1 && getState() != State.STATE_NEW)
-                return null;
-            if (getState() == State.STATE_EDIT){
-                int value = jTableCustomerTable.getSelectedRow();
-                entity = listModel.getPetshopEntityAt(value);
-            }
-        } else
-            state = State.STATE_NEW;
-        return entity;
+    public void execControllerInterface(){
+        jTableCustomerTable.revalidate();
+        jTableCustomerTable.clearSelection();
+        listModel.initialize();
+        jTableCustomerTable.setModel(listModel.createModel());
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
             
     @Override
@@ -239,8 +230,7 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
     }
 
     private void newAction() {
-        state = State.STATE_NEW;
-        dispose();
+        controllerList.newAction();
     }
     
     public void createEditAction(){
@@ -259,8 +249,7 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
             JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
             return;
         }
-        state = State.STATE_EDIT;
-        dispose();
+        controllerList.editAction(listModel.getPetshopEntityAt(jTableCustomerTable.getSelectedRow()));
     }
     
     public void createDeleteAction(){
@@ -299,6 +288,16 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
     private void cancelAction() {
         state = State.STATE_CANCEL;
         dispose();
+    }
+
+    @Override
+    public void wasFinalized(JInternalFrame view) {
+        execControllerInterface();
+    }
+
+    @Override
+    public void addjDesktop(JInternalFrame customerView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

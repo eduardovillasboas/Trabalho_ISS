@@ -19,11 +19,13 @@ public class CustomerController implements ControllerInterface{
 
     CustomerModel customerModel;
     CustomerView customerView;
-    public CustomerController(CustomerModel m,ObserverJInternalFrame o) {
+    public CustomerController(CustomerModel m,ObserverJInternalFrame o,
+            ObserverJInternalFrame o2) {
         customerModel = m;
         customerModel.initialize();
         customerView = new CustomerView(this,customerModel);
         customerView.register(o);
+        customerView.register(o2);
         o.addjDesktop(customerView);
     }
 

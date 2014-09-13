@@ -71,18 +71,6 @@ public class LoginListModel extends AbstractModelList{
         };
     }
 
-    public void delete(int selectedRow) {
-        try {
-            Login l = login.get(selectedRow);
-            login.remove(selectedRow);
-            LoginDAO loginDAO = new LoginDAO();
-            loginDAO.delete(l);
-            updateObservers("O Login "+l.getName().trim()+" deletado com sucesso!");
-        } catch (Exception e) {
-            updateObservers(e.getMessage());
-        }
-    }
-
     public String columnName(int col) {
         if (col == 0)
             return "Código";
@@ -99,6 +87,19 @@ public class LoginListModel extends AbstractModelList{
         if (columnIndex == 0)
             return l.getID();
         return l.getName();
+    }
+
+    @Override
+    public void delele(int selectedRow) {
+        try {
+            Login l = login.get(selectedRow);
+            login.remove(selectedRow);
+            LoginDAO loginDAO = new LoginDAO();
+            loginDAO.delete(l);
+            updateObservers("O Login "+l.getName().trim()+" deletado com sucesso!");
+        } catch (Exception e) {
+            updateObservers(e.getMessage());
+        }
     }
     
     

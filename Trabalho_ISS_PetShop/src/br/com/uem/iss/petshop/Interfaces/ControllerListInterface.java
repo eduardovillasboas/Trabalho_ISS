@@ -16,6 +16,9 @@ public interface ControllerListInterface {
     
     public void delete(int selectedRow);
     public State getState();
-    public PetshopEntity exec();
+    public void exec();
+    public void newAction();
+    public void editAction(PetshopEntity petshopEntity);
+
     
 }

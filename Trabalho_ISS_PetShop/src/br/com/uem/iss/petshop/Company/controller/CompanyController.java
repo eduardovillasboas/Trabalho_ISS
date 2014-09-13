@@ -20,11 +20,14 @@ public class CompanyController implements ControllerInterface {
     CompanyModel companyModel;
     CompanyView companyView;
 
-    public CompanyController(CompanyModel m, ObserverJInternalFrame o) {
+    public CompanyController(CompanyModel m, 
+                             ObserverJInternalFrame o,
+                             ObserverJInternalFrame o2) {
         companyModel = m;
         companyModel.initialize();
         companyView = new CompanyView(this, companyModel);
         companyView.register(o);
+        companyView.register(o2);
         o.addjDesktop(companyView);
     }
 

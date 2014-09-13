@@ -9,6 +9,7 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -46,7 +47,7 @@ public class DrugListModel extends AbstractModelList {
         return drugs.size();
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Object _getValueAt(int rowIndex, int columnIndex) {
         Drug drug = drugs.get(rowIndex);
         if (columnIndex == 0) {
             return drug.getID();
@@ -89,6 +90,33 @@ public class DrugListModel extends AbstractModelList {
         DrugDAO drugDAO = new DrugDAO();
         drugDAO.delete(p);
         updateObservers("Medicamento " + p.getDescricao().trim() + p.getFornecedor().trim() + p.getQuantidade().trim() + " deletado com sucesso!");
+    }
+
+    @Override
+    public AbstractTableModel createModel() {
+       AbstractTableModel tableModel = new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col) {
+                return columnName(col);
+            }
+
+            @Override
+            public int getRowCount() {
+                return length();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 2;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                return _getValueAt(rowIndex, columnIndex);
+            }
+        };
+       return tableModel;
     }
 
 }

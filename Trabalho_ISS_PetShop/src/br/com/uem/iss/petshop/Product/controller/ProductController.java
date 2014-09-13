@@ -19,11 +19,14 @@ public class ProductController implements ControllerInterface {
     ProductModel productModel;
     ProductView productView;
 
-    public ProductController(ProductModel m, ObserverJInternalFrame o) {
+    public ProductController(   ProductModel m, 
+                                ObserverJInternalFrame o,
+                                ObserverJInternalFrame o2) {
         productModel = m;
         productModel.initialize();
         productView = new ProductView(this, productModel);
         productView.register(o);
+        productView.register(o2);
         o.addjDesktop(productView);
     }
 

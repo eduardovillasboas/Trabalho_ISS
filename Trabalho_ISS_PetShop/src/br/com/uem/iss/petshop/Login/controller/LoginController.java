@@ -19,11 +19,14 @@ public class LoginController implements ControllerInterface{
 
     LoginModel loginModel;
     LoginView loginView;
-    public LoginController(LoginModel m, ObserverJInternalFrame o) {
+    public LoginController(LoginModel m,
+                           ObserverJInternalFrame o,
+                           ObserverJInternalFrame o2) {
         loginModel = m;
         m.initialize();
         loginView = new LoginView(this, m);
         loginView.register(o);
+        loginView.register(o2);
         o.addjDesktop(loginView);
     }
 

@@ -20,11 +20,14 @@ public class VacinaController implements ControllerInterface {
     VacinaModel vacinaModel;
     VacinaView vacinaView;
 
-    public VacinaController(VacinaModel m, ObserverJInternalFrame o) {
+    public VacinaController(VacinaModel m, 
+                            ObserverJInternalFrame o,
+                            ObserverJInternalFrame o2) {
         vacinaModel = m;
         vacinaModel.initialize();
         vacinaView = new VacinaView(this, vacinaModel);
         vacinaView.register(o);
+        vacinaView.register(o2);
         o.addjDesktop(vacinaView);
     }
 

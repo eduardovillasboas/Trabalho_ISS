@@ -7,6 +7,7 @@
 package br.com.uem.iss.petshop.Abstract.model;
 
 import br.com.uem.iss.petshop.Interfaces.ModelListInterface;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -17,6 +18,9 @@ public abstract class AbstractModelList extends AbstractObservableModel implemen
     public AbstractModelList() {
         super();
     }
+
+    public abstract AbstractTableModel createModel();
+    public abstract void delele(int selectedRow);
      
     
 }

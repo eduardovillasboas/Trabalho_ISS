@@ -19,11 +19,14 @@ public class ServiceController implements ControllerInterface {
     ServiceModel serviceModel;
     ServiceView serviceView;
 
-    public ServiceController(ServiceModel m, ObserverJInternalFrame o) {
+    public ServiceController(   ServiceModel m, 
+                                ObserverJInternalFrame o,
+                                ObserverJInternalFrame o2) {
         serviceModel = m;
         serviceModel.initialize();
         serviceView = new ServiceView(this, serviceModel);
         serviceView.register(o);
+        serviceView.register(o2);
         o.addjDesktop(serviceView);
     }
 

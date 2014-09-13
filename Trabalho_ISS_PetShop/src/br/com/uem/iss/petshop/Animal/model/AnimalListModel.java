@@ -74,18 +74,6 @@ public class AnimalListModel extends AbstractModelList{
         };
     }
 
-    public void delete(int selectedRow) {
-        try {
-            Animal a = animals.get(selectedRow);
-            animals.remove(selectedRow);
-            AnimalDAO animalDAO = new AnimalDAO();
-            animalDAO.delete(a);
-            updateObservers("O Animal "+a.getName().trim()+" deletado com sucesso!");
-        } catch (Exception e) {
-            updateObservers(e.getMessage());
-        }
-    }
-
     public String columnName(int col) {
         if (col == 0)
             return "Código";
@@ -102,6 +90,19 @@ public class AnimalListModel extends AbstractModelList{
         if (columnIndex == 0)
             return a.getID();
         return a.getName();
+    }
+
+    @Override
+    public void delele(int selectedRow) {
+        try {
+            Animal a = animals.get(selectedRow);
+            animals.remove(selectedRow);
+            AnimalDAO animalDAO = new AnimalDAO();
+            animalDAO.delete(a);
+            updateObservers("O Animal "+a.getName().trim()+" deletado com sucesso!");
+        } catch (Exception e) {
+            updateObservers(e.getMessage());
+        }
     }
     
 }

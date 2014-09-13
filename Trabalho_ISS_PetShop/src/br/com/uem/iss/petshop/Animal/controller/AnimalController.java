@@ -19,11 +19,14 @@ public class AnimalController implements ControllerInterface{
 
     AnimalModel animalModel;
     AnimalView animalView;
-    public AnimalController(AnimalModel m, ObserverJInternalFrame o) {
+    public AnimalController(AnimalModel m, 
+                            ObserverJInternalFrame o,
+                            ObserverJInternalFrame o2) {
         animalModel = m;
         m.initialize();
         animalView = new AnimalView(this, m);
         animalView.register(o);
+        animalView.register(o2);
         o.addjDesktop(animalView);
     }
 

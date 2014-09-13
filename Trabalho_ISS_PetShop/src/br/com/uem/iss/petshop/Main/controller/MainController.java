@@ -10,9 +10,13 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Animal.controller.FactoryAnimalController;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
 import br.com.uem.iss.petshop.Commons.view.ListController;
+import br.com.uem.iss.petshop.Company.controller.FactoryCompanyController;
+import br.com.uem.iss.petshop.Company.model.CompanyListModel;
 import br.com.uem.iss.petshop.Customer.controller.FactoryCustomerController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
+import br.com.uem.iss.petshop.Drugs.controller.FactoryDrugController;
+import br.com.uem.iss.petshop.Drugs.model.DrugListModel;
 import br.com.uem.iss.petshop.Login.controller.FactoryLoginController;
 import br.com.uem.iss.petshop.Login.model.LoginListModel;
 import br.com.uem.iss.petshop.Main.view.MainView;
@@ -83,5 +87,13 @@ public class MainController {
 
     public void loginAction() {
         action(new LoginListModel(), new FactoryLoginController());
+    }
+
+    public void companyAction() {
+        action(new CompanyListModel(), new FactoryCompanyController());
+    }
+
+    public void drugsAction() {
+        action(new DrugListModel(), new FactoryDrugController());
     }
 }

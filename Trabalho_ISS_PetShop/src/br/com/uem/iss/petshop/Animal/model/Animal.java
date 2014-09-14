@@ -83,7 +83,12 @@ public class Animal implements Serializable, PetshopEntity {
 
     @Override
     public void setAtributes(PetshopEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Animal animal = (Animal)entity;
+        setName(animal.getName());
+        setBirth(animal.getBirth());
+        setBreed(animal.getBreed());
+        setHeight(animal.getHeight());
+        setWeight(animal.getWeight());
     }
 
     public List<Customer> getCustomer() {

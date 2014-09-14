@@ -10,7 +10,6 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ListModel;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -45,6 +44,7 @@ public class AnimalListModel extends AbstractModelList{
         
     }
 
+    @Override
     public AbstractTableModel createModel() {
         return new AbstractTableModel() {
 

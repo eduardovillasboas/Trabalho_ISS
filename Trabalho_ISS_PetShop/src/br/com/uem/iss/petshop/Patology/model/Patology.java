@@ -69,7 +69,9 @@ public class Patology implements Serializable, PetshopEntity {
 
     @Override
     public void setAtributes(PetshopEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Patology patology = (Patology)entity;
+        setName(patology.getName());
+        setDescription(patology.getDescription());
     }
 
     @Column(name = "nome")

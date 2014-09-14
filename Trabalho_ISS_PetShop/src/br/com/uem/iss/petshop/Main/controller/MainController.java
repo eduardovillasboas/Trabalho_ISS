@@ -14,7 +14,6 @@ import br.com.uem.iss.petshop.Company.controller.FactoryCompanyController;
 import br.com.uem.iss.petshop.Company.model.CompanyListModel;
 import br.com.uem.iss.petshop.Customer.controller.FactoryCustomerController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
-import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Drugs.controller.FactoryDrugController;
 import br.com.uem.iss.petshop.Drugs.model.DrugListModel;
 import br.com.uem.iss.petshop.Login.controller.FactoryLoginController;
@@ -27,7 +26,6 @@ import br.com.uem.iss.petshop.Product.model.ProductListModel;
 import br.com.uem.iss.petshop.Service.controller.FactoryServiceController;
 import br.com.uem.iss.petshop.Service.model.ServiceListModel;
 import br.com.uem.iss.petshop.Utils.FactoryController;
-import br.com.uem.iss.petshop.Utils.State;
 import br.com.uem.iss.petshop.Vacina.controller.FactoryVacinaController;
 import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
 
@@ -57,11 +55,6 @@ public class MainController {
     }
 
     public void customerAction() {
- /*       CustomerListModel listModel;
-        listModel = new CustomerListModel();
-        ListController listController;
-        listController = new ListController(listModel, mainView,new FactoryCustomerController());
-        listController.exec();*/
         action(new CustomerListModel(), new FactoryCustomerController());
     }
 

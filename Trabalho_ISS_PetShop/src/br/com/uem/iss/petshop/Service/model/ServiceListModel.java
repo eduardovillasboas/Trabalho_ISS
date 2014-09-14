@@ -104,5 +104,10 @@ public class ServiceListModel extends AbstractModelList {
             }
         };
     }
+
+    @Override
+    public String getTitle() {
+        return "Cadastro de Serviços";
+    }
     
 }

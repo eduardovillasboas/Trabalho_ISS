@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Commons.view;
+package br.com.uem.iss.petshop.Commons;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
-import br.com.uem.iss.petshop.Commons.view.PetshopListView;
+import br.com.uem.iss.petshop.Commons.PetshopListView;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
@@ -21,13 +21,13 @@ import javax.swing.JFrame;
  *
  * @author EDUARDO
  */
-public class ListController implements ControllerListInterface{
+public class PetshopListController implements ControllerListInterface{
 
     AbstractModelList listModel;
     PetshopListView listView;
     ObserverJInternalFrame observerInterfalFrame;
     FactoryController factoryController;
-    public ListController(AbstractModelList lm, 
+    public PetshopListController(AbstractModelList lm, 
                                   JFrame jframe,
                                   FactoryController fc) {
         listModel = lm;

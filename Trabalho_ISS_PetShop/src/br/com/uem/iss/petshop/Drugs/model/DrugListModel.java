@@ -119,4 +119,9 @@ public class DrugListModel extends AbstractModelList {
        return tableModel;
     }
 
+    @Override
+    public String getTitle() {
+        return "Cadastro de Medicamentos";
+    }
+
 }

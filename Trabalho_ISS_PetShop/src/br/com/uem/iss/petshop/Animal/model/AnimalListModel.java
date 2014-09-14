@@ -104,5 +104,10 @@ public class AnimalListModel extends AbstractModelList{
             updateObservers(e.getMessage());
         }
     }
-    
+
+    @Override
+    public String getTitle() {
+        return "Cadastro de Animais";
+    }
+   
 }

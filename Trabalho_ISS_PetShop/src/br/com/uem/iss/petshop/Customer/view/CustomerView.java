@@ -315,7 +315,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                record();
+                actionRecord();
             }
         });
     }
@@ -325,7 +325,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
         dispose();
     }
 
-    private void record() {
+    private void actionRecord() {
         if (customerControler.persist()) {
             finalizeCustomerView();
         }
@@ -368,10 +368,6 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
         });
     }
 
-    private void addAnimal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     private void createActionRemoveAnimal() {
         jButtonRemoveAnimal.addActionListener(new ActionListener() {
 
@@ -380,6 +376,10 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
                 removeAnimal();
             }
         });
+    }
+
+    private void addAnimal() {
+        customerControler.addAnimal();
     }
 
     private void removeAnimal() {

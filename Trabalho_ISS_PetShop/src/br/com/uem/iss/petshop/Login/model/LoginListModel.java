@@ -101,6 +101,11 @@ public class LoginListModel extends AbstractModelList{
             updateObservers(e.getMessage());
         }
     }
+
+    @Override
+    public String getTitle() {
+        return "Cadastro de Login/Senha.";
+    }
     
     
 }

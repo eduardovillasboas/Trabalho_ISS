@@ -7,8 +7,6 @@
 package br.com.uem.iss.petshop.Patology.model;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
-import br.com.uem.iss.petshop.Customer.model.Customer;
-import br.com.uem.iss.petshop.Customer.model.CustomerDAO;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +88,11 @@ public class PatologyListModel extends AbstractModelList{
         }
 
         
+    }
+
+    @Override
+    public String getTitle() {
+        return "Cadastro de Patologias";
     }
     
 }

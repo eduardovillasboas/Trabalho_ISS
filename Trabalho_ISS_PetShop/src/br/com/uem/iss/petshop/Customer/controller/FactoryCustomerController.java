@@ -23,6 +23,7 @@ public class FactoryCustomerController implements FactoryController{
         CustomerModel model = new CustomerModel();
         model.setEntity(entity);
         CustomerController c = new CustomerController(model, desktop, listView);
+        
         return c;
 
     }

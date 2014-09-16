@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Commons.view;
+package br.com.uem.iss.petshop.Commons;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
@@ -42,6 +42,7 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
         state = State.STATE_CANCEL;
         ((ObservableModel)listModel).registerErrorObserver(this);
         ((ObservableModel)listModel).registerUpdate(this);
+        setTitle(listModel.getTitle());
     }
 
     /**

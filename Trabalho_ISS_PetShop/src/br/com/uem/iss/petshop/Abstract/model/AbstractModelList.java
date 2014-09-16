@@ -21,6 +21,7 @@ public abstract class AbstractModelList extends AbstractObservableModel implemen
 
     public abstract AbstractTableModel createModel();
     public abstract void delele(int selectedRow);
+    public abstract String getTitle();
      
     
 }

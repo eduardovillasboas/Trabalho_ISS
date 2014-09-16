@@ -100,4 +100,9 @@ public class CustomerListModel extends AbstractModelList{
         };
     }
 
+    @Override
+    public String getTitle() {
+        return "Cadastro de Clientes";
+    }
+
 }

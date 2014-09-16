@@ -9,7 +9,7 @@ package br.com.uem.iss.petshop.Main.controller;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Animal.controller.FactoryAnimalController;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
-import br.com.uem.iss.petshop.Commons.view.ListController;
+import br.com.uem.iss.petshop.Commons.PetshopListController;
 import br.com.uem.iss.petshop.Company.controller.FactoryCompanyController;
 import br.com.uem.iss.petshop.Company.model.CompanyListModel;
 import br.com.uem.iss.petshop.Customer.controller.FactoryCustomerController;
@@ -49,8 +49,8 @@ public class MainController {
     }
 
     public void action(AbstractModelList listModel, FactoryController factoryController){
-        ListController listController;
-        listController = new ListController(listModel, mainView, factoryController);
+        PetshopListController listController;
+        listController = new PetshopListController(listModel, mainView, factoryController);
         listController.exec();
     }
 

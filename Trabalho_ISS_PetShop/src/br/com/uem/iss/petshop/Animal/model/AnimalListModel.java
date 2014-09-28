@@ -24,7 +24,7 @@ public class AnimalListModel extends AbstractModelList{
         super();
         animals = new ArrayList<>();
     }
-    
+   
     @Override
     public PetshopEntity getPetshopEntityAt(int value) {
         return animals.get(value);
@@ -44,6 +44,11 @@ public class AnimalListModel extends AbstractModelList{
         
     }
 
+    public void initialize(List<Animal> a) {
+        animals = a;
+    }
+
+    
     @Override
     public AbstractTableModel createModel() {
         return new AbstractTableModel() {
@@ -109,5 +114,5 @@ public class AnimalListModel extends AbstractModelList{
     public String getTitle() {
         return "Cadastro de Animais";
     }
-   
+
 }

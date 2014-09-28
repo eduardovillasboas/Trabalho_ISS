@@ -34,7 +34,11 @@ public class PatologyListModel extends AbstractModelList{
         }
         
     }
-
+    
+    public void initialize(List<Patology> p){
+        patologys = p;
+    }
+    
     @Override
     public PetshopEntity getPetshopEntityAt(int value) {
         return patologys.get(value);

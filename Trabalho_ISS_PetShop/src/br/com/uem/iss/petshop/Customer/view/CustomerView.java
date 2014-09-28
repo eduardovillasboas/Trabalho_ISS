@@ -5,6 +5,7 @@
  */
 package br.com.uem.iss.petshop.Customer.view;
 
+import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Customer.controller.CustomerController;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
@@ -355,7 +356,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
         customerModel.setCpf(jFormattedTextFieldCPF.getText());
         customerModel.setAddress(jTextFieldAddress.getText());
         customerModel.setNumber(new Long(jTextFieldNumber.getText()));
-
+        
     }
 
     private void createActionAddAnimal() {
@@ -383,7 +384,15 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     }
 
     private void removeAnimal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (jTableAnimals.getSelectedRow() == -1){
+            
+        }
+        Animal animal = customerModel.getAnimal(jTableAnimals.getSelectedRow());
+        customerControler.removeAnimal(animal);
+    }
+
+    public boolean confirm(String confirmaRemocaoAnimal) {
+        return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this, confirmaRemocaoAnimal);
     }
 
 }

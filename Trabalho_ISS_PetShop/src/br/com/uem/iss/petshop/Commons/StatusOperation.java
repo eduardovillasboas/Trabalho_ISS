@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.Interfaces;
+package br.com.uem.iss.petshop.Commons;
 
 /**
  *
  * @author EDUARDO
  */
-public interface ListSelectControllerInterface {
-    
+public enum StatusOperation {
+    EMPTY_ANIMAL_MODEL,
+    SELECTED_ANIMAL,
+    CANCEL_SELECT
 }

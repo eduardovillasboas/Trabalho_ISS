@@ -72,6 +72,8 @@ public class CustomerListModel extends AbstractModelList{
     public PetshopEntity getPetshopEntityAt(int value) {
         return customers.get(value);
     }
+    
+    @Override
     public AbstractTableModel createModel(){
         return new AbstractTableModel() {
 

@@ -9,10 +9,13 @@ package br.com.uem.iss.petshop.Animal.model;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -111,6 +114,12 @@ public class AnimalModel extends AbstractModel{
     @Override
     public void setEntity(PetshopEntity entity) {
         animal = (Animal)entity;
+    }
+
+    private PatologyListModel patologyListModel = new PatologyListModel();
+    public AbstractTableModel createModel() {
+        patologyListModel.initialize(animal.getPathologys());
+        return patologyListModel.createModel();
     }
 
     

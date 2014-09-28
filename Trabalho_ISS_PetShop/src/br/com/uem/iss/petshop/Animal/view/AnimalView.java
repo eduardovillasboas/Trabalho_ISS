@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -61,10 +62,10 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         jLabel6 = new javax.swing.JLabel();
         jFormattedTextFieldHeight = new javax.swing.JFormattedTextField();
         jButtonRemovePatology = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         jButtonRecord = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTablePathology = new javax.swing.JTable();
 
         setMaximizable(true);
         setResizable(true);
@@ -102,16 +103,22 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
 
         jButtonRemovePatology.setText("Remover");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
         jButtonRecord.setText("Gravar");
 
         jButtonCancel.setText("Cancelar");
+
+        jTablePathology.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTablePathology);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,25 +147,28 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
                                 .addGap(22, 22, 22)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextFieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(jFormattedTextFieldWeight)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFormattedTextFieldHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonRecord))
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAddPatology)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRemovePatology)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonAddPatology)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonRemovePatology)))
+                        .addGap(0, 159, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(jButtonCancel)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonRecord)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,13 +192,13 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
                     .addComponent(jLabel4)
                     .addComponent(jButtonAddPatology)
                     .addComponent(jButtonRemovePatology))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRecord)
-                    .addComponent(jButtonCancel))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonRecord))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -209,8 +219,8 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTablePathology;
     private javax.swing.JTextField jTextFieldBreed;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
@@ -253,8 +263,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         jFormattedTextFieldBirth.setText(dateUtil.toString(animalModel.getBirth()));
         jFormattedTextFieldHeight.setText(Double.toString(animalModel.getHeight()));
         jFormattedTextFieldWeight.setText(Double.toString(animalModel.getWeight()));
-        
-        
+        jTablePathology.setModel(animalModel.createModel());
         
     }
 

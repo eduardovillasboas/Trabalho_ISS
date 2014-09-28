@@ -8,6 +8,7 @@ package br.com.uem.iss.petshop.Animal.model;
 
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Patology.model.Patology;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -142,6 +143,10 @@ public class Animal implements Serializable, PetshopEntity {
     @Override
     public Long getID() {
         return id;
+    }
+
+    List<Patology> getPathologys() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

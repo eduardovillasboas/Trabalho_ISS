@@ -15,17 +15,26 @@ import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
  */
 
 public class ListSelectController {
-
-    AbstractModelList modelList;
     
+    
+    AbstractModelList modelList;
+    ListSelectView listView;
+    PetshopEntity entity;
     public ListSelectController( AbstractModelList ml) {
         modelList = ml;
+        listView = new ListSelectView(null, 
+                                      true, 
+                                      ml, 
+                                      this);
         
     }
 
-    public PetshopEntity exec() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StatusOperation exec() {
+        entity = listView.configure();
+        return listView.getStatusOperation();
     }
     
-    
+    public PetshopEntity getPetshopEntity(){
+        return entity;
+    }
 }

@@ -23,12 +23,10 @@ public class CustomerModel extends AbstractModel{
 
     private Customer customer;
     final private CustomerDAO customerDAO; 
-
-
+    
     public CustomerModel() {
         customer = new Customer();
         customerDAO = new CustomerDAO();
-
     }
     
     @Override
@@ -87,8 +85,10 @@ public class CustomerModel extends AbstractModel{
             updateObservers("Dados gravados com sucesso");
             return true;
         } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+            updateErrorMessage("Erro ao gravar os dados no banco de dados "+e.getMessage());
             return false;
+        } finally {
+            customerDAO.close();
         }
     }
 
@@ -141,17 +141,29 @@ public class CustomerModel extends AbstractModel{
         return customer.getAnimals();
     }
 
-    public boolean add(Animal e) {
-        return customer.add(e);
+    public void add(Animal e) {
+        if (customer.getAnimals().contains(e)){
+            updateErrorMessage("O animal "+e.getName()+" já foi adiconado para este cliente");
+            return;
+        }
+            
+        customer.add(e);
+        updateObservers(null);
     }
 
-    public boolean remove(Animal a) {
-        return customer.remove(a);
+    public void remove(Animal a) {
+        customer.remove(a);
+        updateObservers(null);
     }
 
+    AnimalListModel animalListModel = new AnimalListModel();
     public AbstractTableModel getCreateModel() {
-        AnimalListModel animalListModel = new AnimalListModel();
+        animalListModel.initialize(customer.getAnimals());
         return animalListModel.createModel();
     }
-    
+
+    public Animal getAnimal(int selectedRow) {
+        return (Animal)animalListModel.getPetshopEntityAt(selectedRow);
+    }
+   
 }

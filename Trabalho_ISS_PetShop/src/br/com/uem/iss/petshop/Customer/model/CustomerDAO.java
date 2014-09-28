@@ -37,5 +37,5 @@ public class CustomerDAO extends AbstractDAO{
     void delete(Customer c){
         rawDelete(c,Customer.class);
     }
-   
+  
 }

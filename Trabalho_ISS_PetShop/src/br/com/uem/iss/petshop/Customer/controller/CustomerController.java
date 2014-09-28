@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.Customer.controller;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
 import br.com.uem.iss.petshop.Commons.ListSelectController;
+import br.com.uem.iss.petshop.Commons.StatusOperation;
 import br.com.uem.iss.petshop.Customer.model.CustomerModel;
 import br.com.uem.iss.petshop.Customer.view.CustomerView;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
@@ -46,12 +47,26 @@ public class CustomerController implements ControllerInterface{
     }
 
     public void addAnimal() {
+        PetshopEntity entity;
+        entity = selectAnimal();
+        customerModel.add((Animal)entity);
+    }
+    
+    private PetshopEntity selectAnimal(){
         ListSelectController listSelectController;
         AnimalListModel animalModel = new AnimalListModel();
         listSelectController = new ListSelectController(animalModel);
-        PetshopEntity entity;
-        entity = listSelectController.exec();
-        customerModel.add((Animal)entity);
+        
+        StatusOperation status = listSelectController.exec();
+        
+        if (status == StatusOperation.EMPTY_ANIMAL_MODEL)
+            customerView.updateViews("Nenhum animal cadastrado");
+        
+        return listSelectController.getPetshopEntity();
+    }
+
+    public void removeAnimal(Animal animal) {
+        customerModel.remove(animal);
     }
 
 }

@@ -181,6 +181,6 @@ public class Customer implements Serializable,PetshopEntity {
     public boolean remove(Animal a) {
         return animals.remove(a);
     }
- 
+
     
-}
+    }

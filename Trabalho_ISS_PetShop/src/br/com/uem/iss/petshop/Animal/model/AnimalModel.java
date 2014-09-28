@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.Animal.model;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Patology.model.Patology;
 import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.util.ArrayList;
@@ -116,10 +117,19 @@ public class AnimalModel extends AbstractModel{
         animal = (Animal)entity;
     }
 
-    private PatologyListModel patologyListModel = new PatologyListModel();
+    private final PatologyListModel patologyListModel = new PatologyListModel();
     public AbstractTableModel createModel() {
         patologyListModel.initialize(animal.getPathologys());
         return patologyListModel.createModel();
+    }
+
+    public void add(Patology patology) {
+        if (animal.getPathologys().contains(patology)){
+            updateErrorMessage("A patologia "+patology.getName()+" já foi adicionada para este animal");
+            return;
+        }
+        animal.add(patology);
+        updateObservers(null);
     }
 
     

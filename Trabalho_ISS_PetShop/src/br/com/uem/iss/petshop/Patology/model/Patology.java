@@ -6,6 +6,8 @@
 
 package br.com.uem.iss.petshop.Patology.model;
 
+import br.com.uem.iss.petshop.Animal.model.Animal;
+import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -13,6 +15,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -96,5 +101,18 @@ public class Patology implements Serializable, PetshopEntity {
         this.description = description;
     }
     
+/*    @ManyToOne
+    @JoinColumn(name = "id")
+    private Animal animal;
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+ 
+  */  
     
 }

@@ -9,7 +9,9 @@ package br.com.uem.iss.petshop.Patology.model;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -18,30 +20,34 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PatologyListModel extends AbstractModelList{
 
-    private List<Patology> patologys;
+    private Set<Patology> patologys;
     public PatologyListModel() {
-        patologys = new ArrayList<>();
+        patologys = new HashSet<>();
     }
     
     @Override
     public void initialize() {
         PatologyDAO patologyDAO = new PatologyDAO();
         try {
-            patologys = patologyDAO.getAllPatologis();
+            for (Patology patology : patologyDAO.getAllPatologis()) {
+                patologys.add(patology);
+            }
         } catch (Exception e) {
-            patologys = new ArrayList<>();
+            patologys = new HashSet<>();
         } finally {
         }
         
     }
     
-    public void initialize(List<Patology> p){
+    public void initialize(Set<Patology> p){
         patologys = p;
     }
     
     @Override
     public PetshopEntity getPetshopEntityAt(int value) {
-        return patologys.get(value);
+        Patology array[] = toArray(patologys);
+        Patology p = array[value];
+        return p;
     }
 
     public String columnName(int col){
@@ -70,19 +76,30 @@ public class PatologyListModel extends AbstractModelList{
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-                Patology p = patologys.get(rowIndex);
+                Patology array[] = toArray(patologys);
+                Patology p = array[rowIndex];
                 if (columnIndex == 0)
                     return p.getID();
                 return p.getName();
             }
-        };
 
+        };
     
+    }
+
+    private Patology[] toArray(Set<Patology> patologys) {
+        Object o[] = patologys.toArray();
+        Patology p[] = new Patology[o.length];
+        for (int i = 0;i<o.length;++i) {
+            p[i] = (Patology)o[i];
+        }
+        return p;
     }
 
     public void delele(int selectedRow) {
         try {
-            Patology p = patologys.get(selectedRow);
+            Patology array[] = toArray(patologys);
+            Patology p = array[selectedRow];
             patologys.remove(selectedRow);
             PatologyDAO patologyDAO = new PatologyDAO();
             patologyDAO.delete(p);

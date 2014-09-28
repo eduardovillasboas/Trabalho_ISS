@@ -12,12 +12,15 @@ import br.com.uem.iss.petshop.Patology.model.Patology;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -90,6 +93,7 @@ public class Animal implements Serializable, PetshopEntity {
         setBreed(animal.getBreed());
         setHeight(animal.getHeight());
         setWeight(animal.getWeight());
+        setPathologys(animal.getPathologys());
     }
 
     public List<Customer> getCustomer() {
@@ -144,10 +148,21 @@ public class Animal implements Serializable, PetshopEntity {
     public Long getID() {
         return id;
     }
-
-    List<Patology> getPathologys() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
+    @OneToMany
+    @JoinColumn(name = "id")
+    private Set<Patology> pathologys;
+    
+    public Set<Patology> getPathologys() {
+        return pathologys;
+    }
+            
+    public void setPathologys(Set<Patology> p) {
+        pathologys = p;
+    }
+
+    void add(Patology patology) {
+        pathologys.add(patology);
+    }
     
 }

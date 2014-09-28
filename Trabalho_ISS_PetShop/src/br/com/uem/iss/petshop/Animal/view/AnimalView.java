@@ -271,7 +271,8 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     public void createActions() {
         createActionRecord();
         createActionCancel();
-        
+        createActionAddPathology();
+        createActionRemovePathology();
     }
 
     @Override
@@ -319,5 +320,32 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
                 finalizeView();
             }
         });
+    }
+
+    private void createActionAddPathology() {
+        jButtonAddPatology.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionAddPathology();
+            }
+        });
+    }
+
+    private void actionAddPathology() {
+        animalController.addPathology();
+    }
+    
+    private void createActionRemovePathology() {
+        jButtonRemovePatology.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionRemovePathology();
+            }
+        });
+    }
+    
+    private void actionRemovePathology() {
+        throw new UnsupportedOperationException("actionRemovePathology");
     }
 }

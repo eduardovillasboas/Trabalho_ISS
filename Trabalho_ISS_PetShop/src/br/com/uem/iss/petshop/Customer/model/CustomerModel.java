@@ -146,7 +146,6 @@ public class CustomerModel extends AbstractModel{
             updateErrorMessage("O animal "+e.getName()+" já foi adiconado para este cliente");
             return;
         }
-            
         customer.add(e);
         updateObservers(null);
     }

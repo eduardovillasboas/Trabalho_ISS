@@ -124,7 +124,7 @@ public class AnimalModel extends AbstractModel{
     }
 
     public void add(Patology patology) {
-        if (animal.getPathologys().contains(patology)){
+        if (animal.getPathologys() != null && animal.getPathologys().contains(patology)){
             updateErrorMessage("A patologia "+patology.getName()+" já foi adicionada para este animal");
             return;
         }

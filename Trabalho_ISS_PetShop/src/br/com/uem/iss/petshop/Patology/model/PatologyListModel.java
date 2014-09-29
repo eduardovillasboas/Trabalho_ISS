@@ -20,34 +20,29 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PatologyListModel extends AbstractModelList{
 
-    private Set<Patology> patologys;
+    private List<Patology> patologys = new ArrayList<>();
     public PatologyListModel() {
-        patologys = new HashSet<>();
     }
     
     @Override
     public void initialize() {
         PatologyDAO patologyDAO = new PatologyDAO();
         try {
-            for (Patology patology : patologyDAO.getAllPatologis()) {
-                patologys.add(patology);
-            }
+            patologys = patologyDAO.getAllPatologis();
         } catch (Exception e) {
-            patologys = new HashSet<>();
+            patologys = new ArrayList<>();
         } finally {
         }
         
     }
     
-    public void initialize(Set<Patology> p){
+    public void initialize(List<Patology> p){
         patologys = p;
     }
     
     @Override
     public PetshopEntity getPetshopEntityAt(int value) {
-        Patology array[] = toArray(patologys);
-        Patology p = array[value];
-        return p;
+        return patologys.get(value);
     }
 
     public String columnName(int col){
@@ -56,6 +51,7 @@ public class PatologyListModel extends AbstractModelList{
         return "Nome";
     }
     
+    @Override
     public AbstractTableModel createModel() {
         return new AbstractTableModel() {
 
@@ -66,6 +62,8 @@ public class PatologyListModel extends AbstractModelList{
             
             @Override
             public int getRowCount() {
+                if (patologys == null)
+                    return 0;
                 return patologys.size();
             }
 
@@ -76,8 +74,7 @@ public class PatologyListModel extends AbstractModelList{
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-                Patology array[] = toArray(patologys);
-                Patology p = array[rowIndex];
+                Patology p = patologys.get(rowIndex);
                 if (columnIndex == 0)
                     return p.getID();
                 return p.getName();
@@ -87,19 +84,10 @@ public class PatologyListModel extends AbstractModelList{
     
     }
 
-    private Patology[] toArray(Set<Patology> patologys) {
-        Object o[] = patologys.toArray();
-        Patology p[] = new Patology[o.length];
-        for (int i = 0;i<o.length;++i) {
-            p[i] = (Patology)o[i];
-        }
-        return p;
-    }
 
     public void delele(int selectedRow) {
         try {
-            Patology array[] = toArray(patologys);
-            Patology p = array[selectedRow];
+            Patology p = patologys.get(selectedRow);
             patologys.remove(selectedRow);
             PatologyDAO patologyDAO = new PatologyDAO();
             patologyDAO.delete(p);

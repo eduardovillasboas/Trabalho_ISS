@@ -10,19 +10,24 @@ import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Patology.model.Patology;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.eclipse.persistence.internal.oxm.schema.model.All;
 
 /**
  *
@@ -42,6 +47,11 @@ public class Animal implements Serializable, PetshopEntity {
 
     @ManyToMany(mappedBy = "animals")
     private List<Customer> customer;
+
+    
+    @ManyToMany()
+    @JoinTable(name="ANIMAL_PATHOLOGY")
+    private List<Patology> pathologys = new ArrayList<>();
     
     @Column(name = "nome")
     private String name;
@@ -149,15 +159,11 @@ public class Animal implements Serializable, PetshopEntity {
         return id;
     }
     
-    @OneToMany
-    @JoinColumn(name = "id")
-    private Set<Patology> pathologys;
-    
-    public Set<Patology> getPathologys() {
+    public List<Patology> getPathologys() {
         return pathologys;
     }
             
-    public void setPathologys(Set<Patology> p) {
+    public void setPathologys(List<Patology> p) {
         pathologys = p;
     }
 

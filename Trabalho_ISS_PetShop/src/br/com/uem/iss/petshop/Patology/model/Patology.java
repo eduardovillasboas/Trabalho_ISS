@@ -10,14 +10,18 @@ import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -100,19 +104,17 @@ public class Patology implements Serializable, PetshopEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-/*    @ManyToOne
-    @JoinColumn(name = "id")
-    private Animal animal;
 
-    public Animal getAnimal() {
+    @ManyToMany(mappedBy="pathologys")
+    private List<Animal> animal;
+//    
+    public List<Animal> getAnimal() {
         return animal;
     }
 
-    public void setAnimal(Animal animal) {
+    public void setAnimal(List<Animal> animal) {
         this.animal = animal;
     }
- 
-  */  
+    
     
 }

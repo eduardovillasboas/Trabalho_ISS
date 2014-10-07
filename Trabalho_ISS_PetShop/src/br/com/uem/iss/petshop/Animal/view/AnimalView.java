@@ -265,7 +265,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         jFormattedTextFieldBirth.setText(dateUtil.toString(animalModel.getBirth()));
         jFormattedTextFieldHeight.setText(Double.toString(animalModel.getHeight()));
         jFormattedTextFieldWeight.setText(Double.toString(animalModel.getWeight()));
-        jTablePathology.setModel(animalModel.createModel());
+        refreshPathologyTable();
         
     }
 
@@ -343,7 +343,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
 
     private void actionAddPathology() {
         animalController.addPathology();
-        jTablePathology.setModel(animalModel.createModel());
+        refreshPathologyTable();
     }
     
     private void createActionRemovePathology() {
@@ -362,6 +362,12 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         }
         Patology patology = animalModel.getPathology(jTablePathology.getSelectedRow());
         animalController.removePathology(patology);
+        refreshPathologyTable();
+    }
+    
+    private void refreshPathologyTable() {
         jTablePathology.setModel(animalModel.createModel());
+        jTablePathology.revalidate();
+        jTablePathology.clearSelection();
     }
 }

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -102,12 +101,23 @@ public class AnimalModel extends AbstractModel{
 
     @Override
     public Boolean persist() {
-        try {
-            animalDAO.persist(animal);
-            updateObservers("Dados gravados com sucesso");
-            return true;
-        } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+        DateUtil d = new DateUtil();
+        if (animal.getName().isEmpty() || 
+                animal.getBreed().isEmpty() ||
+                animal.getBirth().equals(d.toDate("")) ||
+                animal.getHeight() == 0 ||
+                animal.getWeight() == 0 ){
+            updateErrorMessage("Algum campo obrigatório esta vazio!");
+        }else {
+            try {
+                animalDAO.persist(animal);
+                updateObservers("Dados gravados com sucesso");
+                return true;
+            } catch (Exception e) {
+                updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+            } finally {
+                animalDAO.close();
+            }
         }
         return false;
     }
@@ -129,9 +139,14 @@ public class AnimalModel extends AbstractModel{
             return;
         }
         animal.add(patology);
-        updateObservers(null);
     }
 
-    
+    public Patology getPathology(int selectedRow) {
+        return animal.getPathologys().get(selectedRow);
+    }
+
+    public void removePathology(Patology patology) {
+        animal.getPathologys().remove(patology);
+    }
     
 }

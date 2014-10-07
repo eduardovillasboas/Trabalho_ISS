@@ -327,6 +327,12 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
     }
 
     private void actionRecord() {
+        DateUtil dateUtil = new DateUtil();
+        if (!dateUtil.isValid(jFormattedTextFieldBirth.getText())){
+            JOptionPane.showMessageDialog(this, "Data inválida!","Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         if (customerControler.persist()) {
             finalizeCustomerView();
         }
@@ -344,7 +350,7 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
         jFormattedTextFieldCPF.setText(customerModel.getCPF());
         jTextFieldAddress.setText(customerModel.getAddress());
         jTextFieldNumber.setText(Long.toString(customerModel.getNumber()));
-        jTableAnimals.setModel(customerModel.getCreateModel());
+        refreshTableAnimals();
     }
 
     @Override
@@ -381,18 +387,26 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
 
     private void addAnimal() {
         customerControler.addAnimal();
+        refreshTableAnimals();
     }
 
     private void removeAnimal() {
         if (jTableAnimals.getSelectedRow() == -1){
-            
+            JOptionPane.showMessageDialog(this, "Nenhum animal selecionado", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         Animal animal = customerModel.getAnimal(jTableAnimals.getSelectedRow());
         customerControler.removeAnimal(animal);
+        refreshTableAnimals();
     }
 
     public boolean confirm(String confirmaRemocaoAnimal) {
         return JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this, confirmaRemocaoAnimal);
     }
 
+    private void refreshTableAnimals(){
+        jTableAnimals.setModel(customerModel.getCreateModel());
+        jTableAnimals.revalidate();
+        jTableAnimals.clearSelection();
+    }
 }

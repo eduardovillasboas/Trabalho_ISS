@@ -16,6 +16,8 @@ import br.com.uem.iss.petshop.Commons.StatusOperation;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Patology.model.Patology;
 import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
+import br.com.uem.iss.petshop.Utils.DateUtil;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -65,6 +67,10 @@ public class AnimalController implements ControllerInterface{
         
         return listSelectController.getPetshopEntity();
     }
-   
+
+    public void removePathology(Patology patology) {
+        animalModel.removePathology(patology);
+    }
+
     
 }

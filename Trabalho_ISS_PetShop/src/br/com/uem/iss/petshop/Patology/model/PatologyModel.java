@@ -36,15 +36,21 @@ public class PatologyModel extends AbstractModel{
 
     @Override
     public Boolean persist() {
-        try {
-            patologyDAO.persist(patology);
-            updateObservers("Dados gravados com sucesso");
-            return true;
-        } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
-            return false;
+        if (patology.getDescription().isEmpty() ||
+            patology.getName().isEmpty()){
+            updateErrorMessage("Todos os campos da patologia são obrigatórios");
+        }else {
+            try {
+                patologyDAO.persist(patology);
+                updateObservers("Dados gravados com sucesso");
+                return true;
+            } catch (Exception e) {
+                updateErrorMessage("Erro ao gravar os dados no banco de dados"+e.getMessage());
+            } finally {
+                patologyDAO.close();
+            }
         }
-        
+        return false;
     }
 
     @Override

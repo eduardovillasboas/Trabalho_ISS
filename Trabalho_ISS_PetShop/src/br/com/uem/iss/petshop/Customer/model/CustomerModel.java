@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,16 +81,26 @@ public class CustomerModel extends AbstractModel{
 
     @Override
     public Boolean persist() {
-        try {
-            customerDAO.persist(customer);
-            updateObservers("Dados gravados com sucesso");
-            return true;
-        } catch (Exception e) {
-            updateErrorMessage("Erro ao gravar os dados no banco de dados "+e.getMessage());
-            return false;
-        } finally {
-            customerDAO.close();
+        DateUtil d = new DateUtil();
+        if (customer.getName().isEmpty() ||
+                customer.getAddress().isEmpty() || 
+                customer.getBirth().equals(d.toDate(""))||
+                customer.getCpf().isEmpty() ||
+                customer.getLastName().isEmpty() ||
+                customer.getNumber() == 0 ){
+            updateErrorMessage("Algum campo obrigatório está vazio");
+        } else {
+            try {
+                customerDAO.persist(customer);
+                updateObservers("Dados gravados com sucesso");
+                return true;
+            } catch (Exception e) {
+                updateErrorMessage("Erro ao gravar os dados no banco de dados "+e.getMessage());
+            } finally {
+                customerDAO.close();
+            }
         }
+        return false;
     }
 
     public Long getId() {
@@ -147,12 +158,10 @@ public class CustomerModel extends AbstractModel{
             return;
         }
         customer.add(e);
-        updateObservers(null);
     }
 
     public void remove(Animal a) {
         customer.remove(a);
-        updateObservers(null);
     }
 
     AnimalListModel animalListModel = new AnimalListModel();

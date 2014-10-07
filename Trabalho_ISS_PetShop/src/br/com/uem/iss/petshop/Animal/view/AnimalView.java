@@ -9,7 +9,9 @@ package br.com.uem.iss.petshop.Animal.view;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Animal.controller.AnimalController;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
+import br.com.uem.iss.petshop.Animal.model.Animal_;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
+import br.com.uem.iss.petshop.Patology.model.Patology;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -249,9 +251,9 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     @Override
     public void errorOcurred(String error) {
         if (error != null)
-            JOptionPane.showMessageDialog(this, error);
+            JOptionPane.showMessageDialog(this, error, "Informação", JOptionPane.INFORMATION_MESSAGE);
         else
-            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu", "Atenção", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
@@ -284,6 +286,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     @Override
     public void updateModelFromViewValues() {
         DateUtil dateUtil = new DateUtil();
+    
         animalModel.setName(jTextFieldName.getText());
         animalModel.setBirth(dateUtil.toDate(jFormattedTextFieldBirth.getText()));
         animalModel.setBreed(jTextFieldBreed.getText());
@@ -303,6 +306,12 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     }
 
     private void actionRecord(){
+        DateUtil dateUtil = new DateUtil();
+        if (!dateUtil.isValid(jFormattedTextFieldBirth.getText())){
+            JOptionPane.showMessageDialog(this, "Data inválida!","Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+            
         if (animalController.persist())
             finalizeView();
     }
@@ -334,6 +343,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
 
     private void actionAddPathology() {
         animalController.addPathology();
+        jTablePathology.setModel(animalModel.createModel());
     }
     
     private void createActionRemovePathology() {
@@ -346,6 +356,12 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
     }
     
     private void actionRemovePathology() {
-        throw new UnsupportedOperationException("actionRemovePathology");
+        if (jTablePathology.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Nenhuma patologia selecionada", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        Patology patology = animalModel.getPathology(jTablePathology.getSelectedRow());
+        animalController.removePathology(patology);
+        jTablePathology.setModel(animalModel.createModel());
     }
 }

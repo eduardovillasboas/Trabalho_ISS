@@ -51,5 +51,16 @@ public class DateUtil {
                         Integer.parseInt(values[1]),
                         Integer.parseInt(values[0]));
     }
-    
+ 
+    public Boolean isValid(String string){
+        String values[];
+        values = string.split("/");
+        if (values.length != 3)
+            return false;
+        int year = Integer.parseInt(values[2]);
+        int month = Integer.parseInt(values[1]);
+        int day = Integer.parseInt(values[0]);
+
+        return !(year < 1900 || day < 1 || day > 31 || month < 0 || month > 11);
+    }
 }

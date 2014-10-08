@@ -173,6 +173,7 @@
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldHeight">
       <Properties>
         <Property name="text" type="java.lang.String" value="jFormattedTextField3"/>
+        <Property name="toolTipText" type="java.lang.String" value="Digite a altura. Ex: 1.10 ou 0.90"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonRemovePatology">

@@ -27,7 +27,7 @@ public class DateUtil {
             return "";
         
         year = Integer.toString(date.getYear()).trim();
-        month = Integer.toString(date.getMonth()).trim();
+        month = Integer.toString(date.getMonth()+1).trim();
         day = Integer.toString(date.getDate()).trim();
         
         if (month.length() == 1)
@@ -48,7 +48,7 @@ public class DateUtil {
         values = string.split("/");
         
         return new Date(Integer.parseInt(values[2]),
-                        Integer.parseInt(values[1]),
+                        Integer.parseInt(values[1])-1,
                         Integer.parseInt(values[0]));
     }
  
@@ -61,6 +61,6 @@ public class DateUtil {
         int month = Integer.parseInt(values[1]);
         int day = Integer.parseInt(values[0]);
 
-        return !(year < 1900 || day < 1 || day > 31 || month < 0 || month > 11);
+        return !(year < 1900 || day < 1 || day > 31 || month < 1 || month > 12);
     }
 }

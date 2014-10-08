@@ -270,7 +270,7 @@ public class PetshopListView extends javax.swing.JDialog implements ObserverMode
             JOptionPane.showMessageDialog(this, "Nenhum item selecionado");
             return;
         }
-        if (JOptionPane.showConfirmDialog(this, "Mensage do sistema", "Confirma deleção?", JOptionPane.INFORMATION_MESSAGE) != 
+        if (JOptionPane.showConfirmDialog(this, "Confirma deleção?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE) != 
                 JOptionPane.YES_OPTION)
             return;
         controllerList.delete(jTableCustomerTable.getSelectedRow());

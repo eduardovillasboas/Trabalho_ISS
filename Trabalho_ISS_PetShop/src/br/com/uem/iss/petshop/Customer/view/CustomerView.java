@@ -328,6 +328,10 @@ public final class CustomerView extends javax.swing.JInternalFrame implements Vi
             JOptionPane.showMessageDialog(this, "Data inválida!","Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
+        
+        if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE) != 
+            JOptionPane.YES_OPTION)
+            return;
 
         if (customerControler.persist()) {
             finalizeCustomerView();

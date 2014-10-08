@@ -9,7 +9,6 @@ package br.com.uem.iss.petshop.Animal.view;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Animal.controller.AnimalController;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
-import br.com.uem.iss.petshop.Animal.model.Animal_;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.Patology.model.Patology;
 import br.com.uem.iss.petshop.Utils.DateUtil;
@@ -17,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -97,6 +95,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         jLabel6.setText("Alt.:");
 
         jFormattedTextFieldHeight.setText("jFormattedTextField3");
+        jFormattedTextFieldHeight.setToolTipText("Digite a altura. Ex: 1.10 ou 0.90");
 
         jButtonRemovePatology.setText("Remover");
 
@@ -252,8 +251,15 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         jTextFieldName.setText(animalModel.getName());
         jTextFieldBreed.setText(animalModel.getBreed());
         jFormattedTextFieldBirth.setText(dateUtil.toString(animalModel.getBirth()));
-        jFormattedTextFieldHeight.setText(Double.toString(animalModel.getHeight()));
-        jFormattedTextFieldWeight.setText(Double.toString(animalModel.getWeight()));
+        if (animalModel.getHeight() == 0)
+            jFormattedTextFieldHeight.setText("");
+        else
+            jFormattedTextFieldHeight.setText(Double.toString(animalModel.getHeight()));
+        if (animalModel.getWeight() == 0)
+            jFormattedTextFieldWeight.setText("");
+        else
+            jFormattedTextFieldWeight.setText(Double.toString(animalModel.getWeight()));
+        
         refreshPathologyTable();
         
     }
@@ -279,8 +285,22 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         animalModel.setName(jTextFieldName.getText());
         animalModel.setBirth(dateUtil.toDate(jFormattedTextFieldBirth.getText()));
         animalModel.setBreed(jTextFieldBreed.getText());
-        animalModel.setHeight(new Double(jFormattedTextFieldHeight.getText()));
-        animalModel.setWeight(new Double(jFormattedTextFieldWeight.getText()));
+        if (jFormattedTextFieldHeight.getText().isEmpty())
+            animalModel.setHeight(0d);
+        else 
+            try {
+                animalModel.setHeight(new Double(jFormattedTextFieldHeight.getText()));
+            } catch (NumberFormatException e) {
+            }
+            
+        if (jFormattedTextFieldWeight.getText().isEmpty())
+            animalModel.setWeight(0d);
+        else
+            try {
+                animalModel.setWeight(new Double(jFormattedTextFieldWeight.getText()));
+            } catch (NumberFormatException e) {
+            }
+            
         
     }
 
@@ -300,7 +320,21 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
             JOptionPane.showMessageDialog(this, "Data inválida!","Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-            
+        
+        if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE) != 
+                JOptionPane.YES_OPTION)
+            return;
+        
+        if (jFormattedTextFieldHeight.getText().contains(",")){
+            JOptionPane.showMessageDialog(this, "O campo altura deve utilizar ponto(.) como separador!", "Mensagem do sistema", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (jFormattedTextFieldWeight.getText().contains(",")){
+            JOptionPane.showMessageDialog(this, "O campo peso deve utilizar ponto(.) como separador!", "Mensagem do sistema", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         if (animalController.persist())
             finalizeView();
     }

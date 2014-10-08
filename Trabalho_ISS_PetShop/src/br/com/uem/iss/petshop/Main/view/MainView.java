@@ -6,14 +6,7 @@
 package br.com.uem.iss.petshop.Main.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
-import br.com.uem.iss.petshop.Company.controller.CompanyController;
-import br.com.uem.iss.petshop.Company.model.CompanyListModel;
-import br.com.uem.iss.petshop.Company.model.CompanyModel;
 import br.com.uem.iss.petshop.Main.controller.MainController;
-import br.com.uem.iss.petshop.Utils.State;
-import br.com.uem.iss.petshop.Drugs.controller.DrugController;
-import br.com.uem.iss.petshop.Drugs.model.DrugListModel;
-import br.com.uem.iss.petshop.Drugs.model.DrugModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -59,6 +52,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItemClose = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,6 +139,10 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
+
+        jMenuItemClose.setText("Sair");
+        jMenu4.add(jMenuItemClose);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -198,6 +196,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
+    private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemCompanyRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
     private javax.swing.JMenuItem jMenuItemDrugsRecord;
@@ -221,6 +220,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createCompanyAction();
         createDrugsAction();
         createLoginAction();
+        createCloseAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -358,6 +358,20 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     
     private void loginAction(){
         mainController.loginAction();
+    }
+
+    private void createCloseAction() {
+        jMenuItemClose.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeAction();
+            }
+        });
+    }
+    
+    private void closeAction() {
+        dispose();
     }
     
 }

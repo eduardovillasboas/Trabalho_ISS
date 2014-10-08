@@ -107,7 +107,7 @@ public class AnimalModel extends AbstractModel{
                 animal.getBirth().equals(d.toDate("")) ||
                 animal.getHeight() == 0 ||
                 animal.getWeight() == 0 ){
-            updateErrorMessage("Algum campo obrigatório esta vazio!");
+            updateErrorMessage("Todos os campos do cadastro são obrigatórios!");
         }else {
             try {
                 animalDAO.persist(animal);

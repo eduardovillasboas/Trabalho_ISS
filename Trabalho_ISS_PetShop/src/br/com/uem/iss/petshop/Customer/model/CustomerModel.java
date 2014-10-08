@@ -87,8 +87,9 @@ public class CustomerModel extends AbstractModel{
                 customer.getBirth().equals(d.toDate(""))||
                 customer.getCpf().isEmpty() ||
                 customer.getLastName().isEmpty() ||
-                customer.getNumber() == 0 ){
-            updateErrorMessage("Algum campo obrigatório está vazio");
+                customer.getNumber() == 0 ||
+                customer.getRg().isEmpty()){
+            updateErrorMessage("Todos os campos do cadastro são obrigatórios!");
         } else {
             try {
                 customerDAO.persist(customer);

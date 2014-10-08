@@ -7,8 +7,6 @@
 package br.com.uem.iss.petshop.Commons;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
-import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
-import br.com.uem.iss.petshop.Commons.PetshopListView;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ControllerListInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;

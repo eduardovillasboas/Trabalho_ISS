@@ -41,13 +41,13 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
         jMenuItemCustomerRecord = new javax.swing.JMenuItem();
         jMenuItemAnimalRecord = new javax.swing.JMenuItem();
-        jMenuItemProductRecord = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItemProductRecord = new javax.swing.JMenuItem();
         jMenuItemServiceRecord = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenu8 = new javax.swing.JMenu();
         jMenuItemDrugsRecord = new javax.swing.JMenuItem();
         jMenuItemVacinaRecord = new javax.swing.JMenuItem();
         jMenuItemPatologyRecord = new javax.swing.JMenuItem();
@@ -75,6 +75,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenu1.setText("Manutencao");
 
+        jMenu7.setText("Animais e Clientes");
+
         jMenuItemCustomerRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCustomerRecord.setText("Cadastro de Clientes");
         jMenuItemCustomerRecord.addActionListener(new java.awt.event.ActionListener() {
@@ -82,11 +84,15 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
                 jMenuItemCustomerRecordActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemCustomerRecord);
+        jMenu7.add(jMenuItemCustomerRecord);
 
         jMenuItemAnimalRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemAnimalRecord.setText("Cadastro de Animais");
-        jMenu1.add(jMenuItemAnimalRecord);
+        jMenu7.add(jMenuItemAnimalRecord);
+
+        jMenu1.add(jMenu7);
+
+        jMenu6.setText("Produtos e Servicos");
 
         jMenuItemProductRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemProductRecord.setText("Cadastro de Produtos");
@@ -95,10 +101,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
                 jMenuItemProductRecordActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemProductRecord);
-        jMenu1.add(jSeparator1);
-
-        jMenu6.setText("Servicos");
+        jMenu6.add(jMenuItemProductRecord);
 
         jMenuItemServiceRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemServiceRecord.setText("Cadastro de Serviços");
@@ -110,7 +113,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu6.add(jMenuItemServiceRecord);
 
         jMenu1.add(jMenu6);
-        jMenu1.add(jSeparator2);
+
+        jMenu8.setText("Veterinaria");
 
         jMenuItemDrugsRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemDrugsRecord.setText("Cadastro de Medicamentos");
@@ -119,15 +123,17 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
                 jMenuItemDrugsRecordActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemDrugsRecord);
+        jMenu8.add(jMenuItemDrugsRecord);
 
         jMenuItemVacinaRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemVacinaRecord.setText("Cadastro de Vacinas");
-        jMenu1.add(jMenuItemVacinaRecord);
+        jMenu8.add(jMenuItemVacinaRecord);
 
         jMenuItemPatologyRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemPatologyRecord.setText("Cadastro de Patologias");
-        jMenu1.add(jMenuItemPatologyRecord);
+        jMenu8.add(jMenuItemPatologyRecord);
+
+        jMenu1.add(jMenu8);
 
         jMenuItemCompanyRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemCompanyRecord.setText("Cadastro de Empresas");
@@ -208,6 +214,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemClose;
@@ -219,8 +227,6 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
     private javax.swing.JMenuItem jMenuItemVacinaRecord;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
 
     JFrame jMainFrame;

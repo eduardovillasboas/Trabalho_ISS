@@ -89,4 +89,9 @@ public class MainController {
     public void drugsAction() {
         action(new DrugListModel(), new FactoryDrugController());
     }
+
+    public void serviceOrderAction() {
+    //    action(new ServiceOrderListModel(), new FactoryServiceOrderController());
+        throw new UnsupportedOperationException("serviceOrderAction");
+    }
 }

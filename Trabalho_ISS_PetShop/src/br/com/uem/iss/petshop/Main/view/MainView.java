@@ -47,6 +47,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu6 = new javax.swing.JMenu();
         jMenuItemProductRecord = new javax.swing.JMenuItem();
         jMenuItemServiceRecord = new javax.swing.JMenuItem();
+        jMenuItemServiceOrder = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItemDrugsRecord = new javax.swing.JMenuItem();
         jMenuItemVacinaRecord = new javax.swing.JMenuItem();
@@ -111,6 +112,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
         jMenu6.add(jMenuItemServiceRecord);
+
+        jMenuItemServiceOrder.setText("Ordem de serviço");
+        jMenu6.add(jMenuItemServiceOrder);
 
         jMenu1.add(jMenu6);
 
@@ -225,6 +229,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemLoginRecord;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
+    private javax.swing.JMenuItem jMenuItemServiceOrder;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
     private javax.swing.JMenuItem jMenuItemVacinaRecord;
     // End of variables declaration//GEN-END:variables
@@ -243,6 +248,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createDrugsAction();
         createLoginAction();
         createCloseAction();
+        createServiceOrderAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -395,5 +401,18 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private void closeAction() {
         dispose();
     }
+
+    private void createServiceOrderAction() {
+        jMenuItemServiceOrder.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                serviceOrderAction();
+            }
+        });
+    }
     
+    private void serviceOrderAction() {
+        mainController.serviceOrderAction();
+    }
 }

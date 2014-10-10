@@ -19,15 +19,10 @@ public class ServiceModel extends AbstractModel {
     private Service service;
     private final ServiceDAO serviceDAO;
 
-    private final ArrayList<ObserverModel> updateObservers;
-    private final ArrayList<ObserverModel> errorMessageObservers;
-
     /**
      *
      */
     public ServiceModel() {
-        updateObservers = new ArrayList<>();
-        errorMessageObservers = new ArrayList<>();
         service = new Service();
         serviceDAO = new ServiceDAO();
     }

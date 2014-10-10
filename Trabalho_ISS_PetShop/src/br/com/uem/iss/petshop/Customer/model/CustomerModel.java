@@ -52,6 +52,9 @@ public class CustomerModel extends AbstractModel{
         if (customer.getNumber() == null)
             customer.setNumber(new Long(0));
         
+        if (customer.getPhone() == null)
+            customer.setPhone("");
+        
         updateObservers(null);
     }
 
@@ -173,6 +176,14 @@ public class CustomerModel extends AbstractModel{
 
     public Animal getAnimal(int selectedRow) {
         return (Animal)animalListModel.getPetshopEntityAt(selectedRow);
+    }
+
+    public String getPhone() {
+        return customer.getPhone();
+    }
+
+    public void setPhone(String text) {
+        customer.setPhone(text);
     }
    
 }

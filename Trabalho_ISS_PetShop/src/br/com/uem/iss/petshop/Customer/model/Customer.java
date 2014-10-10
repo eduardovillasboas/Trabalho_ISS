@@ -93,8 +93,10 @@ public class Customer implements Serializable,PetshopEntity {
     @ManyToMany()
     @JoinTable(name="ANIMAL_CLIENT")
     private List<Animal> animals;
-    
-    
+   
+    @Column(name = "telefone")
+    private String phone;
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,6 +133,7 @@ public class Customer implements Serializable,PetshopEntity {
         setCpf(e.getCpf());
         setRg(e.getRg());
         setNumber(e.getNumber());
+        setPhone(e.getPhone());
     }
 
 
@@ -182,5 +185,12 @@ public class Customer implements Serializable,PetshopEntity {
         return animals.remove(a);
     }
 
-    
+    public String getPhone() {
+        return phone;
     }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+   
+ }

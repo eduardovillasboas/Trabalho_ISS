@@ -53,9 +53,11 @@ public class CustomerListModel extends AbstractModelList{
         } catch (Exception e) {
             customers = new ArrayList<>();
         } finally {
+            customerDAO.close();
         }
     }
 
+    @Override
     public void delele(int selectedRow) {
         try {
             Customer c = customers.get(selectedRow);

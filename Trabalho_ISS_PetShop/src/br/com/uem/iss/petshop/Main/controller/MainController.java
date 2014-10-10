@@ -25,6 +25,8 @@ import br.com.uem.iss.petshop.Product.controller.FactoryProductController;
 import br.com.uem.iss.petshop.Product.model.ProductListModel;
 import br.com.uem.iss.petshop.Service.controller.FactoryServiceController;
 import br.com.uem.iss.petshop.Service.model.ServiceListModel;
+import br.com.uem.iss.petshop.ServiceOrder.controller.FactoryServiceOrderController;
+import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderListModel;
 import br.com.uem.iss.petshop.Utils.FactoryController;
 import br.com.uem.iss.petshop.Vacina.controller.FactoryVacinaController;
 import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
@@ -91,7 +93,6 @@ public class MainController {
     }
 
     public void serviceOrderAction() {
-    //    action(new ServiceOrderListModel(), new FactoryServiceOrderController());
-        throw new UnsupportedOperationException("serviceOrderAction");
+        action(new ServiceOrderListModel(), new FactoryServiceOrderController());
     }
 }

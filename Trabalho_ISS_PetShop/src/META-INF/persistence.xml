@@ -11,6 +11,7 @@
     <class>br.com.uem.iss.petshop.Vacina.model.Vacina</class>
     <class>br.com.uem.iss.petshop.Login.model.Login</class>
     <class>br.com.uem.iss.petshop.Company.model.Company</class>
+    <class>br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

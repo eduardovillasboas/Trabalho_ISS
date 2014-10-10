@@ -11,6 +11,7 @@ import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,6 +51,9 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
         jPanel1 = new javax.swing.JPanel();
 
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Ordem de Serviço");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Cliente"));
@@ -92,17 +96,20 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
     @Override
     public void createActions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO: Criar acoes
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void configure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        createActions();
+        setVisible(true);
     }
 
     @Override
     public void updateModelFromViewValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO: Atualizar a o Model com os dados da View
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -118,16 +125,26 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
     @Override
     public void updateObserversWasFinalized() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (ObserverJInternalFrame observerJInternalFrame : oberverJInternalFrames) {
+            observerJInternalFrame.wasFinalized(this);
+        }
     }
 
     @Override
     public void updateViews(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (msg != null) {
+            JOptionPane.showMessageDialog(this, msg);
+            return;
+        }
+        updateViewFromModel();
     }
 
     @Override
     public void errorOcurred(String error) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (error != null) {
+            JOptionPane.showMessageDialog(this, error);
+        } else {
+            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        }
     }
 }

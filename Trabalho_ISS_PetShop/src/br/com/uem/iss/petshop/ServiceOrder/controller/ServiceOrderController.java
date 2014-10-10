@@ -27,6 +27,7 @@ public class ServiceOrderController implements ControllerInterface{
         serviceOrderView = new ServiceOrderView(this,serviceOrderModel);
         serviceOrderView.register(desktop);
         serviceOrderView.register(listView);
+        desktop.addjDesktop(serviceOrderView);
     }
 
     @Override

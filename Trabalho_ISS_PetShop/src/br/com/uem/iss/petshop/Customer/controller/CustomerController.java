@@ -58,7 +58,6 @@ public class CustomerController implements ControllerInterface{
     private PetshopEntity selectAnimal(){
         ListSelectController listSelectController;
         AnimalListModel animalModel = new AnimalListModel();
-        animalModel.initialize();
         listSelectController = new ListSelectController(animalModel);
         
         StatusOperation status = listSelectController.exec();

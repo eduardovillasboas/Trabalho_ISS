@@ -61,7 +61,6 @@ public class AnimalController implements ControllerInterface{
     private PetshopEntity selectPathology() {
         ListSelectController listSelectController;
         PatologyListModel pathologyListModel = new PatologyListModel();
-        pathologyListModel.initialize();
         listSelectController = new ListSelectController(pathologyListModel);
         
         StatusOperation status = listSelectController.exec();

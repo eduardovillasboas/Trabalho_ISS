@@ -6,7 +6,6 @@
 
 package br.com.uem.iss.petshop.Animal.model;
 
-import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.util.ArrayList;
 import java.util.Date;
 

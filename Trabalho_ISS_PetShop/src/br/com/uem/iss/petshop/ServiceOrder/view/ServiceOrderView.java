@@ -530,7 +530,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
 
     private void addServiceAction() {
-        throw new UnsupportedOperationException();
+        serviceOrderController.addService();
     }
     
     private void createRemoveServiceAction() {

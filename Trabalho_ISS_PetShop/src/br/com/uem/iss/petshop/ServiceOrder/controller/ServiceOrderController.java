@@ -14,6 +14,8 @@ import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Service.model.Service;
+import br.com.uem.iss.petshop.Service.model.ServiceListModel;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
 import br.com.uem.iss.petshop.ServiceOrder.view.ServiceOrderView;
 
@@ -79,11 +81,27 @@ public class ServiceOrderController implements ControllerInterface{
         StatusOperation status = listSelectController.exec();
         
         if (status == StatusOperation.EMPTY_ENTITY_MODEL)
-            serviceOrderView.updateViews("Nenhum animal cadastrado!");
+            serviceOrderView.updateViews("Nenhum animal cadastrado para esse cliente!");
         
         if (status == StatusOperation.SELECTED_ENTITY){
             serviceOrderModel.setAnimal((Animal)listSelectController.getPetshopEntity());
         }
 
+    }
+
+    public void addService() {
+        ListSelectController listSelectController;
+        ServiceListModel serviceListModel = new ServiceListModel();
+        listSelectController = new ListSelectController(serviceListModel);
+        
+        StatusOperation status = listSelectController.exec();
+        
+        if (status == StatusOperation.EMPTY_ENTITY_MODEL)
+            serviceOrderView.updateViews("Nenhum serviço cadastrado!");
+        
+        if (status == StatusOperation.SELECTED_ENTITY){
+            serviceOrderModel.addService((Service)listSelectController.getPetshopEntity());
+        }
+        
     }
 }

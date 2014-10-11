@@ -12,8 +12,10 @@ import br.com.uem.iss.petshop.Animal.model.AnimalInitializer;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerInitializer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Service.model.Service;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,7 +28,14 @@ public class ServiceOrderModel extends AbstractModel{
     private Customer customer;
     private Animal animal;
     private final ArrayList<ObserverServiceOrderChangeAnimal> observerChangeAnimal; 
-    private ArrayList<ObserverServiceOrderChangeCustomer> observerChangeCustomer;
+    final private ArrayList<ObserverServiceOrderChangeCustomer> observerChangeCustomer;
+    private List<Service> services;
+    
+    public void addService(Service s) {
+        services.add(s);
+        //TODO: UPDATE Observers.
+    }
+    
     public interface ObserverServiceOrderChangeAnimal{
         void animalChanged();
     } 
@@ -104,6 +113,7 @@ public class ServiceOrderModel extends AbstractModel{
         AnimalInitializer animalInitializer;
         animalInitializer = new AnimalInitializer();
         animal = animalInitializer.initializer(animal);
+        services = new ArrayList<>();
     }
 
     public String getCustomerName() {

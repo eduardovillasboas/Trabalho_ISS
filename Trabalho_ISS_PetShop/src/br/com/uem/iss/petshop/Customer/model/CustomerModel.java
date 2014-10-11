@@ -32,29 +32,11 @@ public class CustomerModel extends AbstractModel{
     
     @Override
     public void initialize() {
-        if (customer == null)
-            customer = new Customer();
-        if (customer.getName() == null)
-            customer.setName("");
-        if (customer.getLastName() == null)
-            customer.setLastName("");
-        if (customer.getBirth() == null){
-            customer.setBirth(new Date(0,0,0));
-        }
-        if (customer.getAddress() == null)
-            customer.setAddress("");
-        if (customer.getAnimals() == null)
-            customer.setAnimals(new ArrayList<>());
-        if (customer.getCpf() == null)
-            customer.setCpf("");
-        if (customer.getRg() == null)
-            customer.setRg("");
-        if (customer.getNumber() == null)
-            customer.setNumber(new Long(0));
         
-        if (customer.getPhone() == null)
-            customer.setPhone("");
-        
+        CustomerInitializer customerInitiliInitializer;
+        customerInitiliInitializer = new CustomerInitializer();
+        customer = customerInitiliInitializer.initilizer(customer);
+
         updateObservers(null);
     }
 

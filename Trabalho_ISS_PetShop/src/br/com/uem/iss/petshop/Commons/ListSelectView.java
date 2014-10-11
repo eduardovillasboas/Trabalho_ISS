@@ -124,7 +124,7 @@ public class ListSelectView extends javax.swing.JDialog {
     PetshopEntity entity;
     public PetshopEntity configure() {
         if (modelList.createModel().getRowCount() == 0){
-            status = StatusOperation.EMPTY_ANIMAL_MODEL;
+            status = StatusOperation.EMPTY_ENTITY_MODEL;
             entity = null;
             return null; 
         }
@@ -150,7 +150,7 @@ public class ListSelectView extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Nenhuma entidade selecionada");
             return;
         }
-        status = StatusOperation.SELECTED_ANIMAL;
+        status = StatusOperation.SELECTED_ENTITY;
         entity = (PetshopEntity)modelList.getPetshopEntityAt(jTableEntity.getSelectedRow());
         dispose();
     }

@@ -7,17 +7,25 @@
 package br.com.uem.iss.petshop.ServiceOrder.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author EDUARDO
  */
-public class ServiceOrderView extends javax.swing.JInternalFrame implements ViewInterface{
+public class ServiceOrderView extends javax.swing.JInternalFrame 
+                              implements ViewInterface, 
+                                         ServiceOrderModel.ObserverServiceOrderChangeAnimal,
+                                         ServiceOrderModel.ObserverServiceOrderChangeCustomer{
 
     /**
      * Creates new form ServiceOrderView
@@ -27,19 +35,36 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
         initComponents();
     }
     */
-    ServiceOrderController serviceOrderController;
-    ServiceOrderModel serviceOrderModel;
-    ArrayList<ObserverJInternalFrame> oberverJInternalFrames;
+    final private ServiceOrderController serviceOrderController;
+    final private ServiceOrderModel serviceOrderModel;
+    final private ArrayList<ObserverJInternalFrame> oberverJInternalFrames;
     public ServiceOrderView(ServiceOrderController c, ServiceOrderModel m) {
         initComponents();
         serviceOrderController = c;
         serviceOrderModel = m;
         oberverJInternalFrames = new ArrayList<>();
         updateViewFromModel();
-        serviceOrderModel.registerErrorObserver(this);
-        serviceOrderModel.registerUpdate(this);
+        serviceOrderModel.registerErrorObserver((ObserverModel)this);
+        serviceOrderModel.registerUpdate((ObserverModel)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderChangeAnimal)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderChangeCustomer)this);
     }
-
+    
+    private void enableTextFields(Boolean enable){
+        if (enable)
+            rawEnableTextFields();
+        else 
+            rawDisableTextFields();
+    }
+    
+    public void enableTextFields() {
+        enableTextFields(true);
+    }
+    
+    public void disableTextFields() {
+        enableTextFields(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,22 +78,23 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
         jPanel3 = new javax.swing.JPanel();
         jButtonSelectCustomer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldCustomerName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldCustomerLastName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldCustomerPhone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldCustomerBirth = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jButtonSelectAnimal = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldAnimalName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jTextFieldAnimalBirth = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
+        jButtonCancel = new javax.swing.JButton();
+        jButtonRecord = new javax.swing.JButton();
 
-        setClosable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Ordem de Serviço");
@@ -79,48 +105,44 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
         jLabel1.setText("Nome:");
 
-        jTextField1.setText("jTextField1");
+        jTextFieldCustomerName.setText("jTextField1");
 
         jLabel2.setText("Sobrenome:");
 
-        jTextField2.setText("jTextField2");
+        jTextFieldCustomerLastName.setText("jTextField2");
 
         jLabel3.setText("Telefone:");
 
-        jTextField3.setText("jTextField3");
+        jTextFieldCustomerPhone.setText("jTextField3");
 
         jLabel5.setText("Dt.Nasc:");
 
-        jTextField4.setText("jTextField4");
+        jTextFieldCustomerBirth.setText("jTextField4");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jButtonSelectCustomer)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSelectCustomer)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField4)))))
-                .addGap(0, 49, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldCustomerLastName)
+                    .addComponent(jTextFieldCustomerBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,11 +151,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCustomerPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,13 +163,13 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
                         .addGap(60, 60, 60)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldCustomerBirth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldCustomerLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Do Animal"));
@@ -156,11 +178,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
         jLabel4.setText("Nome:");
 
-        jTextField5.setText("jTextField5");
+        jTextFieldAnimalName.setText("jTextField5");
 
         jLabel6.setText("Dt.Nasc:");
 
-        jTextField6.setText("jTextField6");
+        jTextFieldAnimalBirth.setText("jTextField6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,10 +194,9 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 219, Short.MAX_VALUE))))
+                    .addComponent(jTextFieldAnimalBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAnimalName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButtonSelectAnimal)
                 .addGap(230, 230, 230))
@@ -187,12 +208,12 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAnimalName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTextFieldAnimalBirth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviços"));
@@ -206,21 +227,32 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 141, Short.MAX_VALUE)
+            .addGap(0, 175, Short.MAX_VALUE)
         );
+
+        jButtonCancel.setText("Cancelar");
+
+        jButtonRecord.setText("Gravar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(730, 730, 730)
+                        .addComponent(jButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonRecord)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -228,12 +260,18 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonRecord))
+                .addContainerGap())
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel1, jPanel3});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,6 +289,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonRecord;
     private javax.swing.JButton jButtonSelectAnimal;
     private javax.swing.JButton jButtonSelectCustomer;
     private javax.swing.JLabel jLabel1;
@@ -263,16 +303,20 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextFieldAnimalBirth;
+    private javax.swing.JTextField jTextFieldAnimalName;
+    private javax.swing.JTextField jTextFieldCustomerBirth;
+    private javax.swing.JTextField jTextFieldCustomerLastName;
+    private javax.swing.JTextField jTextFieldCustomerName;
+    private javax.swing.JTextField jTextFieldCustomerPhone;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void createActions() {
+        createRecordAction();
+        createCancelAction();
+        createSelectCustomerAction();
+        createSelectAnimalAction();
         //TODO: Criar acoes
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -291,6 +335,9 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
 
     @Override
     public void updateViewFromModel() {
+        updateViewCustomerData();
+        updateViewAnimalData();
+        
         //TODO: Atualizar a View com os dados do model.
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -316,6 +363,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
         updateViewFromModel();
     }
 
+    private void finalizeServiceOrderView() {
+        updateObserversWasFinalized();
+        dispose();
+    }
+
     @Override
     public void errorOcurred(String error) {
         if (error != null) {
@@ -323,5 +375,102 @@ public class ServiceOrderView extends javax.swing.JInternalFrame implements View
         } else {
             JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
         }
+    }
+
+    private void createRecordAction() {
+        jButtonRecord.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recordAction();
+            }
+        });
+    }
+    
+    private void recordAction(){
+        throw new UnsupportedOperationException();
+    }
+    
+    private void createCancelAction() {
+        jButtonCancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cancelAction();
+            }
+        });
+    }
+    
+    private void cancelAction(){
+        finalizeServiceOrderView();
+    }
+
+    private void updateViewCustomerData() {
+        jTextFieldCustomerName.setText(serviceOrderModel.getCustomerName());
+        jTextFieldCustomerLastName.setText(serviceOrderModel.getCustomerLastName());
+        jTextFieldCustomerPhone.setText(serviceOrderModel.getCustomerPhone());
+        jTextFieldCustomerBirth.setText(serviceOrderModel.getCustomerBirth());
+    }
+
+    private void updateViewAnimalData() {
+        jTextFieldAnimalName.setText(serviceOrderModel.getAnimalName());
+        jTextFieldAnimalBirth.setText(serviceOrderModel.getAnimalBirth());
+    }
+
+    @Override
+    public void animalChanged() {
+        updateViewAnimalData();
+    }
+
+    @Override
+    public void customerChanged() {
+        updateViewCustomerData();
+    }
+
+    private void createSelectCustomerAction() {
+        jButtonSelectCustomer.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectCustomerAction();
+            }
+        });
+    }
+
+    private void selectCustomerAction(){
+        serviceOrderController.selectCustomer();
+    }
+    
+    private void createSelectAnimalAction() {
+        jButtonSelectAnimal.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectAnimalAction();
+            }
+        });
+    }
+    
+    private void selectAnimalAction(){
+        serviceOrderController.selectAnimal();
+        
+    }
+
+    private void rawEnableTextFields() {
+        jTextFieldAnimalBirth.setEditable(true);
+        jTextFieldAnimalName.setEditable(true);
+        jTextFieldCustomerBirth.setEditable(true);
+        jTextFieldCustomerLastName.setEditable(true);
+        jTextFieldCustomerName.setEditable(true);
+        jTextFieldCustomerPhone.setEditable(true);
+    }
+
+    private void rawDisableTextFields() {
+        jTextFieldAnimalBirth.setEditable(false);
+        jTextFieldAnimalName.setEditable(false);
+        jTextFieldCustomerBirth.setEditable(false);
+        jTextFieldCustomerLastName.setEditable(false);
+        jTextFieldCustomerName.setEditable(false);
+        jTextFieldCustomerPhone.setEditable(false);
     }
 }

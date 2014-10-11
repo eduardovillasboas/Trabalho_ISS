@@ -32,6 +32,8 @@ public class CustomerController implements ControllerInterface{
         customerView.register(o);
         customerView.register(o2);
         o.addjDesktop(customerView);
+        customerView.setPreferredSize(customerView.getParent().getSize());
+        customerView.pack();
     }
 
     @Override
@@ -49,17 +51,19 @@ public class CustomerController implements ControllerInterface{
     public void addAnimal() {
         PetshopEntity entity;
         entity = selectAnimal();
-        customerModel.add((Animal)entity);
+        if (entity != null)
+            customerModel.add((Animal)entity);
     }
     
     private PetshopEntity selectAnimal(){
         ListSelectController listSelectController;
         AnimalListModel animalModel = new AnimalListModel();
+        animalModel.initialize();
         listSelectController = new ListSelectController(animalModel);
         
         StatusOperation status = listSelectController.exec();
         
-        if (status == StatusOperation.EMPTY_ANIMAL_MODEL)
+        if (status == StatusOperation.EMPTY_ENTITY_MODEL)
             customerView.updateViews("Nenhum animal cadastrado");
         
         return listSelectController.getPetshopEntity();

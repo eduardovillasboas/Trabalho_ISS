@@ -38,6 +38,7 @@ public final class AnimalView extends javax.swing.JInternalFrame implements View
         updateViewFromModel();
         animalModel.registerErrorObserver(this);
         animalModel.registerUpdate(this);
+        
     }
 
     /**

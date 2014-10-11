@@ -11,7 +11,7 @@ package br.com.uem.iss.petshop.Commons;
  * @author EDUARDO
  */
 public enum StatusOperation {
-    EMPTY_ANIMAL_MODEL,
-    SELECTED_ANIMAL,
+    EMPTY_ENTITY_MODEL,
+    SELECTED_ENTITY,
     CANCEL_SELECT
 }

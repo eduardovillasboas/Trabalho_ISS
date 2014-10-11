@@ -36,6 +36,8 @@ public class AnimalController implements ControllerInterface{
         animalView.register(o);
         animalView.register(o2);
         o.addjDesktop(animalView);
+     //   animalView.setPreferredSize(animalView.getParent().getSize());
+     //   animalView.pack();
     }
 
     @Override
@@ -52,17 +54,19 @@ public class AnimalController implements ControllerInterface{
 
     public void addPathology() {
         PetshopEntity entity = selectPathology();
-        animalModel.add((Patology)entity);
+        if (entity != null)
+            animalModel.add((Patology)entity);
     }
 
     private PetshopEntity selectPathology() {
-                ListSelectController listSelectController;
+        ListSelectController listSelectController;
         PatologyListModel pathologyListModel = new PatologyListModel();
+        pathologyListModel.initialize();
         listSelectController = new ListSelectController(pathologyListModel);
         
         StatusOperation status = listSelectController.exec();
         
-        if (status == StatusOperation.EMPTY_ANIMAL_MODEL)
+        if (status == StatusOperation.EMPTY_ENTITY_MODEL)
             animalView.updateViews("Nehuma pathologia cadastrada");
         
         return listSelectController.getPetshopEntity();

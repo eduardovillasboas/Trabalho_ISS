@@ -9,6 +9,7 @@ import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Main.controller.MainController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
@@ -293,11 +294,14 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         mainController.serviceAction();
     }
     
+    Stack<JInternalFrame> internalFrames = new Stack<>();
     @Override
     public void addjDesktop(JInternalFrame customerView) {
         jDesktopPane1.add(customerView);
+        internalFrames.add(customerView);
         try {
             customerView.setSelected(true);
+            jDesktopPane1.repaint();
         } catch (java.beans.PropertyVetoException e) {
         }
 
@@ -306,7 +310,21 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     @Override
     public void wasFinalized(JInternalFrame view) {
         jDesktopPane1.remove(view);
+        JInternalFrame internalFrame = null;
+        if (!internalFrames.isEmpty()){
+            internalFrames.remove(view);
+            if (!internalFrames.isEmpty())
+                internalFrame = internalFrames.peek();
+        }
+        try {
+            if (internalFrame != null)
+                internalFrame.setSelected(true);
+        } catch (Exception e) {
+        }
+        /*TODO: REMOVER E ADICIONAR UTILIZAR UMA PILHA*/
+        jDesktopPane1.revalidate();
         jDesktopPane1.repaint();
+        
     }
 
     private void createAnimalAction() {

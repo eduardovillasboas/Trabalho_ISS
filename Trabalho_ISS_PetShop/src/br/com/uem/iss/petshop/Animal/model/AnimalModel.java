@@ -74,29 +74,14 @@ public class AnimalModel extends AbstractModel{
         super();
         animal = new Animal();
         animalDAO = new AnimalDAO();
-        
     }
 
     
     @Override
     public void initialize() {
-        DateUtil dateUtil = new DateUtil();
-        if (animal == null)
-            animal = new Animal();
-        if (animal.getName() == null)
-            animal.setName("");
-        if (animal.getBirth() == null)
-            animal.setBirth(new Date(0,0,0));
-        
-        if (animal.getBreed() == null)
-            animal.setBreed("");
-        if (animal.getCustomer() == null)
-            animal.setCustomer(new ArrayList<>());
-        if (animal.getHeight() == null)
-            animal.setHeight(new Double(0));
-        if (animal.getWeight() == null)
-            animal.setWeight(new Double(0));
-        
+        AnimalInitializer animalInitializer;
+        animalInitializer = new AnimalInitializer();
+        animal = animalInitializer.initializer(animal);
     }
 
     @Override

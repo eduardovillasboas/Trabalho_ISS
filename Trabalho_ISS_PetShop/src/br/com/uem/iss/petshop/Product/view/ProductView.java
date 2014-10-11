@@ -381,9 +381,19 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                record();
+                actionRecord();
             }
         });
+    }
+    private void actionRecord() {
+        if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE)
+                != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        if (productControler.persist()) {
+            finalizeProductView();
+        }
     }
 
     @Override

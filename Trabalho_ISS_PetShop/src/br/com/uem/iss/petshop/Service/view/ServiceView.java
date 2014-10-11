@@ -208,13 +208,6 @@ public class ServiceView extends javax.swing.JInternalFrame implements ViewInter
         dispose();
     }
 
-    private void record() {
-        if (serviceControler.persist()) {
-            finalizeProductView();
-        }
-
-    }
-
     private void createActionCancel() {
         jButtonCancel.addActionListener(new ActionListener() {
 
@@ -231,9 +224,21 @@ public class ServiceView extends javax.swing.JInternalFrame implements ViewInter
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                record();
+                actionRecord();
             }
+
         });
+    }
+
+    private void actionRecord() {
+        if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE)
+                != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        if (serviceControler.persist()) {
+            finalizeProductView();
+        }
     }
 
     @Override

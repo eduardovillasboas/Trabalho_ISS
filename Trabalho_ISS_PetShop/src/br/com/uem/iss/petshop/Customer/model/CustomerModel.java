@@ -32,11 +32,7 @@ public class CustomerModel extends AbstractModel{
     
     @Override
     public void initialize() {
-        
-        CustomerInitializer customerInitiliInitializer;
-        customerInitiliInitializer = new CustomerInitializer();
-        customer = customerInitiliInitializer.initilizer(customer);
-
+        customer = Customer.CustomerInitializer.initilizer(customer);
         updateObservers(null);
     }
 
@@ -66,14 +62,7 @@ public class CustomerModel extends AbstractModel{
 
     @Override
     public Boolean persist() {
-        DateUtil d = new DateUtil();
-        if (customer.getName().isEmpty() ||
-                customer.getAddress().isEmpty() || 
-                customer.getBirth().equals(d.toDate(""))||
-                customer.getCpf().isEmpty() ||
-                customer.getLastName().isEmpty() ||
-                customer.getNumber() == 0 ||
-                customer.getRg().isEmpty()){
+        if (!Customer.Checker.mandatoryFieldsFilled(customer)){
             updateErrorMessage("Todos os campos do cadastro são obrigatórios!");
         } else {
             try {
@@ -167,5 +156,5 @@ public class CustomerModel extends AbstractModel{
     public void setPhone(String text) {
         customer.setPhone(text);
     }
-   
+
 }

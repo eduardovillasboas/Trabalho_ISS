@@ -79,9 +79,7 @@ public class AnimalModel extends AbstractModel{
     
     @Override
     public void initialize() {
-        AnimalInitializer animalInitializer;
-        animalInitializer = new AnimalInitializer();
-        animal = animalInitializer.initializer(animal);
+        animal = Animal.AnimalInitializer.initializer(animal);
     }
 
     @Override

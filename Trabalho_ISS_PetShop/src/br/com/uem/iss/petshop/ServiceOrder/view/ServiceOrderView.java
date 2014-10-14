@@ -13,9 +13,8 @@ import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +24,10 @@ import javax.swing.JOptionPane;
 public class ServiceOrderView extends javax.swing.JInternalFrame 
                               implements ViewInterface, 
                                          ServiceOrderModel.ObserverServiceOrderChangeAnimal,
-                                         ServiceOrderModel.ObserverServiceOrderChangeCustomer{
+                                         ServiceOrderModel.ObserverServiceOrderChangeCustomer,
+                                         ServiceOrderModel.ObserverServiceOrderAdded,
+                                         ServiceOrderModel.ObserverServiceOrderRemoved, 
+                                         ServiceOrderModel.ObserverTotalCalculed{
 
     /**
      * Creates new form ServiceOrderView
@@ -43,11 +45,9 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         serviceOrderController = c;
         serviceOrderModel = m;
         oberverJInternalFrames = new ArrayList<>();
+        registerObservers();
         updateViewFromModel();
-        serviceOrderModel.registerErrorObserver((ObserverModel)this);
-        serviceOrderModel.registerUpdate((ObserverModel)this);
-        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderChangeAnimal)this);
-        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderChangeCustomer)this);
+        
     }
     
     public void enableTextFields() {
@@ -86,7 +86,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jTextFieldAnimalBirth = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableServiceOrders = new javax.swing.JTable();
         jButtonAddService = new javax.swing.JButton();
         jButtonRemoveService = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -218,7 +218,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviços"));
         jPanel4.setToolTipText("");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableServiceOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -229,7 +229,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableServiceOrders);
 
         jButtonAddService.setText("Acicionar Servico");
 
@@ -352,7 +352,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableServiceOrders;
     private javax.swing.JTextField jTextFieldAnimalBirth;
     private javax.swing.JTextField jTextFieldAnimalName;
     private javax.swing.JTextField jTextFieldCustomerBirth;
@@ -382,14 +382,19 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
 
     @Override
     public void updateModelFromViewValues() {
-        //TODO: Atualizar a o Model com os dados da View
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*
+        TODO: TALVEZ NAO NECESSITE POIS NESSE CASO NAO EXISTE NENHUM CAMPO EM ABERTO.
+        É INTERESSANTE TER UM CAMPO EM ABERTO DE DESCONTO. MAS NAO ESTA NOS REQUISITOS, PORTANTO NAO
+        SERA IMPLEMENTADO. QUANTIDADE DE SERVICOS TAMBEM SERIA LEGAL. MAS VAI FICAR SENDO SOMENTE
+        UM SERVICO MESMO.
+        */
     }
 
     @Override
     public void updateViewFromModel() {
         updateViewCustomerData();
         updateViewAnimalData();
+        refreshTableService();
         
         //TODO: Atualizar a View com os dados do model.
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -441,7 +446,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
     
     private void recordAction(){
-        throw new UnsupportedOperationException();
+        if (!serviceOrderController.persist()){
+            return;
+        }
+        
+        finalizeServiceOrderView();
     }
     
     private void createCancelAction() {
@@ -478,6 +487,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     @Override
     public void customerChanged() {
         updateViewCustomerData();
+        jButtonSelectAnimal.setEnabled(true);
     }
 
     private void createSelectCustomerAction() {
@@ -544,7 +554,58 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
     
     private void removeServiceAction() {
-        throw new UnsupportedOperationException();
+        if (jTableServiceOrders.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this,"Nenhum serviço selecionado!", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        serviceOrderController.removeService();
+    }
+
+    private void registerObservers() {
+        serviceOrderModel.registerErrorObserver((ObserverModel)this);
+        serviceOrderModel.registerUpdate((ObserverModel)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderChangeAnimal)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderChangeCustomer)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderAdded)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverServiceOrderRemoved)this);
+        serviceOrderModel.register((ServiceOrderModel.ObserverTotalCalculed)this);
+    }
+
+    @Override
+    public void addedService() {
+        refreshTableService();
+    }
+
+    @Override
+    public void removedService() {
+        refreshTableService();
+    }
+
+    private void refreshTableService() {
+        jTableServiceOrders.setModel(serviceOrderModel.createServiceModel());
+        jTableServiceOrders.revalidate();
+        jTableServiceOrders.clearSelection();
+        calculeTotal();
+    }
+
+    public void enableInsertMode() {
+        jButtonSelectAnimal.setEnabled(false);
+        jButtonAddService.setEnabled(true);
+        jButtonRemoveService.setEnabled(true);
+    }
+
+    public void enableEditMode() {
+        enableInsertMode();
+        jButtonSelectAnimal.setEnabled(false);
+    }
+
+    private void calculeTotal() {
+        serviceOrderController.calculeTotal();
+    }
+
+    @Override
+    public void totalWasCalculed(BigDecimal value) {
+        jTextFieldTotal.setText(value.toString());
     }
     
 }

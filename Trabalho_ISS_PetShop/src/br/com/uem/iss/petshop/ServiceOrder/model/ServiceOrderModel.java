@@ -8,14 +8,14 @@ package br.com.uem.iss.petshop.ServiceOrder.model;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Animal.model.Animal;
-import br.com.uem.iss.petshop.Animal.model.AnimalInitializer;
 import br.com.uem.iss.petshop.Customer.model.Customer;
-import br.com.uem.iss.petshop.Customer.model.CustomerInitializer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Service.model.Service;
 import br.com.uem.iss.petshop.Utils.DateUtil;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -23,19 +23,78 @@ import java.util.List;
  */
 public class ServiceOrderModel extends AbstractModel{
 
-    ServiceOrder serviceOrder;
+    private ServiceOrder serviceOrder;
     final private ServiceOrderDAO serviceOrderDAO;
-    private Customer customer;
-    private Animal animal;
-    private final ArrayList<ObserverServiceOrderChangeAnimal> observerChangeAnimal; 
-    final private ArrayList<ObserverServiceOrderChangeCustomer> observerChangeCustomer;
-    private List<Service> services;
+    private final List<ObserverServiceOrderChangeAnimal> observerChangeAnimal; 
+    final private List<ObserverServiceOrderChangeCustomer> observerChangeCustomer;
+    final private List<ObserverServiceOrderAdded> observerAddedService;
+    final private List<ObserverServiceOrderRemoved> observerRemovedService;
+    final private List<ObserverTotalCalculed> observerTotalCalculed;
     
     public void addService(Service s) {
-        services.add(s);
-        //TODO: UPDATE Observers.
+        serviceOrder.add(s);
+        serviceWasAdded();
+    }
+
+    public AbstractTableModel createServiceModel() {
+        return new AbstractTableModel() {
+
+            @Override
+            public String getColumnName(int col){
+                if (col == 0)
+                    return "Codigo do serviço";
+                else if (col == 1)
+                    return "Descrição do serviço";
+                
+                return "Preço do serviço";
+            }
+            
+            @Override
+            public int getRowCount() {
+                return serviceOrder.getServices().size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 3;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                Service service = serviceOrder.getServices().get(rowIndex);
+                if (columnIndex == 0)
+                    return service.getID();
+                else if (columnIndex == 1)
+                    return service.getDescricao();
+                
+                return service.getPreco();
+            }
+        };
+    }
+
+    public void calculeTotal() {
+        BigDecimal total;
+        total = new BigDecimal("00000000");
+        for (Service service : serviceOrder.getServices()) {
+            Double value = Double.parseDouble(Float.toString(service.getPreco()));
+            BigDecimal bigValue = BigDecimal.valueOf(value);
+            total = total.add(bigValue);
+        }
+        updateObserversTotalWasCalculed(total);
+    }
+
+    public interface ObserverTotalCalculed {
+        public void totalWasCalculed(BigDecimal value);
     }
     
+    public interface ObserverServiceOrderAdded{
+        public void addedService();
+    }
+    
+    public interface ObserverServiceOrderRemoved{
+        public void removedService();
+    }
+
     public interface ObserverServiceOrderChangeAnimal{
         void animalChanged();
     } 
@@ -49,8 +108,41 @@ public class ServiceOrderModel extends AbstractModel{
         serviceOrderDAO = new ServiceOrderDAO();
         observerChangeAnimal = new ArrayList<>();
         observerChangeCustomer = new ArrayList<>();
+        observerAddedService = new ArrayList<>();
+        observerRemovedService = new ArrayList<>();
+        observerTotalCalculed = new ArrayList<>();
     }
 
+    public void register(ObserverTotalCalculed o) {
+        observerTotalCalculed.add(o);
+    }
+    
+    public void updateObserversTotalWasCalculed(BigDecimal total) {
+        for (ObserverTotalCalculed observer : observerTotalCalculed ) {
+            observer.totalWasCalculed(total);
+        }
+    }
+    
+    public void register(ObserverServiceOrderRemoved o) {
+        observerRemovedService.add(o);
+    }
+    
+    public void serviceWasRemoved() {
+        for (ObserverServiceOrderRemoved observerServiceOrderRemoved : observerRemovedService) {
+            observerServiceOrderRemoved.removedService();
+        }
+    }
+    
+    public void register(ObserverServiceOrderAdded o) {
+        observerAddedService.add(o);
+    }
+    
+    public void serviceWasAdded() {
+        for (ObserverServiceOrderAdded observerServiceAdded : observerAddedService) {
+            observerServiceAdded.addedService();
+        }
+    }
+    
     public void register(ObserverServiceOrderChangeAnimal o){
         observerChangeAnimal.add(o);
     }
@@ -80,7 +172,24 @@ public class ServiceOrderModel extends AbstractModel{
 
     @Override
     public Boolean persist() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!Customer.Checker.mandatoryFieldsFilled(serviceOrder.getCustomer())){
+            updateErrorMessage("Por favor selecione um cliente!");
+        } else if (serviceOrder.getServices().isEmpty()){
+            updateErrorMessage("Nenhum servico foi adiconado a ordem de serviço!");
+        } else {
+            try {
+                serviceOrderDAO.persist(serviceOrder);
+                updateObservers("Dados gravados com sucesso");
+                return true;
+            } catch (Exception e) {
+                updateErrorMessage("Erro ao gravar os dados no banco de dados "+e.getMessage());
+            } finally {
+                serviceOrderDAO.close();
+            }
+            
+        }
+        
+        return false;
     }
 
     @Override
@@ -89,57 +198,51 @@ public class ServiceOrderModel extends AbstractModel{
     }
 
     public Customer getCustomer() {
-        return customer;
+        return serviceOrder.getCustomer();
     }
 
     public void setCustomer(Customer customer) {
-        this.customer = customer;
+        serviceOrder.setCustomer(customer);
         customerWasChanged();
     }
 
     public Animal getAnimal() {
-        return animal;
+        return serviceOrder.getAnimal();
     }
 
     public void setAnimal(Animal animal) {
-        this.animal = animal;
+        serviceOrder.setAnimal(animal);
         animalWasChanged();
     }
 
     private void initializerEntities() {
-        CustomerInitializer customerInitializer;
-        customerInitializer = new CustomerInitializer();
-        customer = customerInitializer.initilizer(customer);
-        AnimalInitializer animalInitializer;
-        animalInitializer = new AnimalInitializer();
-        animal = animalInitializer.initializer(animal);
-        services = new ArrayList<>();
+        serviceOrder = ServiceOrder.ServiceOrderInitializer.initializer(serviceOrder);
     }
 
     public String getCustomerName() {
-        return customer.getName();
+        return serviceOrder.getCustomer().getName();
     }
 
     public String getCustomerLastName() {
-        return customer.getLastName();
+        return serviceOrder.getCustomer().getLastName();
     }
 
     public String getCustomerPhone() {
-        return customer.getPhone();
+        return serviceOrder.getCustomer().getPhone();
     }
 
     public String getCustomerBirth() {
         DateUtil dateUtil = new DateUtil();
-        return dateUtil.toString(customer.getBirth());
+        return dateUtil.toString(serviceOrder.getCustomer().getBirth());
     }
 
     public String getAnimalName() {
-        return animal.getName();
+        return serviceOrder.getAnimal().getName();
     }
 
     public String getAnimalBirth() {
         DateUtil dateUtil = new DateUtil();
-        return dateUtil.toString(animal.getBirth());
+        return dateUtil.toString(serviceOrder.getAnimal().getBirth());
     }
 
 }

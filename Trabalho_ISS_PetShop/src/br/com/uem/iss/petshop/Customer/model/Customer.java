@@ -8,7 +8,10 @@ package br.com.uem.iss.petshop.Customer.model;
 
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder;
+import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -18,6 +21,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -111,10 +115,7 @@ public class Customer implements Serializable,PetshopEntity {
             return false;
         }
         Customer other = (Customer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override
@@ -192,5 +193,57 @@ public class Customer implements Serializable,PetshopEntity {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-   
+    
+    public static class CustomerInitializer {
+
+        private CustomerInitializer() {
+        }
+
+        static public Customer initilizer(Customer customer){
+            if (customer == null)
+                customer = new Customer();
+
+            if (customer.getName() == null)
+                customer.setName("");
+            if (customer.getLastName() == null)
+                customer.setLastName("");
+            if (customer.getBirth() == null){
+                customer.setBirth(new Date(0,0,0));
+            }
+            if (customer.getAddress() == null)
+                customer.setAddress("");
+            if (customer.getAnimals() == null)
+                customer.setAnimals(new ArrayList<>());
+            if (customer.getCpf() == null)
+                customer.setCpf("");
+            if (customer.getRg() == null)
+                customer.setRg("");
+            if (customer.getNumber() == null)
+                customer.setNumber(new Long(0));
+            if (customer.getPhone() == null)
+                customer.setPhone("");
+
+            return customer;
+        }
+    }
+    
+    public static class Checker {
+    
+        private Checker() {
+        }
+        
+        public static Boolean mandatoryFieldsFilled(Customer customer){
+            DateUtil d = new DateUtil();
+            if (customer == null)
+                return false;
+            return !customer.getName().isEmpty() && 
+                    !customer.getAddress().isEmpty() && 
+                    !customer.getBirth().equals(d.toDate("")) && 
+                    !customer.getCpf().isEmpty() && 
+                    !customer.getLastName().isEmpty() && 
+                    customer.getNumber() != 0 && 
+                    !customer.getRg().isEmpty();
+        }
+    }
+    
  }

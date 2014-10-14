@@ -44,6 +44,10 @@ public class ServiceOrderController implements ControllerInterface{
     @Override
     public void exec() {
         serviceOrderModel.initialize();
+        if (serviceOrderModel.getAnimal() != null)
+            serviceOrderView.enableEditMode();
+        else
+            serviceOrderView.enableInsertMode();
         serviceOrderView.configure();
     }
 
@@ -52,6 +56,7 @@ public class ServiceOrderController implements ControllerInterface{
         /*
         TODO: AO CHAMAR NAO ESQUECER DE ANTES INVOCAR updateModelFromViewValues();
         */        
+        serviceOrderView.updateModelFromViewValues();
         return serviceOrderModel.persist();
     }
 
@@ -75,9 +80,9 @@ public class ServiceOrderController implements ControllerInterface{
     public void selectAnimal() {
         ListSelectController listSelectController;
         AnimalListModel animalListModel = new AnimalListModel();
-        animalListModel.initialize(serviceOrderModel.getCustomer().getAnimals());
-        listSelectController = new ListSelectController(animalListModel);
         
+        listSelectController = new ListSelectController(animalListModel);
+        animalListModel.initialize(serviceOrderModel.getCustomer().getAnimals());
         StatusOperation status = listSelectController.exec();
         
         if (status == StatusOperation.EMPTY_ENTITY_MODEL)
@@ -103,5 +108,17 @@ public class ServiceOrderController implements ControllerInterface{
             serviceOrderModel.addService((Service)listSelectController.getPetshopEntity());
         }
         
+    }
+
+    public void calculeTotal() {
+        serviceOrderModel.calculeTotal();
+    }
+
+    public void remove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void removeService() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

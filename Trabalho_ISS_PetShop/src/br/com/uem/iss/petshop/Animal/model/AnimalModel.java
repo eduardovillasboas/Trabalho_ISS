@@ -85,11 +85,7 @@ public class AnimalModel extends AbstractModel{
     @Override
     public Boolean persist() {
         DateUtil d = new DateUtil();
-        if (animal.getName().isEmpty() || 
-                animal.getBreed().isEmpty() ||
-                animal.getBirth().equals(d.toDate("")) ||
-                animal.getHeight() == 0 ||
-                animal.getWeight() == 0 ){
+        if (!Animal.Checker.mandatoryFieldsFilled(animal)){
             updateErrorMessage("Todos os campos do cadastro são obrigatórios!");
         }else {
             try {

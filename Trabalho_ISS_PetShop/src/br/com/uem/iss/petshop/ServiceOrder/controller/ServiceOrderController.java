@@ -114,11 +114,8 @@ public class ServiceOrderController implements ControllerInterface{
         serviceOrderModel.calculeTotal();
     }
 
-    public void remove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public void removeService() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void removeService(int selected) {
+        serviceOrderModel.remove(selected);
     }
 }

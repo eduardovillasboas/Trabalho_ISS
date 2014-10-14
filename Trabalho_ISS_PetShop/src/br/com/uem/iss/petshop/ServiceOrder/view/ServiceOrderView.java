@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.ServiceOrder.view;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
+import br.com.uem.iss.petshop.Service.model.Service;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
 import java.awt.event.ActionEvent;
@@ -558,7 +559,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
             JOptionPane.showMessageDialog(this,"Nenhum serviço selecionado!", "Informação", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        serviceOrderController.removeService();
+        serviceOrderController.removeService(jTableServiceOrders.getSelectedRow());
     }
 
     private void registerObservers() {

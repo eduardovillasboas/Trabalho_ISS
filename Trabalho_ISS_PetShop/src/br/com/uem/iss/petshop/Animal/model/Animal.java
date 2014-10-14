@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.Animal.model;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Patology.model.Patology;
+import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -191,5 +192,19 @@ public class Animal implements Serializable, PetshopEntity {
             return animal;
         }
     }
+    
+    public static class Checker {
 
+        public static boolean mandatoryFieldsFilled(Animal animal) {
+            if (animal == null)
+                return false;
+            DateUtil d = new DateUtil();
+            return !animal.getName().isEmpty() && 
+                    !animal.getBreed().isEmpty() &&
+                    !animal.getBirth().equals(d.toDate("")) &&
+                    animal.getHeight() != 0 &&
+                    animal.getWeight() != 0;
+        }
+        
+    }
 }

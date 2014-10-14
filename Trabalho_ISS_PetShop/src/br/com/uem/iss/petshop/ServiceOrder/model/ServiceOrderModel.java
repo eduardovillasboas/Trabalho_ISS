@@ -32,6 +32,10 @@ public class ServiceOrderModel extends AbstractModel{
     final private List<ObserverTotalCalculed> observerTotalCalculed;
     
     public void addService(Service s) {
+        if (serviceOrder.getServices().contains(s)){
+            updateErrorMessage("Serviço ja adicionado para esta ordem de serviço!");
+            return;
+        }
         serviceOrder.add(s);
         serviceWasAdded();
     }
@@ -81,6 +85,11 @@ public class ServiceOrderModel extends AbstractModel{
             total = total.add(bigValue);
         }
         updateObserversTotalWasCalculed(total);
+    }
+
+    public void remove(int selected) {
+        serviceOrder.getServices().remove(selected);
+        serviceWasRemoved();
     }
 
     public interface ObserverTotalCalculed {
@@ -176,6 +185,8 @@ public class ServiceOrderModel extends AbstractModel{
             updateErrorMessage("Por favor selecione um cliente!");
         } else if (serviceOrder.getServices().isEmpty()){
             updateErrorMessage("Nenhum servico foi adiconado a ordem de serviço!");
+        }else if(!Animal.Checker.mandatoryFieldsFilled(serviceOrder.getAnimal())){
+            updateErrorMessage("Selecione um animal!");
         } else {
             try {
                 serviceOrderDAO.persist(serviceOrder);

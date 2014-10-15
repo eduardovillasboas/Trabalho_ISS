@@ -56,7 +56,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemCompanyRecord = new javax.swing.JMenuItem();
         jMenuItemLoginRecord = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemClose = new javax.swing.JMenuItem();
 
@@ -75,7 +77,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             .addGap(0, 257, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Manutencao");
+        jMenu1.setText("Manutenção");
 
         jMenu7.setText("Animais e Clientes");
 
@@ -119,7 +121,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenu1.add(jMenu6);
 
-        jMenu8.setText("Veterinaria");
+        jMenu8.setText("Veterinária");
 
         jMenuItemDrugsRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemDrugsRecord.setText("Cadastro de Medicamentos");
@@ -156,9 +158,22 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
+
+        jMenuItem1.setText("Medicamentos(por fornecedor)");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Relatorios");
+        jMenu3.setText("Relatórios");
+
+        jMenuItem2.setText("Medicamentos a serem comprados");
+        jMenu3.add(jMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
@@ -210,6 +225,10 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemCompanyRecordActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -222,6 +241,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemCompanyRecord;

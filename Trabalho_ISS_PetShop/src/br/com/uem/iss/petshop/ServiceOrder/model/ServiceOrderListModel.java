@@ -26,9 +26,9 @@ public class ServiceOrderListModel extends AbstractModelList{
     
     private String columnName(int col) {
         if (col == 0)
-            return "Nome";
+            return "Nome do cliente";
         else
-            return "Alterar";
+            return "Data de Execução";
     }
     
     @Override
@@ -54,9 +54,9 @@ public class ServiceOrderListModel extends AbstractModelList{
             public Object getValueAt(int rowIndex, int columnIndex) {
                 ServiceOrder serviceOrder = serviceOrders.get(rowIndex);
                 if (columnIndex == 0)
-                    return serviceOrder.getID();
+                    return serviceOrder.getCustomer().getName();
                 else
-                    return "Alterar";
+                    return serviceOrder.getID()+" Alterar para data de execucao";
             }
         };
     }
@@ -68,7 +68,7 @@ public class ServiceOrderListModel extends AbstractModelList{
             serviceOrders.remove(selectedRow);
             ServiceOrderDAO customerDAO = new ServiceOrderDAO();
             customerDAO.delete(serviceOrder);
-            updateObservers("Cliente Numero "+serviceOrder.getID()+" deletada com sucesso!");
+            updateObservers("Ordem de serviço número "+serviceOrder.getID()+" deletada com sucesso!");
         } catch (Exception e) {
             updateErrorMessage(e.getMessage());
         }

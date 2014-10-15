@@ -78,7 +78,7 @@ public class ServiceOrderModel extends AbstractModel{
 
     public void calculeTotal() {
         BigDecimal total;
-        total = new BigDecimal("00000000");
+        total = new BigDecimal("0");
         for (Service service : serviceOrder.getServices()) {
             Double value = Double.parseDouble(Float.toString(service.getPreco()));
             BigDecimal bigValue = BigDecimal.valueOf(value);
@@ -91,6 +91,11 @@ public class ServiceOrderModel extends AbstractModel{
         serviceOrder.getServices().remove(selected);
         serviceWasRemoved();
     }
+
+    public boolean isClosed() {
+        return serviceOrder.getStatus() == ServiceOrder.Status.CLOSE;
+    }
+    
 
     public interface ObserverTotalCalculed {
         public void totalWasCalculed(BigDecimal value);

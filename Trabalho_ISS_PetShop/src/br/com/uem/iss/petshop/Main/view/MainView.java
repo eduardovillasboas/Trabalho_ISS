@@ -163,7 +163,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenu4.setText("Sair");
 
-        jMenuItemClose.setText("Sair");
+        jMenuItemClose.setText("Sair do sistema");
         jMenu4.add(jMenuItemClose);
 
         jMenuBar1.add(jMenu4);

@@ -153,7 +153,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemClose">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sair"/>
+                <Property name="text" type="java.lang.String" value="Sair do sistema"/>
               </Properties>
             </MenuItem>
           </SubComponents>

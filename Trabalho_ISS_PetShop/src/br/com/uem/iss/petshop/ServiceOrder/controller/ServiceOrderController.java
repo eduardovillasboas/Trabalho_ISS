@@ -44,10 +44,16 @@ public class ServiceOrderController implements ControllerInterface{
     @Override
     public void exec() {
         serviceOrderModel.initialize();
-        if (serviceOrderModel.getAnimal() != null)
+        if (serviceOrderModel.isClosed()){
+            serviceOrderView.disableAllControls();
+        }
+        else if (serviceOrderModel.getAnimal() != null && !serviceOrderModel.getAnimal().getName().isEmpty()){
             serviceOrderView.enableEditMode();
-        else
+        } else {
             serviceOrderView.enableInsertMode();
+        }
+        
+        
         serviceOrderView.configure();
     }
 

@@ -136,6 +136,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Vendas"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVendaAGranel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Venda a Granel"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemVendaAGranelActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consultas"/>

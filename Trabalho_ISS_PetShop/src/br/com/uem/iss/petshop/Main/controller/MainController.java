@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.Main.controller;
 
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
@@ -16,6 +15,8 @@ import br.com.uem.iss.petshop.Customer.controller.FactoryCustomerController;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
 import br.com.uem.iss.petshop.Drugs.controller.FactoryDrugController;
 import br.com.uem.iss.petshop.Drugs.model.DrugListModel;
+import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
+import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Login.controller.FactoryLoginController;
 import br.com.uem.iss.petshop.Login.model.LoginListModel;
 import br.com.uem.iss.petshop.Main.view.MainView;
@@ -23,6 +24,7 @@ import br.com.uem.iss.petshop.Patology.controller.FactoryPatologyController;
 import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
 import br.com.uem.iss.petshop.Product.controller.FactoryProductController;
 import br.com.uem.iss.petshop.Product.model.ProductListModel;
+import br.com.uem.iss.petshop.RationBulkSale.controller.FactoryRationBulkSaleController;
 import br.com.uem.iss.petshop.Service.controller.FactoryServiceController;
 import br.com.uem.iss.petshop.Service.model.ServiceListModel;
 import br.com.uem.iss.petshop.ServiceOrder.controller.FactoryServiceOrderController;
@@ -38,6 +40,7 @@ import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
 public class MainController {
 
     MainView mainView;
+
     public MainController() {
         mainView = new MainView(this);
     }
@@ -50,10 +53,18 @@ public class MainController {
         mainView.createControls();
     }
 
-    public void action(AbstractModelList listModel, FactoryController factoryController){
+    public void action(AbstractModelList listModel, FactoryController factoryController) {
         PetshopListController listController;
         listController = new PetshopListController(listModel, mainView, factoryController);
         listController.exec();
+    }
+
+    public void actionV(FactoryController factoryController) {
+        ObserverJInternalFrame observerInterfalFrame = (ObserverJInternalFrame) mainView;
+        ControllerInterface c;
+        c = factoryController.factoty(null, observerInterfalFrame, null);
+        c.exec();
+
     }
 
     public void customerAction() {
@@ -66,6 +77,10 @@ public class MainController {
 
     public void serviceAction() {
         action(new ServiceListModel(), new FactoryServiceController());
+    }
+
+    public void vendaGranelAction() {
+        actionV(new FactoryRationBulkSaleController());
     }
 
     public void animalAction() {

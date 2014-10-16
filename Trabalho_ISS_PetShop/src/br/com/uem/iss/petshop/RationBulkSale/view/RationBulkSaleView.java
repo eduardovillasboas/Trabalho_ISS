@@ -3,20 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.RationBulkSale.view;
+
+import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Interfaces.ViewInterface;
+import br.com.uem.iss.petshop.Product.model.Product;
+import br.com.uem.iss.petshop.Product.model.ProductDAO;
+import br.com.uem.iss.petshop.RationBulkSale.controller.RationBulkSaleController;
+        
+
 
 /**
  *
  * @author Lucas
  */
-public class RationBulkSale extends javax.swing.JInternalFrame {
+import br.com.uem.iss.petshop.Sales.model.SalesModel;
+import br.com.uem.iss.petshop.Utils.NumberUtil;
+import java.awt.PopupMenu;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+public class RationBulkSaleView extends javax.swing.JInternalFrame implements ViewInterface {
+
+    RationBulkSaleController rationBulkSaleControler;
+    SalesModel salesModel;
+    private List<Product> products;
+
+    ArrayList<ObserverJInternalFrame> observerJInternalFrames;
 
     /**
      * Creates new form RationBulkSale
      */
-    public RationBulkSale() {
+    public RationBulkSaleView(RationBulkSaleController s, SalesModel m) {
         initComponents();
+        rationBulkSaleControler = s;
+        salesModel = m;
+        observerJInternalFrames = new ArrayList<>();
+//        ProductDAO productDAO = new ProductDAO();
+//        products = productDAO.getAllProducts();        
+        updateViewFromModel();
+        salesModel.registerErrorObserver(this);
+        salesModel.registerUpdate(this);
     }
 
     /**
@@ -43,16 +71,16 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
         jFormattedTextFieldValorDesejadoEmR$ = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
-        jFormattedTextFieldValorDesejadoEmR$1 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldQuantidadeDesejada = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jFormattedTextFieldValorDesejadoEmR$2 = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jButtonGravaVenda = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboBoxCodigoAnimal = new javax.swing.JComboBox();
+        jComboBoxFormaDePagamento = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
 
         label1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         label1.setName("Venda Ração Granel"); // NOI18N
@@ -64,7 +92,7 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Código Animal:");
 
-        jLabel6.setText("Código Ração:");
+        jLabel6.setText("Ração:");
 
         jTextField2.setEditable(false);
 
@@ -79,6 +107,11 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
 
         jFormattedTextFieldValorDesejadoEmR$.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jFormattedTextFieldValorDesejadoEmR$.setText("0.00");
+        jFormattedTextFieldValorDesejadoEmR$.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jFormattedTextFieldValorDesejadoEmR$PropertyChange(evt);
+            }
+        });
 
         jLabel1.setText("Valor desejado em R$:");
 
@@ -119,8 +152,8 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jFormattedTextFieldValorDesejadoEmR$1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextFieldValorDesejadoEmR$1.setText("0.00");
+        jFormattedTextFieldQuantidadeDesejada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextFieldQuantidadeDesejada.setText("0.00");
 
         jLabel8.setText("Valor em R$:");
 
@@ -136,7 +169,7 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jFormattedTextFieldValorDesejadoEmR$1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFormattedTextFieldQuantidadeDesejada, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,25 +189,25 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldValorDesejadoEmR$1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jFormattedTextFieldQuantidadeDesejada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jLayeredPane3.setLayer(jFormattedTextFieldValorDesejadoEmR$1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jFormattedTextFieldQuantidadeDesejada, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jFormattedTextFieldValorDesejadoEmR$2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton2.setText("Cancela");
+        jButtonCancel.setText("Cancela");
 
-        jButton1.setText("Grava Venda");
+        jButtonGravaVenda.setText("Grava Venda");
 
         jLabel9.setText("Forma de pagamento:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCodigoAnimal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFormaDePagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jButton1.setText("Selecionar...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,11 +221,11 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxFormaDePagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
+                                .addComponent(jButtonCancel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1))
+                                .addComponent(jButtonGravaVenda))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,9 +240,9 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, 84, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxCodigoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -243,7 +276,7 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxCodigoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
@@ -254,7 +287,7 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,28 +300,33 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(jButtonGravaVenda)
+                            .addComponent(jButtonCancel))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(35, Short.MAX_VALUE))))
+                        .addComponent(jComboBoxFormaDePagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(34, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jFormattedTextFieldValorDesejadoEmR$PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValorDesejadoEmR$PropertyChange
+        // TODO add your handling code here:
+        evt.getNewValue();
+    }//GEN-LAST:event_jFormattedTextFieldValorDesejadoEmR$PropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonGravaVenda;
+    private javax.swing.JComboBox jComboBoxCodigoAnimal;
+    private javax.swing.JComboBox jComboBoxFormaDePagamento;
+    private javax.swing.JFormattedTextField jFormattedTextFieldQuantidadeDesejada;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorDesejadoEmKG;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorDesejadoEmR$;
-    private javax.swing.JFormattedTextField jFormattedTextFieldValorDesejadoEmR$1;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorDesejadoEmR$2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -307,4 +345,65 @@ public class RationBulkSale extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void createActions() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void configure() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateModelFromViewValues() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateViewFromModel() {
+//        for (Product product : products) {
+//            jComboBoxCodigoRacao.add((PopupMenu)(Serializable)product);
+//        }       
+        
+    }
+
+    @Override
+    public void register(ObserverJInternalFrame o) {
+        observerJInternalFrames.add(o);
+    }
+
+    @Override
+    public void updateObserversWasFinalized() {
+        for (ObserverJInternalFrame observerJInternalFrame : observerJInternalFrames) {
+            observerJInternalFrame.wasFinalized(this);
+        }
+    }
+
+    @Override
+    public void updateViews(String msg) {
+        if (msg != null) {
+            JOptionPane.showMessageDialog(this, msg);
+            return;
+        }
+        updateViewFromModel();
+    }
+
+    @Override
+    public void errorOcurred(String error) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void atualizeModelFromViewValues() {
+        //salesModel.setValor(NumberUtil.toFloat(jF));
+        //productModel.setEstoque(new Double(jFormattedTextFieldEstoque.getText()));
+        //productModel.setPesoBruto(NumberUtil.toFloat(jFormattedTextFieldPesoBruto.getText()));
+        //productModel.setPesoLiquido(NumberUtil.toFloat(jFormattedTextFieldPesoLiquido.getText()));
+        //productModel.setPreco(NumberUtil.toFloat(jFormattedTextFieldPreco.getText()));
+        //productModel.setDescricao(jTextFieldDescricao.getText());
+        //productModel.setMarca(jTextFieldMarca.getText());
+        //productModel.setUndade(jTextFieldUnidade.getText());
+    }
+
 }

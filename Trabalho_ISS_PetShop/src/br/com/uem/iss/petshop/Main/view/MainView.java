@@ -55,6 +55,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemPatologyRecord = new javax.swing.JMenuItem();
         jMenuItemCompanyRecord = new javax.swing.JMenuItem();
         jMenuItemLoginRecord = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItemVendaAGranel = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -155,6 +157,18 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenuBar1.add(jMenu1);
 
+        jMenu9.setText("Vendas");
+
+        jMenuItemVendaAGranel.setText("Venda a Granel");
+        jMenuItemVendaAGranel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVendaAGranelActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItemVendaAGranel);
+
+        jMenuBar1.add(jMenu9);
+
         jMenu2.setText("Consultas");
         jMenuBar1.add(jMenu2);
 
@@ -210,6 +224,10 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemCompanyRecordActionPerformed
 
+    private void jMenuItemVendaAGranelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendaAGranelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemVendaAGranelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -221,6 +239,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemClose;
@@ -233,6 +252,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemServiceOrder;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
     private javax.swing.JMenuItem jMenuItemVacinaRecord;
+    private javax.swing.JMenuItem jMenuItemVendaAGranel;
     // End of variables declaration//GEN-END:variables
 
     JFrame jMainFrame;
@@ -244,6 +264,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createAnimalAction();
         createPatologyAction();
         createServiceAction();
+        createVendaGranelAction();
         createVacinaAction();
         createCompanyAction();
         createDrugsAction();
@@ -276,11 +297,11 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
+
     private void productAction() {
         mainController.productAction();
     }
-    
+
     private void createServiceAction() {
         jMenuItemServiceRecord.addActionListener(new ActionListener() {
             @Override
@@ -290,11 +311,25 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
     }
 
-    private void serviceAction(){
+    private void createVendaGranelAction() {
+        jMenuItemVendaAGranel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vendaGranelAction();
+            }
+        });
+    }
+
+    private void serviceAction() {
         mainController.serviceAction();
     }
-    
+
+    private void vendaGranelAction() {
+        mainController.vendaGranelAction();
+    }
+
     Stack<JInternalFrame> internalFrames = new Stack<>();
+
     @Override
     public void addjDesktop(JInternalFrame customerView) {
         jDesktopPane1.add(customerView);
@@ -311,20 +346,22 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     public void wasFinalized(JInternalFrame view) {
         jDesktopPane1.remove(view);
         JInternalFrame internalFrame = null;
-        if (!internalFrames.isEmpty()){
+        if (!internalFrames.isEmpty()) {
             internalFrames.remove(view);
-            if (!internalFrames.isEmpty())
+            if (!internalFrames.isEmpty()) {
                 internalFrame = internalFrames.peek();
+            }
         }
         try {
-            if (internalFrame != null)
+            if (internalFrame != null) {
                 internalFrame.setSelected(true);
+            }
         } catch (Exception e) {
         }
         /*TODO: REMOVER E ADICIONAR UTILIZAR UMA PILHA*/
         jDesktopPane1.revalidate();
         jDesktopPane1.repaint();
-        
+
     }
 
     private void createAnimalAction() {
@@ -350,10 +387,11 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
+
     private void patologyAction() {
         mainController.patologyAction();
     }
+
     private void createVacinaAction() {
         jMenuItemVacinaRecord.addActionListener(new ActionListener() {
             @Override
@@ -362,11 +400,11 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
-    private void vacinaAction(){
+
+    private void vacinaAction() {
         mainController.vacinaAction();
     }
-    
+
     private void createLoginAction() {
         jMenuItemLoginRecord.addActionListener(new ActionListener() {
             @Override
@@ -375,7 +413,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-     private void createCompanyAction() {
+
+    private void createCompanyAction() {
         jMenuItemCompanyRecord.addActionListener(new ActionListener() {
 
             @Override
@@ -384,11 +423,11 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
+
     private void companyAction() {
         mainController.companyAction();
     }
-           
+
     private void createDrugsAction() {
         jMenuItemDrugsRecord.addActionListener(new ActionListener() {
             @Override
@@ -398,11 +437,11 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         });
     }
 
-    private void drugsAction(){
+    private void drugsAction() {
         mainController.drugsAction();
     }
-    
-    private void loginAction(){
+
+    private void loginAction() {
         mainController.loginAction();
     }
 
@@ -415,7 +454,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
+
     private void closeAction() {
         dispose();
     }
@@ -429,7 +468,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
+
     private void serviceOrderAction() {
         mainController.serviceOrderAction();
     }

@@ -94,6 +94,21 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jTextFieldTotal = new javax.swing.JTextField();
         jButtonCancel = new javax.swing.JButton();
         jButtonRecord = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldExecuteDate = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaNote = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBoxPaymentType = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        jTextFieldEntryValue = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jComboBoxServiceOrderStatus = new javax.swing.JComboBox();
+        jTextFieldVendor = new javax.swing.JTextField();
+        jButtonCloseServiceOrder = new javax.swing.JButton();
 
         setMaximizable(true);
         setResizable(true);
@@ -140,7 +155,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldCustomerLastName)
+                    .addComponent(jTextFieldCustomerLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                     .addComponent(jTextFieldCustomerBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
@@ -196,7 +211,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldAnimalBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAnimalName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 163, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButtonSelectAnimal)
                 .addGap(230, 230, 230))
@@ -268,37 +283,127 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                     .addComponent(jButtonAddService)
                     .addComponent(jButtonRemoveService))
                 .addGap(7, 7, 7)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jButtonCancel.setText("Cancelar");
 
         jButtonRecord.setText("Gravar");
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da Ordem de Serviço"));
+
+        jLabel8.setText("Data de execução:");
+
+        jTextFieldExecuteDate.setText("jTextField1");
+
+        jLabel9.setText("Observações:");
+
+        jTextAreaNote.setColumns(20);
+        jTextAreaNote.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaNote);
+
+        jLabel10.setText("Vendedor:");
+
+        jLabel11.setText("Tipo de Pagamento:");
+
+        jComboBoxPaymentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel12.setText("Valor da entrada:");
+
+        jTextFieldEntryValue.setText("jTextField2");
+
+        jLabel13.setText("Situação da Ordem de Servico:");
+
+        jComboBoxServiceOrderStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTextFieldVendor.setText("jTextField3");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldExecuteDate, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jComboBoxPaymentType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldEntryValue, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(jTextFieldVendor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxServiceOrderStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldExecuteDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jTextFieldVendor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(jComboBoxServiceOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBoxPaymentType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldEntryValue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jButtonCloseServiceOrder.setText("Fechar Ordem de Servico");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(730, 730, 730)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCloseServiceOrder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRecord)))
+                        .addComponent(jButtonRecord))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -308,13 +413,16 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonRecord))
-                .addContainerGap(83, Short.MAX_VALUE))
+                    .addComponent(jButtonRecord)
+                    .addComponent(jButtonCloseServiceOrder))
+                .addGap(6, 6, 6))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel1, jPanel3});
@@ -337,30 +445,45 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddService;
     private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonCloseServiceOrder;
     private javax.swing.JButton jButtonRecord;
     private javax.swing.JButton jButtonRemoveService;
     private javax.swing.JButton jButtonSelectAnimal;
     private javax.swing.JButton jButtonSelectCustomer;
+    private javax.swing.JComboBox jComboBoxPaymentType;
+    private javax.swing.JComboBox jComboBoxServiceOrderStatus;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableServiceOrders;
+    private javax.swing.JTextArea jTextAreaNote;
     private javax.swing.JTextField jTextFieldAnimalBirth;
     private javax.swing.JTextField jTextFieldAnimalName;
     private javax.swing.JTextField jTextFieldCustomerBirth;
     private javax.swing.JTextField jTextFieldCustomerLastName;
     private javax.swing.JTextField jTextFieldCustomerName;
     private javax.swing.JTextField jTextFieldCustomerPhone;
+    private javax.swing.JTextField jTextFieldEntryValue;
+    private javax.swing.JTextField jTextFieldExecuteDate;
     private javax.swing.JTextField jTextFieldTotal;
+    private javax.swing.JTextField jTextFieldVendor;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -371,6 +494,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         createSelectAnimalAction();
         createAddServiceAction();
         createRemoveServiceAction();
+        createCloseServiceOrderAction();
         //TODO: Criar acoes
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -590,6 +714,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
 
     public void enableInsertMode() {
+        jButtonSelectCustomer.setEnabled(true);
         jButtonSelectAnimal.setEnabled(false);
         jButtonAddService.setEnabled(true);
         jButtonRemoveService.setEnabled(true);
@@ -597,6 +722,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
 
     public void enableEditMode() {
         enableInsertMode();
+        jButtonSelectCustomer.setEnabled(false);
         jButtonSelectAnimal.setEnabled(false);
     }
 
@@ -608,5 +734,29 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     public void totalWasCalculed(BigDecimal value) {
         jTextFieldTotal.setText(value.toString());
     }
+
+    public void disableAllControls() {
+        jTextAreaNote.setEditable(false);
+        jTextFieldEntryValue.setEditable(false);
+        jTextFieldExecuteDate.setEditable(false);
+        jTextFieldVendor.setEditable(false);
+        jButtonAddService.setEnabled(false);
+        jButtonCloseServiceOrder.setEnabled(false);
+        jButtonRecord.setEnabled(false);
+        jButtonRemoveService.setEnabled(false);
+    }
+
+    private void createCloseServiceOrderAction() {
+        jButtonCloseServiceOrder.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeServiceOrderAction();
+            }
+        });
+    }
     
+    private void closeServiceOrderAction() {
+        throw new UnsupportedOperationException();
+    }
 }

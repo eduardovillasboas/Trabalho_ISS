@@ -353,6 +353,7 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void configure() {
+        setVisible(true);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

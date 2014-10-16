@@ -30,6 +30,7 @@ public class RationBulkSaleController implements ControllerInterface {
         salesModel.initialize();
         rationBulkSaleView = new RationBulkSaleView(this, salesModel);
         rationBulkSaleView.register(o);
+        o.addjDesktop(rationBulkSaleView);
 
     }
 

@@ -95,7 +95,7 @@ public class ServiceOrder implements Serializable, PetshopEntity {
     }
     
     public enum PaymentType {
-        SELECIONAR,
+        UNDEFINED,
         DINHEIRO,
         CARTAO 
     }
@@ -163,6 +163,12 @@ public class ServiceOrder implements Serializable, PetshopEntity {
         setCustomer(serviceOrder.getCustomer());
         setServices(serviceOrder.getServices());
         setAnimal(serviceOrder.getAnimal());
+        setEntryValue(serviceOrder.getEntryValue());
+        setExecuteDate(serviceOrder.getExecuteDate());
+        setNote(serviceOrder.getNote());
+        setPaymentType(serviceOrder.getPaymentType());
+        setStatus(serviceOrder.getStatus());
+        setVendor(serviceOrder.getVendor());
     }
 
     void add(Service s) {
@@ -199,13 +205,13 @@ public class ServiceOrder implements Serializable, PetshopEntity {
         }
         
         public static ServiceOrder initializer(ServiceOrder serviceOrder) {
-            DateUtil dateUtil = new DateUtil();
+            //DateUtil dateUtil = new DateUtil();
             
             if (serviceOrder == null)
                 serviceOrder = new ServiceOrder();
             
             if (serviceOrder.getStatus() == null){
-                serviceOrder.setStatus(Status.OPEN);
+                serviceOrder.setStatus(Status.UNDEFINED);
             }
             
             if (serviceOrder.getEntryValue() == null)
@@ -218,7 +224,10 @@ public class ServiceOrder implements Serializable, PetshopEntity {
                 serviceOrder.setVendor("");
             
             if (serviceOrder.getPaymentType() == null)
-                serviceOrder.setPaymentType(PaymentType.SELECIONAR);
+                serviceOrder.setPaymentType(PaymentType.UNDEFINED);
+            
+            if (serviceOrder.getNote() == null)
+                serviceOrder.setNote("");
             
             Customer customer = serviceOrder.getCustomer();
             if (customer == null){
@@ -243,6 +252,7 @@ public class ServiceOrder implements Serializable, PetshopEntity {
     }
 
     public enum Status{
+        UNDEFINED,
         CLOSE,
         OPEN,
     }

@@ -9,11 +9,13 @@ package br.com.uem.iss.petshop.ServiceOrder.model;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModel;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Customer.model.Customer;
+import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Service.model.Service;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -92,8 +94,104 @@ public class ServiceOrderModel extends AbstractModel{
         serviceWasRemoved();
     }
 
+    public int getStatusIndex() {
+        int index = 0; //ServiceOrder.Status.UNDEFINED
+        ServiceOrder.Status status = getStatus();
+        if (status == ServiceOrder.Status.OPEN)
+            index = 1;
+        else if (status == ServiceOrder.Status.CLOSE)
+            index = 2;
+        return index;
+    }
+    
+    public void setStatuByIndex(int index) {
+        if (index == 0)
+            setStatus(ServiceOrder.Status.UNDEFINED);
+        else if (index == 1)
+            setStatus(ServiceOrder.Status.OPEN);
+        else if (index == 2)
+            setStatus(ServiceOrder.Status.CLOSE);
+    }
+    
+    private void setStatus(ServiceOrder.Status status) {
+        serviceOrder.setStatus(status);
+    }
+    
+    private ServiceOrder.Status getStatus() {
+        return serviceOrder.getStatus();
+    }
+    
+    public int getPaymentIndex() {
+        int index = 0;
+        ServiceOrder.PaymentType paymentType = getPaymentType();
+        if (paymentType == ServiceOrder.PaymentType.CARTAO)
+            index = 1;
+        else if (paymentType == ServiceOrder.PaymentType.DINHEIRO)
+            index = 2;
+        return index;
+    }
+    
+    public void setPaymentTypeByIndex(int index) {
+        if (index == 0)
+            setPayment(ServiceOrder.PaymentType.UNDEFINED);
+        else if (index == 1)
+            setPayment(ServiceOrder.PaymentType.CARTAO);
+        else if (index == 2)
+            setPayment(ServiceOrder.PaymentType.DINHEIRO);
+    }
+    
+    private void setPayment(ServiceOrder.PaymentType paymentType) {
+        serviceOrder.setPaymentType(paymentType);
+    }
+    
+    private ServiceOrder.PaymentType getPaymentType() {
+        return serviceOrder.getPaymentType();
+    }
+    
     public boolean isClosed() {
         return serviceOrder.getStatus() == ServiceOrder.Status.CLOSE;
+    }
+
+    public Date getExecuteDate() {
+        return serviceOrder.getExecuteDate();
+    }
+
+    public String getEntryValue() {
+        Double entryValue = serviceOrder.getEntryValue();
+        return entryValue.toString();
+    }
+
+    public String getVendor() {
+        return serviceOrder.getVendor();
+    }
+
+    public String getNote() {
+        return serviceOrder.getNote();
+    }
+
+    
+    public List<Object> getPaymentSituations() {
+        return paymentSituations;
+    }
+
+    public List<Object> getStausSituation() {
+        return statusSituations;
+    }
+
+    public void setNote(String text) {
+        serviceOrder.setNote(text);
+    }
+
+    public void setEntryValue(Double entryValue) {
+        serviceOrder.setEntryValue(entryValue);
+    }
+
+    public void setVendor(String text) {
+        serviceOrder.setVendor(text);
+    }
+
+    public void setExecuteDate(Date executeDate) {
+        serviceOrder.setExecuteDate(executeDate);
     }
     
 
@@ -117,6 +215,8 @@ public class ServiceOrderModel extends AbstractModel{
         void customerChanged();
     }
     
+    private List<Object> paymentSituations;
+    private List<Object> statusSituations;
     public ServiceOrderModel() {
         serviceOrder = new ServiceOrder();
         serviceOrderDAO = new ServiceOrderDAO();
@@ -125,6 +225,14 @@ public class ServiceOrderModel extends AbstractModel{
         observerAddedService = new ArrayList<>();
         observerRemovedService = new ArrayList<>();
         observerTotalCalculed = new ArrayList<>();
+        paymentSituations = new ArrayList<>();
+        paymentSituations.add("Selecione o tipo de pagamento");
+        paymentSituations.add("CARTÃO");
+        paymentSituations.add("DINHEIRO");
+        statusSituations = new ArrayList<>();
+        statusSituations.add("Selecione a situacao da ordem de serviço");
+        statusSituations.add("ABERTA");
+        statusSituations.add("FECHADA");
     }
 
     public void register(ObserverTotalCalculed o) {
@@ -186,12 +294,15 @@ public class ServiceOrderModel extends AbstractModel{
 
     @Override
     public Boolean persist() {
+        DateUtil dateUtil = new DateUtil();
         if (!Customer.Checker.mandatoryFieldsFilled(serviceOrder.getCustomer())){
             updateErrorMessage("Por favor selecione um cliente!");
         } else if (serviceOrder.getServices().isEmpty()){
             updateErrorMessage("Nenhum servico foi adiconado a ordem de serviço!");
         }else if(!Animal.Checker.mandatoryFieldsFilled(serviceOrder.getAnimal())){
             updateErrorMessage("Selecione um animal!");
+        } else if (dateUtil.before(serviceOrder.getExecuteDate(),dateUtil.getCurrentDate())){
+            updateErrorMessage("A data de execução não deve ser anterior a data atual.");
         } else {
             try {
                 serviceOrderDAO.persist(serviceOrder);

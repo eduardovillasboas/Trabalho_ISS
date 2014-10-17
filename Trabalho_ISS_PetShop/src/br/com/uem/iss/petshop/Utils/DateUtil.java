@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Utils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -40,6 +41,13 @@ public class DateUtil {
         return day+"/"+month+"/"+year;
     }
     
+    public Date getCurrentDate(){
+        Date date;
+        Calendar c = Calendar.getInstance();
+        date = c.getTime();
+        return date;
+    }
+    
     public Date toDate(String string){
         String values[];
         if (string.trim().length() == 0)
@@ -62,5 +70,10 @@ public class DateUtil {
         int day = Integer.parseInt(values[0]);
 
         return !(year < 1900 || day < 1 || day > 31 || month < 1 || month > 12);
+    }
+
+    public boolean before(Date date, Date currentDate) {
+        Date data = toDate(toString(currentDate));
+        return date.before(data);
     }
 }

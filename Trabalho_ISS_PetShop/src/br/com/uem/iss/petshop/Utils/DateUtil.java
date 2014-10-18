@@ -51,6 +51,7 @@ public class DateUtil {
             date = df.parse(string);
         } catch (Exception e) {
             System.out.println("Erro ao converter a string "+string);
+            e.printStackTrace();
         }
         return date;
     }

@@ -255,6 +255,8 @@ public class ServiceOrder implements Serializable, PetshopEntity {
         UNDEFINED,
         CLOSE,
         OPEN,
+        WITHDRAW,
+        DELIVERY
     }
     
     @Enumerated(EnumType.STRING)

@@ -236,9 +236,9 @@ public class Customer implements Serializable,PetshopEntity {
             DateUtil d = new DateUtil();
             if (customer == null)
                 return false;
+            
             return !customer.getName().isEmpty() && 
                     !customer.getAddress().isEmpty() && 
-                    !customer.getBirth().equals(d.toDate("")) && 
                     !customer.getCpf().isEmpty() && 
                     !customer.getLastName().isEmpty() && 
                     customer.getNumber() != 0 && 

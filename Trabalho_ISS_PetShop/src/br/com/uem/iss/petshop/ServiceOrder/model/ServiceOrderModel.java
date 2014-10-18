@@ -101,6 +101,11 @@ public class ServiceOrderModel extends AbstractModel{
             index = 1;
         else if (status == ServiceOrder.Status.CLOSE)
             index = 2;
+        else if (status == ServiceOrder.Status.WITHDRAW)
+            index = 3;
+        else if (status == ServiceOrder.Status.DELIVERY)
+            index = 4;
+        
         return index;
     }
     
@@ -111,6 +116,10 @@ public class ServiceOrderModel extends AbstractModel{
             setStatus(ServiceOrder.Status.OPEN);
         else if (index == 2)
             setStatus(ServiceOrder.Status.CLOSE);
+        else if (index == 3)
+            setStatus(ServiceOrder.Status.WITHDRAW);
+        else if (index == 4)
+            setStatus(ServiceOrder.Status.DELIVERY);
     }
     
     private void setStatus(ServiceOrder.Status status) {
@@ -132,7 +141,7 @@ public class ServiceOrderModel extends AbstractModel{
     }
     
     public void setPaymentTypeByIndex(int index) {
-        if (index == 0)
+        if (index == 0 || index == -1)
             setPayment(ServiceOrder.PaymentType.UNDEFINED);
         else if (index == 1)
             setPayment(ServiceOrder.PaymentType.CARTAO);
@@ -233,6 +242,9 @@ public class ServiceOrderModel extends AbstractModel{
         statusSituations.add("Selecione a situacao da ordem de serviço");
         statusSituations.add("ABERTA");
         statusSituations.add("FECHADA");
+        statusSituations.add("A RETIRAR");
+        statusSituations.add("A ENTREGAR");
+        
     }
 
     public void register(ObserverTotalCalculed o) {

@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Utils;
 
+import java.util.Calendar;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,31 +48,28 @@ public class DateUtilTest {
         System.out.println("toString");
         
         Date date;
-        date = new Date(2014, 8, 11);
         DateUtil instance = new DateUtil();
+        
+        date = instance.toDate("11/08/2014");
         String expResult = "11/08/2014";
         String result = instance.toString(date);
         assertEquals(expResult, result);
 
         expResult = "24/09/2013";
-        date = new Date(2013, 9, 24);
+        date = instance.toDate("24/09/2013");
         result = instance.toString(date);
         assertEquals(expResult, result);
         
         expResult = "01/09/2011";
-        date = new Date(2011, 9, 1);
+        date = instance.toDate("01/09/2011");
         result = instance.toString(date);
         assertEquals(expResult, result);
     
         expResult = "04/09/2014";
-        date = new Date(2014, 9, 4);
+        date = instance.toDate("04/09/2014");
         result = instance.toString(date);
         assertEquals(expResult, result);
         
-        expResult = "";
-        date = new Date(0, 0, 0);
-        result = instance.toString(date);
-        assertEquals(expResult, result);
     }
     
     
@@ -83,28 +81,25 @@ public class DateUtilTest {
         System.out.println("toDate");
         String string;
         Date expResult;
-        Date result;        
+        Date result;
         DateUtil instance = new DateUtil();
         
-        expResult = new Date(2014, 8, 1);
+        
+        expResult = instance.toDate("01/08/2014");
         string = "01/08/2014";
         result = instance.toDate(string);
         assertEquals(expResult, result);
         
-        expResult = new Date(2011, 11, 9);
+        expResult = instance.toDate("09/11/2011");
         string = "09/11/2011";
         result = instance.toDate(string);
         assertEquals(expResult, result);
 
-        expResult = new Date(2010, 1, 25);
+        expResult = instance.toDate("25/01/2010");;
         string = "25/01/2010";
         result = instance.toDate(string);
         assertEquals(expResult, result);
         
-        expResult = new Date(0, 0, 0);
-        string = "";
-        result = instance.toDate(string);
-        assertEquals(expResult, result);
 
     }
     

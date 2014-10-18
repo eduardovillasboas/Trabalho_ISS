@@ -618,7 +618,6 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jTextFieldCustomerLastName.setText(serviceOrderModel.getCustomerLastName());
         jTextFieldCustomerPhone.setText(serviceOrderModel.getCustomerPhone());
         jTextFieldCustomerBirth.setText(serviceOrderModel.getCustomerBirth());
-        jComboBoxServiceOrderStatus.setSelectedIndex(serviceOrderModel.getStatusIndex());
         
     }
 
@@ -789,6 +788,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jTextFieldEntryValue.setText(serviceOrderModel.getEntryValue());
         jTextFieldVendor.setText(serviceOrderModel.getVendor());
         jTextAreaNote.setText(serviceOrderModel.getNote());
+        jComboBoxServiceOrderStatus.setSelectedIndex(serviceOrderModel.getStatusIndex());
+        jComboBoxPaymentType.setSelectedIndex(serviceOrderModel.getPaymentIndex());
     }
 
     private void dynamicFillComponents() {

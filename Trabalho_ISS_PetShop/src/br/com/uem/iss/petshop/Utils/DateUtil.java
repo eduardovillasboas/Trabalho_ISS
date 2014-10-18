@@ -6,8 +6,13 @@
 
 package br.com.uem.iss.petshop.Utils;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -15,30 +20,21 @@ import java.util.Date;
  */
 public class DateUtil {
 
+    private Date today;
+    final private String DATE_FORMAT = "dd/MM/yyyy";
     public DateUtil() {
+        today = Calendar.getInstance().getTime();
     }
     
     public String toString(Date date){
-        String year;
-        String month;
-        String day;
-        if (date.getYear() == -1 &&
-                date.getMonth() == 11 &&
-                date.getDate() == 31)
-            return "";
-        
-        year = Integer.toString(date.getYear()).trim();
-        month = Integer.toString(date.getMonth()+1).trim();
-        day = Integer.toString(date.getDate()).trim();
-        
-        if (month.length() == 1)
-            month = "0"+month;
-        
-        if (day.length() == 1)
-            day = "0"+day;
-        
-        
-        return day+"/"+month+"/"+year;
+        String dateString = "";
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            dateString = df.format(date);
+        } catch (Exception e) {
+            System.out.printf("erro ao converter a data", date);
+        }
+        return dateString;
     }
     
     public Date getCurrentDate(){
@@ -49,15 +45,15 @@ public class DateUtil {
     }
     
     public Date toDate(String string){
-        String values[];
-        if (string.trim().length() == 0)
-            return new Date(0, 0, 0);
-        
-        values = string.split("/");
-        
-        return new Date(Integer.parseInt(values[2]),
-                        Integer.parseInt(values[1])-1,
-                        Integer.parseInt(values[0]));
+        Date date = today;
+        DateFormat df = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+        try {
+            date = df.parse(string);
+        } catch (Exception e) {
+            System.out.println("Erro ao converter a string "+string);
+            e.printStackTrace();
+        }
+        return date;
     }
  
     public Boolean isValid(String string){

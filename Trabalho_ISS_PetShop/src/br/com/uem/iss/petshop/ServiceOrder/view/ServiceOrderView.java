@@ -570,6 +570,10 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
     
     private void recordAction(){
+        if (jComboBoxServiceOrderStatus.getSelectedIndex() == 2)
+            if (JOptionPane.showConfirmDialog(this,"Confirma fechamento da Ordem de servico?", "Mensagem do sistema", JOptionPane.INFORMATION_MESSAGE) != JOptionPane.YES_OPTION)
+                return;
+
         DateUtil dateUtil = new DateUtil();
         if (!dateUtil.isValid(jTextFieldExecuteDate.getText())){
             JOptionPane.showMessageDialog(this, "Data inválida!","Informação", JOptionPane.INFORMATION_MESSAGE);
@@ -779,7 +783,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
     
     private void closeServiceOrderAction() {
-        throw new UnsupportedOperationException();
+        jComboBoxServiceOrderStatus.setSelectedIndex(2);
+        recordAction();
     }
 
     private void updateViewServiceOrderData() {

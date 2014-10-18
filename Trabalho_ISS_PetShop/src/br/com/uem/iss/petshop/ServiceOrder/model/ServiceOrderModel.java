@@ -79,14 +79,7 @@ public class ServiceOrderModel extends AbstractModel{
     }
 
     public void calculeTotal() {
-        BigDecimal total;
-        total = new BigDecimal("0");
-        for (Service service : serviceOrder.getServices()) {
-            Double value = Double.parseDouble(Float.toString(service.getPreco()));
-            BigDecimal bigValue = BigDecimal.valueOf(value);
-            total = total.add(bigValue);
-        }
-        updateObserversTotalWasCalculed(total);
+        updateObserversTotalWasCalculed(rawCalculeTotal());
     }
 
     public void remove(int selected) {
@@ -202,6 +195,17 @@ public class ServiceOrderModel extends AbstractModel{
     public void setExecuteDate(Date executeDate) {
         serviceOrder.setExecuteDate(executeDate);
     }
+
+    private BigDecimal rawCalculeTotal() {
+        BigDecimal total;
+        total = new BigDecimal("0");
+        for (Service service : serviceOrder.getServices()) {
+            Double value = Double.parseDouble(Float.toString(service.getPreco()));
+            BigDecimal bigValue = BigDecimal.valueOf(value);
+            total = total.add(bigValue);
+        }
+        return total;
+    }
     
 
     public interface ObserverTotalCalculed {
@@ -315,6 +319,8 @@ public class ServiceOrderModel extends AbstractModel{
             updateErrorMessage("Selecione um animal!");
         } else if (dateUtil.before(serviceOrder.getExecuteDate(),dateUtil.getCurrentDate())){
             updateErrorMessage("A data de execução não deve ser anterior a data atual.");
+        } else  if (rawCalculeTotal().doubleValue() < serviceOrder.getEntryValue()) {
+            updateErrorMessage("O valor de entrada é maior que o valor total da ordem de serviço!");
         } else {
             try {
                 serviceOrderDAO.persist(serviceOrder);

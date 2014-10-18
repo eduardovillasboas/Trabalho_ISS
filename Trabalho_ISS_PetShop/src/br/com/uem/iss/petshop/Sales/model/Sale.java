@@ -8,7 +8,9 @@ package br.com.uem.iss.petshop.Sales.model;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
+import br.com.uem.iss.petshop.Service.model.Service;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -40,6 +43,17 @@ public class Sale implements Serializable, PetshopEntity {
     public void setID(Long ID) {
         this.ID = ID;
     }
+    @OneToMany
+    private List<ItemSale> itens_sale;
+
+    public List<ItemSale> getItens_sale() {
+        return itens_sale;
+    }
+
+    public void setItens_sale(List<ItemSale> itens_sale) {
+        this.itens_sale = itens_sale;
+    }
+    
     @ManyToOne
     @JoinColumn(name = "animal_id")
     private Animal animal;
@@ -56,14 +70,8 @@ public class Sale implements Serializable, PetshopEntity {
         this.customer = customer;
     }
     
-//    @Column(name = "codigo_item")
-//    int codigo_item;
-//
-//    @Column(name = "quantidade_vendida")
-//    Double quantidade_vendida;
-//
     @Column(name = "valor")
-    Float valor;
+    Double valor;
 
     @Column(name = "forma_pagamento", length = 15)
     String forma_pagamento;
@@ -76,27 +84,11 @@ public class Sale implements Serializable, PetshopEntity {
         this.animal = animal;
     }
 
-//    public int getCodigo_item() {
-//        return codigo_item;
-//    }
-//
-//    public void setCodigo_item(int codigo_item) {
-//        this.codigo_item = codigo_item;
-//    }
-//
-//    public Double getQuantidade_vendida() {
-//        return quantidade_vendida;
-//    }
-//
-//    public void setQuantidade_vendida(Double quantidade_vendida) {
-//        this.quantidade_vendida = quantidade_vendida;
-//    }
-
-    public Float getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(Float valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -113,10 +105,10 @@ public class Sale implements Serializable, PetshopEntity {
         Sale s;
         s = (Sale)entity;
         setAnimal(s.getAnimal());
-//        setCodigo_item(s.getCodigo_item());
-        setForma_pagamento(s.getForma_pagamento());
-//        setQuantidade_vendida(s.getQuantidade_vendida());
+        setItens_sale(s.getItens_sale());
+        setCustomer(s.getCustomer());
         setValor(s.getValor());
+        setForma_pagamento(s.getForma_pagamento());
         
     }
     

@@ -7,8 +7,6 @@ package br.com.uem.iss.petshop.Service.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
-import br.com.uem.iss.petshop.Product.controller.ProductController;
-import br.com.uem.iss.petshop.Product.model.ProductModel;
 import br.com.uem.iss.petshop.Service.controller.ServiceController;
 import br.com.uem.iss.petshop.Service.model.ServiceModel;
 import br.com.uem.iss.petshop.Utils.NumberUtil;

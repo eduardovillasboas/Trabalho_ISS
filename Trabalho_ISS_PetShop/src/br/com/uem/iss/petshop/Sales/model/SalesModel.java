@@ -11,6 +11,7 @@ import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,19 +39,23 @@ public class SalesModel extends AbstractModel {
         if (sale == null) {
             sale = new Sale();
         }
-//        if (sale.getCodigo_animal() == null) {
-//            sale.setCodigo_animal(0);
-//        } 
-        //sale.setCodigo_item(0);
+        if ( sale.getItens_sale() == null ){
+            sale.setItens_sale(new ArrayList<>());
+        }
+        if ( sale.getAnimal() == null ) {
+            sale.setAnimal(new Animal());
+        }
+        
+        if ( sale.getCustomer() == null ) {
+            sale.setCustomer(new Customer());
+        }
+            
         if (sale.getForma_pagamento() == null) {
             sale.setForma_pagamento("");
         }
-//        if (sale.getQuantidade_vendida() == null) {
-//            sale.setQuantidade_vendida(new Double(0));
-//        }
 
         if (sale.getValor() == null) {
-            sale.setValor(new Float(0));
+            sale.setValor(new Double(0));
         }
 
         updateObservers(null);
@@ -77,11 +82,11 @@ public class SalesModel extends AbstractModel {
         sale = (Sale) entity;
     }
 
-    public Float getValor() {
+    public Double getValor() {
         return sale.getValor();
     }
 
-    public void setValor(Float valor) {
+    public void setValor(Double valor) {
         sale.setValor(valor);
     }
 
@@ -107,6 +112,13 @@ public class SalesModel extends AbstractModel {
 
     public void setCustomer(Customer customer) {
         sale.setCustomer(customer);
+    }
+    
+   public void setItens_sale(List<ItemSale> itens_sale) {
+        sale.setItens_sale(itens_sale);
+    }
+   public List<ItemSale> getItens_sale() {
+        return sale.getItens_sale();
     }
 
     public Long getID() {

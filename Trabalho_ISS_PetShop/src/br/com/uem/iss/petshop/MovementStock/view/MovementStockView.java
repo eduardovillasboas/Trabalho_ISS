@@ -3,20 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.uem.iss.petshop.MovementStock.view;
+
+import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
+import br.com.uem.iss.petshop.Interfaces.ViewInterface;
+import br.com.uem.iss.petshop.MovementStock.controller.MovementStockController;
+import br.com.uem.iss.petshop.MovementStock.model.MovementStockModel;
+import br.com.uem.iss.petshop.Product.controller.ProductController;
+import br.com.uem.iss.petshop.Product.model.ProductModel;
+import java.util.ArrayList;
+import br.com.uem.iss.petshop.MovementStock.controller.MovementStockController;
+import br.com.uem.iss.petshop.Utils.NumberUtil;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Lucas
  */
-public class MovementStockView extends javax.swing.JInternalFrame {
+public class MovementStockView extends javax.swing.JInternalFrame implements ViewInterface {
+
+    MovementStockController movimentStockController;
+    MovementStockModel movementStockModel;
+
+    ArrayList<ObserverJInternalFrame> observerJInternalFrames;
 
     /**
      * Creates new form MovementStock
      */
-    public MovementStockView() {
+    public MovementStockView(MovementStockController c, MovementStockModel m) {
         initComponents();
+        movimentStockController = c;
+        movementStockModel = m;
+        observerJInternalFrames = new ArrayList<>();
+        updateViewFromModel();
+        movementStockModel.registerErrorObserver(this);
+        movementStockModel.registerUpdate(this);
     }
 
     /**
@@ -31,20 +54,20 @@ public class MovementStockView extends javax.swing.JInternalFrame {
         popupMenu1 = new java.awt.PopupMenu();
         popupMenu2 = new java.awt.PopupMenu();
         label1 = new java.awt.Label();
-        choiceTipoMovimento = new java.awt.Choice();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldQuantidade = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextFieldDescricaoItem = new javax.swing.JTextField();
+        jButtonLancar = new javax.swing.JButton();
+        jButtonSelecionarItem = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jButton3 = new javax.swing.JButton();
+        jFormattedTextFieldValorAtualEstoque = new javax.swing.JFormattedTextField();
+        jButtonCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        jComboBox1 = new javax.swing.JComboBox();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -60,28 +83,30 @@ public class MovementStockView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Quantidade:");
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField2.setText("0.00");
-        jFormattedTextField2.setToolTipText("");
+        jFormattedTextFieldQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextFieldQuantidade.setText("0.00");
+        jFormattedTextFieldQuantidade.setToolTipText("");
 
         jLabel4.setText("Código:");
 
         jLabel5.setText("Descrição:");
 
-        jTextField1.setEditable(false);
+        jTextFieldDescricaoItem.setEditable(false);
 
-        jButton1.setText("Lançar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLancar.setText("Lançar");
+        jButtonLancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonLancarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Selecionar...");
+        jButtonSelecionarItem.setText("Selecionar...");
 
         jLabel6.setText("Estoque Atual:");
 
-        jButton3.setText("Cancelar");
+        jButtonCancelar.setText("Cancelar");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENTRADA", "SAIDA" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,37 +114,37 @@ public class MovementStockView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jFormattedTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLancar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jButton2)
-                                    .addComponent(choiceTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonSelecionarItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDescricaoItem, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jFormattedTextFieldValorAtualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,18 +155,19 @@ public class MovementStockView extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
+                .addGap(3, 3, 3)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(choiceTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonSelecionarItem)
+                    .addComponent(jTextFieldDescricaoItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldValorAtualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,31 +175,31 @@ public class MovementStockView extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 23, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))))
+                            .addComponent(jButtonLancar)
+                            .addComponent(jButtonCancelar))))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonLancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLancarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonLancarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Choice choiceTipoMovimento;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonLancar;
+    private javax.swing.JButton jButtonSelecionarItem;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JFormattedTextField jFormattedTextFieldQuantidade;
+    private javax.swing.JFormattedTextField jFormattedTextFieldValorAtualEstoque;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -181,9 +207,82 @@ public class MovementStockView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldDescricaoItem;
     private java.awt.Label label1;
     private java.awt.PopupMenu popupMenu1;
     private java.awt.PopupMenu popupMenu2;
     // End of variables declaration//GEN-END:variables
+
+    private void finalizeMovementView() {
+        updateObserversWasFinalized();
+        dispose();
+    }
+    
+    
+    private void createActionCancel() {
+        jButtonCancelar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finalizeMovementView();
+            }
+
+        });
+    }
+
+    @Override
+    public void createActions() {
+        createActionCancel();
+    }
+
+    @Override
+    public void configure() {
+        createActions();
+        setVisible(true);
+    }
+
+    @Override
+    public void updateModelFromViewValues() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateViewFromModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void register(ObserverJInternalFrame o) {
+        observerJInternalFrames.add(o);
+    }
+
+    @Override
+    public void updateObserversWasFinalized() {
+        observerJInternalFrames.stream().forEach((observerJInternalFrame) -> {
+            observerJInternalFrame.wasFinalized(this);
+        });
+    }
+
+    @Override
+    public void updateViews(String msg) {
+        if (msg != null) {
+            JOptionPane.showMessageDialog(this, msg);
+            return;
+        }
+        updateViewFromModel();
+    }
+
+    @Override
+    public void errorOcurred(String error) {
+        if (error == null) {
+            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        } else {
+            JOptionPane.showMessageDialog(this, error);
+        }
+    }
+    
+    public void atualizeModelFromViewValues() {
+        movementStockModel.setQuantidade(new Double( jFormattedTextFieldQuantidade.getText() ));
+        movementStockModel.setTipo_Movimento((String) jComboBox1.getSelectedItem());        
+    }
 }

@@ -534,9 +534,9 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
             valor += next.getValor();
         }
         salesModel.setValor(valor);
-        salesModel.setAnimal(null);
-        salesModel.setCustomer(null);
-        salesModel.setForma_pagamento(jComboBoxFormaDePagamento.toString());
+        salesModel.setAnimal(rationBulkSaleControler.getAnimalSale());
+        salesModel.setCustomer(rationBulkSaleControler.getCustomerSale());
+        salesModel.setForma_pagamento((String) jComboBoxFormaDePagamento.getSelectedItem());
 
     }
 

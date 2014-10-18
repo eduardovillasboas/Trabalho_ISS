@@ -101,5 +101,13 @@ public class MovementStockModel extends AbstractModel {
         return movimentStock.getTipo_movimento();
     }
     
+    public Date getData_execution() {
+        return movimentStock.getData_execution();
+    }
+    
+    public void setData_execution( Date d ) {
+        movimentStock.setData_execution( d );
+    }
+    
 
 }

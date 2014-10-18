@@ -16,6 +16,7 @@ import br.com.uem.iss.petshop.MovementStock.controller.MovementStockController;
 import br.com.uem.iss.petshop.Utils.NumberUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,10 +24,10 @@ import javax.swing.JOptionPane;
  * @author Lucas
  */
 public class MovementStockView extends javax.swing.JInternalFrame implements ViewInterface {
-
+    
     MovementStockController movimentStockController;
     MovementStockModel movementStockModel;
-
+    
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
 
     /**
@@ -68,6 +69,8 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
         jButtonCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -108,6 +111,11 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENTRADA", "SAIDA" }));
 
+        jLabel2.setText("Data:");
+
+        jFormattedTextField1.setEditable(false);
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,12 +145,16 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDescricaoItem, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jFormattedTextFieldValorAtualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldDescricaoItem, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jFormattedTextFieldValorAtualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -154,10 +166,14 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
                 .addGap(4, 4, 4)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addGap(3, 3, 3)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,7 +192,7 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 23, Short.MAX_VALUE))
+                        .addGap(0, 19, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -198,9 +214,11 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
     private javax.swing.JButton jButtonLancar;
     private javax.swing.JButton jButtonSelecionarItem;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuantidade;
     private javax.swing.JFormattedTextField jFormattedTextFieldValorAtualEstoque;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -218,51 +236,50 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
         dispose();
     }
     
-    
     private void createActionCancel() {
         jButtonCancelar.addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 finalizeMovementView();
             }
-
+            
         });
     }
-
+    
     @Override
     public void createActions() {
         createActionCancel();
     }
-
+    
     @Override
     public void configure() {
         createActions();
         setVisible(true);
     }
-
+    
     @Override
     public void updateModelFromViewValues() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void updateViewFromModel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void register(ObserverJInternalFrame o) {
         observerJInternalFrames.add(o);
     }
-
+    
     @Override
     public void updateObserversWasFinalized() {
         observerJInternalFrames.stream().forEach((observerJInternalFrame) -> {
             observerJInternalFrame.wasFinalized(this);
         });
     }
-
+    
     @Override
     public void updateViews(String msg) {
         if (msg != null) {
@@ -271,7 +288,7 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
         }
         updateViewFromModel();
     }
-
+    
     @Override
     public void errorOcurred(String error) {
         if (error == null) {
@@ -282,7 +299,8 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
     }
     
     public void atualizeModelFromViewValues() {
-        movementStockModel.setQuantidade(new Double( jFormattedTextFieldQuantidade.getText() ));
+        movementStockModel.setQuantidade(new Double(jFormattedTextFieldQuantidade.getText()));
         movementStockModel.setTipo_Movimento((String) jComboBox1.getSelectedItem());        
+        movementStockModel.setData_execution(new Date(System.currentTimeMillis()));        
     }
 }

@@ -333,7 +333,7 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
         jFormattedTextFieldCodigo.setText("0");
         if (productModel != null && productModel.getProduct() != null) {
             if (productModel.getID() != null) {
-                jFormattedTextFieldCodigo.setText(productModel.getID().toString());            
+                jFormattedTextFieldCodigo.setText(productModel.getID().toString());
             }
             jFormattedTextFieldEstoque.setText(productModel.getEstoque().toString());
             jFormattedTextFieldPesoBruto.setText(productModel.getPesoBruto().toString().replace(".", ","));
@@ -342,7 +342,7 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
             jTextFieldDescricao.setText(productModel.getDescricao());
             jTextFieldMarca.setText(productModel.getMarca());
             jTextFieldUnidade.setText(productModel.getUndade());
-        } else {            
+        } else {
             jFormattedTextFieldEstoque.setText("");
             jFormattedTextFieldPesoBruto.setText("");
             jFormattedTextFieldPesoLiquido.setText("");
@@ -356,13 +356,6 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
     private void finalizeProductView() {
         updateObserversWasFinalized();
         dispose();
-    }
-
-    private void record() {
-        if (productControler.persist()) {
-            finalizeProductView();
-        }
-
     }
 
     private void createActionCancel() {
@@ -385,12 +378,13 @@ public class ProductView extends javax.swing.JInternalFrame implements ViewInter
             }
         });
     }
+
     private void actionRecord() {
         if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE)
                 != JOptionPane.YES_OPTION) {
             return;
         }
-        
+
         if (productControler.persist()) {
             finalizeProductView();
         }

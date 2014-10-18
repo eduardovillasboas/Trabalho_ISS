@@ -60,8 +60,37 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
         });
     }
 
+    private void createSelectAnimalAction() {
+        jButtonSelecionarAnimal.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectAnimalAction();
+            }
+        });
+    }
+
+    private void createSelectCustomerAction() {
+        jButtonSelecionaCliente.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectCustomerAction();
+            }
+        });
+    }
+
     private void selectProductAction() {
         rationBulkSaleControler.selectProduct();
+        jTextFieldAnimal.setText(rationBulkSaleControler.getAnimalSale().getName());
+    }
+
+    private void selectAnimalAction() {
+        rationBulkSaleControler.selectAnimal();
+    }
+
+    private void selectCustomerAction() {
+        rationBulkSaleControler.selectCustomer();
     }
 
     private void createActionCancel() {
@@ -100,13 +129,11 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label1 = new java.awt.Label();
-        jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldAnimal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldProduto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLayeredPane2 = new javax.swing.JLayeredPane();
@@ -125,16 +152,14 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
         jComboBoxFormaDePagamento = new javax.swing.JComboBox();
         jButtonSelecionaProduto = new javax.swing.JButton();
         jButtonSelecionarAnimal = new javax.swing.JButton();
-        jButtonSelecionaProduto1 = new javax.swing.JButton();
+        jButtonSelecionaCliente = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldCliente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
-        label1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        label1.setName("Venda Ração Granel"); // NOI18N
-        label1.setText("Venda Ração Granel");
+        setTitle("Venda ração granel");
 
-        jTextField1.setEditable(false);
+        jTextFieldAnimal.setEditable(false);
 
         jLabel5.setText("Descrição:");
 
@@ -142,7 +167,7 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
         jLabel6.setText("Ração:");
 
-        jTextField2.setEditable(false);
+        jTextFieldProduto.setEditable(false);
 
         jLabel7.setText("Descrição:");
 
@@ -258,11 +283,11 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
         jButtonSelecionarAnimal.setText("Selecionar..");
 
-        jButtonSelecionaProduto1.setText("Selecionar...");
+        jButtonSelecionaCliente.setText("Selecionar...");
 
         jLabel10.setText("Cliente");
 
-        jTextField3.setEditable(false);
+        jTextFieldCliente.setEditable(false);
 
         jLabel11.setText("Descrição:");
 
@@ -273,20 +298,27 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxFormaDePagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxFormaDePagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonGravaVenda)
+                        .addGap(20, 20, 20))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonSelecionaProduto1)
+                            .addComponent(jButtonSelecionaCliente)
                             .addComponent(jLabel10)
                             .addComponent(jButtonSelecionaProduto)
                             .addComponent(jLabel6)
@@ -295,26 +327,16 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextFieldCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                                .addComponent(jTextFieldAnimal, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addGap(146, 153, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(146, 146, 146)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel5)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(420, 420, 420)
-                                .addComponent(jButtonCancel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonGravaVenda))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel5))
+                        .addGap(411, 411, 411))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -322,28 +344,21 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSelecionarAnimal)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSelecionaProduto1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonSelecionaCliente)
+                    .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -351,22 +366,21 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSelecionaProduto)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addGap(9, 9, 9)
-                .addComponent(jComboBoxFormaDePagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGravaVenda)
-                    .addComponent(jButtonCancel))
-                .addContainerGap())
+                    .addComponent(jComboBoxFormaDePagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonGravaVenda))
+                .addGap(56, 56, 56))
         );
 
         pack();
@@ -381,8 +395,8 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonGravaVenda;
+    private javax.swing.JButton jButtonSelecionaCliente;
     private javax.swing.JButton jButtonSelecionaProduto;
-    private javax.swing.JButton jButtonSelecionaProduto1;
     private javax.swing.JButton jButtonSelecionarAnimal;
     private javax.swing.JComboBox jComboBoxFormaDePagamento;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuantidadeDesejada;
@@ -402,12 +416,10 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private java.awt.Label label1;
+    private javax.swing.JTextField jTextFieldAnimal;
+    private javax.swing.JTextField jTextFieldCliente;
+    private javax.swing.JTextField jTextFieldProduto;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -415,6 +427,8 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
         createSelectProductAction();
         createActionCancel();
         createActionRecord();
+        createSelectAnimalAction();
+        createSelectCustomerAction();
 
     }
 

@@ -82,15 +82,18 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
     private void selectProductAction() {
         rationBulkSaleControler.selectProduct();
-        jTextFieldAnimal.setText(rationBulkSaleControler.getAnimalSale().getName());
+        jTextFieldProduto.setText(rationBulkSaleControler.getRationSale().getDescricao());
+
     }
 
     private void selectAnimalAction() {
         rationBulkSaleControler.selectAnimal();
+        jTextFieldAnimal.setText(rationBulkSaleControler.getAnimalSale().getName());
     }
 
     private void selectCustomerAction() {
         rationBulkSaleControler.selectCustomer();
+        jTextFieldCliente.setText(rationBulkSaleControler.getCustomerSale().getName() + " " + rationBulkSaleControler.getCustomerSale().getLastName());
     }
 
     private void createActionCancel() {

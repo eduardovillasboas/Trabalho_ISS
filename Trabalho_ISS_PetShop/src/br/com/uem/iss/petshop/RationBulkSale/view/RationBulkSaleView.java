@@ -18,6 +18,7 @@ import br.com.uem.iss.petshop.Sales.model.ItemSale;
  */
 import br.com.uem.iss.petshop.Sales.model.SalesModel;
 import br.com.uem.iss.petshop.Utils.NumberUtil;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +32,7 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
     RationBulkSaleController rationBulkSaleControler;
     SalesModel salesModel;
-    private List<ItemSale> itens_sale;
+    private List<ItemSale> itens_sale = new ArrayList<ItemSale>();
 
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
 
@@ -113,6 +114,21 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
     }
 
     private void actionRecord() {
+        if ( rationBulkSaleControler.getAnimalSale() == null ) {
+            JOptionPane.showMessageDialog( this, "Animal não selecionado!","Informação", JOptionPane.INFORMATION_MESSAGE );
+            return;
+        }
+        
+        if ( rationBulkSaleControler.getCustomerSale() == null ) {
+            JOptionPane.showMessageDialog( this, "Cliente não selecionado!","Informação", JOptionPane.INFORMATION_MESSAGE );
+            return;
+        }
+        
+        if ( rationBulkSaleControler.getRationSale()== null ) {
+            JOptionPane.showMessageDialog( this, "Item não selecionado!","Informação", JOptionPane.INFORMATION_MESSAGE );
+            return;
+        }
+        
         if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE)
                 != JOptionPane.YES_OPTION) {
             return;
@@ -391,7 +407,14 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
     private void jFormattedTextFieldValorDesejadoEmR$PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValorDesejadoEmR$PropertyChange
         // TODO add your handling code here:
-        evt.getNewValue();
+        if (rationBulkSaleControler != null && rationBulkSaleControler.getRationSale() != null && evt.getNewValue() != null) {
+            Double valorDesejadoEmReais = new Double(evt.getNewValue().toString());
+            Float valorDoQuilo;
+            valorDoQuilo = (rationBulkSaleControler.getRationSale().getPreco() / rationBulkSaleControler.getRationSale().getPesoLiquido());
+            Double valorDesejadoEmKG;
+            valorDesejadoEmKG = (valorDesejadoEmReais / valorDoQuilo);
+            jFormattedTextFieldValorDesejadoEmKG.setText(valorDesejadoEmKG.toString().replace(".", ","));
+        }
     }//GEN-LAST:event_jFormattedTextFieldValorDesejadoEmR$PropertyChange
 
 
@@ -488,7 +511,11 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
 
     @Override
     public void errorOcurred(String error) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (error != null) {
+            JOptionPane.showMessageDialog(this, error);
+        } else {
+            JOptionPane.showMessageDialog(this, "um erro desconhecido ocorreu");
+        }
     }
 
     public void atualizeModelFromViewValues() {
@@ -509,6 +536,7 @@ public class RationBulkSaleView extends javax.swing.JInternalFrame implements Vi
         salesModel.setValor(valor);
         salesModel.setAnimal(null);
         salesModel.setCustomer(null);
+        salesModel.setForma_pagamento(jComboBoxFormaDePagamento.toString());
 
     }
 

@@ -68,6 +68,7 @@ public class SalesModel extends AbstractModel {
 //                if ( sale.getForma_pagamento().isEmpty() || sale.getQuantidade_vendida() <= 0 || sale.getQuantidade_vendida() <= 0) {
                 throw new Exception("Algum campo obrigatório está vazio!");
             }
+            
             salesDAO.persist(sale);
             updateObservers("Dados gravados com sucesso. " + "Venda com código " + sale.getID());
             return true;

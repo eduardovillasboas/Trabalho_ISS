@@ -39,7 +39,7 @@ public class MovementStock implements Serializable, PetshopEntity {
     public void setID(Long ID) {
         this.ID = ID;
     }
-    
+
     @Temporal(TemporalType.DATE)
     private Date data_execution;
 
@@ -50,8 +50,8 @@ public class MovementStock implements Serializable, PetshopEntity {
     public void setData_execution(Date data_execution) {
         this.data_execution = data_execution;
     }
-    
-    @Column( name = "quantidade" )
+
+    @Column(name = "quantidade")
     Double quantidade;
 
     public Double getQuantidade() {
@@ -69,27 +69,26 @@ public class MovementStock implements Serializable, PetshopEntity {
     public void setTipo_movimento(String tipo_movimento) {
         this.tipo_movimento = tipo_movimento;
     }
-    
-    @Column( name = "tipo_movimento", length = 10 )
+
+    @Column(name = "tipo_movimento", length = 10)
     String tipo_movimento;
 
-    
     @Override
     public void setAtributes(PetshopEntity entity) {
         MovementStock m;
-        m = (MovementStock)entity;
+        m = (MovementStock) entity;
         setData_execution(m.getData_execution());
         setQuantidade(m.getQuantidade());
-        setTipo_movimento(m.getTipo_movimento());        
+        setTipo_movimento(m.getTipo_movimento());
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (ID != null ? ID.hashCode() : 0);
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -104,6 +103,5 @@ public class MovementStock implements Serializable, PetshopEntity {
     public String toString() {
         return "br.com.uem.iss.petshop.MovimentStock.model.MovmentStock[ ID=" + ID + " ]";
     }
-    
 
 }

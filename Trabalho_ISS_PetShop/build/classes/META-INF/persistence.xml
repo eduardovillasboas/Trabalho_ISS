@@ -14,7 +14,6 @@
     <class>br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder</class>
     <class>br.com.uem.iss.petshop.Sales.model.Sale</class>
     <class>br.com.uem.iss.petshop.Sales.model.ItemSale</class>
-    <class>br.com.uem.iss.petshop.MovementStock.model.MovementStock</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

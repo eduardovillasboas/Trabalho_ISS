@@ -124,4 +124,8 @@ public class ServiceOrderController implements ControllerInterface{
     public void removeService(int selected) {
         serviceOrderModel.remove(selected);
     }
+
+    public boolean canPrint() {
+        return true;
+    }
 }

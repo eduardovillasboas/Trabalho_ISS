@@ -153,7 +153,7 @@ public class ServiceOrderModel extends AbstractModel{
         serviceOrder.setPaymentType(paymentType);
     }
     
-    private ServiceOrder.PaymentType getPaymentType() {
+    public ServiceOrder.PaymentType getPaymentType() {
         return serviceOrder.getPaymentType();
     }
     
@@ -201,6 +201,10 @@ public class ServiceOrderModel extends AbstractModel{
 
     public void setExecuteDate(Date executeDate) {
         serviceOrder.setExecuteDate(executeDate);
+    }
+
+    public List<Service> getServices() {
+        return serviceOrder.getServices();
     }
     
 

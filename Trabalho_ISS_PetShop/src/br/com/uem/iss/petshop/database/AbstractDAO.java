@@ -6,7 +6,6 @@
 
 package br.com.uem.iss.petshop.database;
 
-import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

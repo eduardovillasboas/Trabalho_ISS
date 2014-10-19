@@ -109,5 +109,8 @@ public class CompanyListModel extends AbstractModelList{
     public String getTitle() {
         return "Cadastro de Empresa";
     }
-
+    
+    public List<Company> getCompanys() {
+        return companys; 
+    }
 }

@@ -176,6 +176,11 @@
                 <Property name="text" type="java.lang.String" value="Medicamentos a serem comprados"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDeliveryReceipt">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comprovante de Entrega"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">

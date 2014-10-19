@@ -9,15 +9,12 @@ package br.com.uem.iss.petshop.Animal.controller;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
-import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.view.AnimalView;
 import br.com.uem.iss.petshop.Commons.ListSelectController;
 import br.com.uem.iss.petshop.Commons.StatusOperation;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Patology.model.Patology;
 import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
-import br.com.uem.iss.petshop.Utils.DateUtil;
-import javax.swing.JOptionPane;
 
 /**
  *

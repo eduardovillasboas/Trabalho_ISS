@@ -157,4 +157,8 @@ public class CustomerModel extends AbstractModel{
         customer.setPhone(text);
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 }

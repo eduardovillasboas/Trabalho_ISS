@@ -141,4 +141,12 @@ public class CompanyModel extends AbstractModel {
     public Company getCompany() {
         return company;
     }
+
+    public void setCompany() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 }

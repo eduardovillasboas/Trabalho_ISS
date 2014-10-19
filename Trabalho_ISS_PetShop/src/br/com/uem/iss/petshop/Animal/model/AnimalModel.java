@@ -127,5 +127,13 @@ public class AnimalModel extends AbstractModel{
     public void removePathology(Patology patology) {
         animal.getPathologys().remove(patology);
     }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
     
 }

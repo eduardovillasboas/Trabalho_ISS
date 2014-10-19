@@ -61,6 +61,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemDeliveryReceipt = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemClose = new javax.swing.JMenuItem();
 
@@ -188,6 +189,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItem2.setText("Medicamentos a serem comprados");
         jMenu3.add(jMenuItem2);
 
+        jMenuItemDeliveryReceipt.setText("Comprovante de Entrega");
+        jMenu3.add(jMenuItemDeliveryReceipt);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
@@ -264,6 +268,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemCompanyRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
+    private javax.swing.JMenuItem jMenuItemDeliveryReceipt;
     private javax.swing.JMenuItem jMenuItemDrugsRecord;
     private javax.swing.JMenuItem jMenuItemLoginRecord;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
@@ -290,6 +295,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createLoginAction();
         createCloseAction();
         createServiceOrderAction();
+        createReportDeliveryReceipt();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -491,4 +497,20 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private void serviceOrderAction() {
         mainController.serviceOrderAction();
     }
+
+    private void createReportDeliveryReceipt() {
+        jMenuItemDeliveryReceipt.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionDeliveryReceipt();
+            }
+        });
+    }
+    
+    private void actionDeliveryReceipt() {
+        mainController.reportDeliveryReceipt();
+    }
+    
 }
+

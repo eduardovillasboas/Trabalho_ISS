@@ -32,6 +32,8 @@ import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderListModel;
 import br.com.uem.iss.petshop.Utils.FactoryController;
 import br.com.uem.iss.petshop.Vacina.controller.FactoryVacinaController;
 import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
+import br.com.uem.iss.petshop.reports.DeliveryReceipt.controller.DeliveryReceiptController;
+import br.com.uem.iss.petshop.reports.DeliveryReceipt.model.DeliveryReceiptModel;
 
 /**
  *
@@ -51,6 +53,12 @@ public class MainController {
 
     public void exec() {
         mainView.createControls();
+    }
+
+    public void reportDeliveryReceipt() {
+        DeliveryReceiptModel deliveryReceiptModel = new DeliveryReceiptModel();
+        DeliveryReceiptController deliveryReceiptController = new DeliveryReceiptController(mainView,deliveryReceiptModel);
+        deliveryReceiptController.exec();
     }
 
     public void action(AbstractModelList listModel, FactoryController factoryController) {
@@ -110,4 +118,5 @@ public class MainController {
     public void serviceOrderAction() {
         action(new ServiceOrderListModel(), new FactoryServiceOrderController());
     }
+
 }

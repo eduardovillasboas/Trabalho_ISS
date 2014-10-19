@@ -131,6 +131,7 @@ public class ListSelectView extends javax.swing.JDialog {
             
         createActions();
         status = StatusOperation.CANCEL_SELECT;
+        setLocationRelativeTo(null);
         setVisible(true);
         return entity;
     }

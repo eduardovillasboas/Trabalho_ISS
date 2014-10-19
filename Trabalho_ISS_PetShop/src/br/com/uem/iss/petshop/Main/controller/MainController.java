@@ -20,7 +20,6 @@ import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Login.controller.FactoryLoginController;
 import br.com.uem.iss.petshop.Login.model.LoginListModel;
 import br.com.uem.iss.petshop.Main.view.MainView;
-import br.com.uem.iss.petshop.MovementStock.controller.FactoryMovementStockController;
 import br.com.uem.iss.petshop.Patology.controller.FactoryPatologyController;
 import br.com.uem.iss.petshop.Patology.model.PatologyListModel;
 import br.com.uem.iss.petshop.Product.controller.FactoryProductController;
@@ -86,10 +85,6 @@ public class MainController {
 
     public void animalAction() {
         action(new AnimalListModel(), new FactoryAnimalController());
-    }
-    
-    public void movimentacaoEstoqueAction(){
-        actionV(new FactoryMovementStockController());
     }
 
     public void patologyAction() {

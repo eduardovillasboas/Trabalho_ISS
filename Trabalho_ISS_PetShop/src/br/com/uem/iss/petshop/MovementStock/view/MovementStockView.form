@@ -74,7 +74,7 @@
                                       </Group>
                                   </Group>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField1" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextField1" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -204,9 +204,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldValorAtualEstoque">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
       <Properties>

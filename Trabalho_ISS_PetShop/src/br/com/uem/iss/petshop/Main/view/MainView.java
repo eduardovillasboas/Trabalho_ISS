@@ -57,6 +57,8 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemLoginRecord = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItemVendaAGranel = new javax.swing.JMenuItem();
+        jMenuOperacionais = new javax.swing.JMenu();
+        jMenuItemMovimentacaoEstoque = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -172,6 +174,13 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenuBar1.add(jMenu9);
 
+        jMenuOperacionais.setText("Operacionais");
+
+        jMenuItemMovimentacaoEstoque.setText("Movimentação de Estoque");
+        jMenuOperacionais.add(jMenuItemMovimentacaoEstoque);
+
+        jMenuBar1.add(jMenuOperacionais);
+
         jMenu2.setText("Consultas");
 
         jMenuItem1.setText("Medicamentos(por fornecedor)");
@@ -270,12 +279,14 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemDeliveryReceipt;
     private javax.swing.JMenuItem jMenuItemDrugsRecord;
     private javax.swing.JMenuItem jMenuItemLoginRecord;
+    private javax.swing.JMenuItem jMenuItemMovimentacaoEstoque;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceOrder;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
     private javax.swing.JMenuItem jMenuItemVacinaRecord;
     private javax.swing.JMenuItem jMenuItemVendaAGranel;
+    private javax.swing.JMenu jMenuOperacionais;
     // End of variables declaration//GEN-END:variables
 
     JFrame jMainFrame;
@@ -293,11 +304,25 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createDrugsAction();
         createLoginAction();
         createCloseAction();
+        createmovimentacaoEstoqueAction();
         createServiceOrderAction();
         createDeliveryReceiptAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+    }
+
+    private void createmovimentacaoEstoqueAction() {
+        jMenuItemMovimentacaoEstoque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                movimentacaoEstoqueAction();
+            }
+        });
+    }
+
+    private void movimentacaoEstoqueAction() {
+        mainController.movimentacaoEstoqueAction();
     }
 
     private void createCustomerAction() {
@@ -506,9 +531,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             }
         });
     }
-    
+
     private void actionDeliveryReceipt() {
         mainController.reportDeliveryReceipt();
-               
+
     }
 }

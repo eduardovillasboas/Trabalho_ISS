@@ -178,7 +178,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDeliveryReceipt">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Comprovante de Entrega"/>
+                <Property name="text" type="java.lang.String" value="Comprovante de Entrega(impressao)"/>
               </Properties>
             </MenuItem>
           </SubComponents>

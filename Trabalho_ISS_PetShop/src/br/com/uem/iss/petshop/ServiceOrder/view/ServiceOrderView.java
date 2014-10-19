@@ -11,6 +11,8 @@ import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
+import br.com.uem.iss.petshop.ServiceOrder.print.PrintableServiceOrder;
+import br.com.uem.iss.petshop.ServiceOrder.print.PrinterServiceOrder;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -505,6 +507,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         createAddServiceAction();
         createRemoveServiceAction();
         createCloseServiceOrderAction();
+        createActionPrint();
         //TODO: Criar acoes
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -784,7 +787,12 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     }
     
     private void closeServiceOrderAction() {
-        throw new UnsupportedOperationException();
+        if (jComboBoxPaymentType.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Selecione uma forma de pagamento", "Mensagem do sistema", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        jComboBoxServiceOrderStatus.setSelectedIndex(2);
+        recordAction();
     }
 
     private void updateViewServiceOrderData() {
@@ -809,5 +817,33 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
             jComboBoxServiceOrderStatus.addItem(object);
         }
     }
+
+    private void message(String msg){
+        JOptionPane.showMessageDialog(this, msg, "Mensagem do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void createActionPrint() {
+        jButtonPrintServiceOrder.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionPrint();
+            }
+        });
+            
+    }
+    
+    private void actionPrint() {
+        
+        if (serviceOrderController.canPrint()){
+            PrinterServiceOrder printerServiceOrder = new PrinterServiceOrder();
+            printerServiceOrder.setServiceOrder(serviceOrderModel);
+            if (printerServiceOrder.generate())
+                message("Ordem de servico reports/"+PrintableServiceOrder.REPORT_NAME+".pdf gerado com sucesso!");
+            else 
+                message("Erro ao gerar a impressao da ordem de servico!");
+        }
+    }
+    
 }
 

@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.reports.DeliveryReceipt.controller;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.model.AnimalListModel;
 import br.com.uem.iss.petshop.Commons.ListSelectController;
+import br.com.uem.iss.petshop.Commons.PetshopGeneratorReport;
 import br.com.uem.iss.petshop.Commons.StatusOperation;
 import br.com.uem.iss.petshop.Customer.model.Customer;
 import br.com.uem.iss.petshop.Customer.model.CustomerListModel;
@@ -48,21 +49,8 @@ public class DeliveryReceiptController  {
     public Boolean generateReport() {
         ArrayList<DeliveryReceipt> deliveryReceiptModels = new ArrayList<>();
         deliveryReceiptModels.add(deliveryReceiptModel.getDeliveryReciReceipt());
-        return generateReport(DeliveryReceiptModel.REPORT_NAME,deliveryReceiptModels);
-    }
- 
-    private Boolean generateReport(String reportName, Collection<?> collection) {
-        JasperReport report;
-        try {
-            report = JasperCompileManager.compileReport("reports/"+reportName+".jrxml");
-            JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(collection));
-            JasperExportManager.exportReportToPdfFile(print,"reports/"+reportName+".pdf");
-        } catch (JRException e) {
-            e.printStackTrace();
-            System.out.println("Erro ao gerar o relatorio");
-            return false;
-        }
-        return true;
+        PetshopGeneratorReport pg = new PetshopGeneratorReport();
+        return pg.generateReport(DeliveryReceiptModel.REPORT_NAME,deliveryReceiptModels);
     }
 
     public void selectCustomer() {

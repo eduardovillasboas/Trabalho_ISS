@@ -199,9 +199,9 @@ public class Animal implements Serializable, PetshopEntity {
             if (animal == null)
                 return false;
             DateUtil d = new DateUtil();
+            //!animal.getBirth().equals(d.toDate("")) &&
             return !animal.getName().isEmpty() && 
                     !animal.getBreed().isEmpty() &&
-                    !animal.getBirth().equals(d.toDate("")) &&
                     animal.getHeight() != 0 &&
                     animal.getWeight() != 0;
         }

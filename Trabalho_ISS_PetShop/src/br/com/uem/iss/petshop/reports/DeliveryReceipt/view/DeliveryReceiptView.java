@@ -322,7 +322,7 @@ public class DeliveryReceiptView extends javax.swing.JDialog implements
         }
             
         if (deliveryReceiptController.generateReport())
-            JOptionPane.showMessageDialog(this, DeliveryReceiptModel.REPORT_NAME+".pdf gerado com sucesso", "Mensagem do Sistema", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "reports/"+DeliveryReceiptModel.REPORT_NAME+".pdf gerado com sucesso!", "Mensagem do Sistema", JOptionPane.INFORMATION_MESSAGE);
         else 
             messageView("Erro ao gerar o comprovante de entrega!");
 

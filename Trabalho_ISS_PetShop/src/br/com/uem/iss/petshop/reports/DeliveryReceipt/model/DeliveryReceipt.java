@@ -90,7 +90,7 @@ public class DeliveryReceipt {
         companyModel.initialize();
     }
 
-    void setCustomer(Customer customer) {
+    public void setCustomer(Customer customer) {
         customerModel.setCustomer(customer);
     }
 

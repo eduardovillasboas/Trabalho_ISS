@@ -111,6 +111,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jComboBoxServiceOrderStatus = new javax.swing.JComboBox();
         jTextFieldVendor = new javax.swing.JTextField();
         jButtonCloseServiceOrder = new javax.swing.JButton();
+        jButtonPrintServiceOrder = new javax.swing.JButton();
 
         setMaximizable(true);
         setResizable(true);
@@ -389,6 +390,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
 
         jButtonCloseServiceOrder.setText("Fechar Ordem de Servico");
 
+        jButtonPrintServiceOrder.setText("Imprimir");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -398,6 +401,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonPrintServiceOrder)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonCloseServiceOrder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonCancel)
@@ -426,7 +431,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonRecord)
-                    .addComponent(jButtonCloseServiceOrder))
+                    .addComponent(jButtonCloseServiceOrder)
+                    .addComponent(jButtonPrintServiceOrder))
                 .addGap(6, 6, 6))
         );
 
@@ -451,6 +457,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     private javax.swing.JButton jButtonAddService;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonCloseServiceOrder;
+    private javax.swing.JButton jButtonPrintServiceOrder;
     private javax.swing.JButton jButtonRecord;
     private javax.swing.JButton jButtonRemoveService;
     private javax.swing.JButton jButtonSelectAnimal;

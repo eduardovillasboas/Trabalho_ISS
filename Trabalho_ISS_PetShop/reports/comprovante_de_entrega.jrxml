@@ -51,7 +51,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="260">
+		<band height="257">
 			<textField>
 				<reportElement x="100" y="17" width="100" height="20" uuid="9cfecb13-3d84-45da-a67c-1782ce47900b"/>
 				<textFieldExpression><![CDATA[$F{companyName}]]></textFieldExpression>

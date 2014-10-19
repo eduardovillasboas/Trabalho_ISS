@@ -8,7 +8,6 @@ package br.com.uem.iss.petshop.reports.DeliveryReceipt.model;
 
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Customer.model.Customer;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**

@@ -44,6 +44,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButtonPrintServiceOrder" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButtonCloseServiceOrder" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
@@ -79,6 +81,7 @@
                       <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonRecord" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonCloseServiceOrder" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonPrintServiceOrder" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               </Group>
@@ -575,6 +578,11 @@
         <Component class="javax.swing.JButton" name="jButtonCloseServiceOrder">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fechar Ordem de Servico"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonPrintServiceOrder">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Imprimir"/>
           </Properties>
         </Component>
       </SubComponents>

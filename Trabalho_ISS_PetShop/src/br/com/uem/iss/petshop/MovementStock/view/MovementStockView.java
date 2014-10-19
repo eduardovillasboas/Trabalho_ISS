@@ -7,13 +7,9 @@ package br.com.uem.iss.petshop.MovementStock.view;
 
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
-import br.com.uem.iss.petshop.MovementStock.controller.MovementStockController;
 import br.com.uem.iss.petshop.MovementStock.model.MovementStockModel;
-import br.com.uem.iss.petshop.Product.controller.ProductController;
-import br.com.uem.iss.petshop.Product.model.ProductModel;
 import java.util.ArrayList;
 import br.com.uem.iss.petshop.MovementStock.controller.MovementStockController;
-import br.com.uem.iss.petshop.Utils.NumberUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -24,10 +20,10 @@ import javax.swing.JOptionPane;
  * @author Lucas
  */
 public class MovementStockView extends javax.swing.JInternalFrame implements ViewInterface {
-    
+
     MovementStockController movimentStockController;
     MovementStockModel movementStockModel;
-    
+
     ArrayList<ObserverJInternalFrame> observerJInternalFrames;
 
     /**
@@ -107,6 +103,8 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
 
         jLabel6.setText("Estoque Atual:");
 
+        jFormattedTextFieldValorAtualEstoque.setEditable(false);
+
         jButtonCancelar.setText("Cancelar");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ENTRADA", "SAIDA" }));
@@ -154,7 +152,7 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
                                             .addComponent(jLabel6)
                                             .addComponent(jFormattedTextFieldValorAtualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel2)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -235,51 +233,91 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
         updateObserversWasFinalized();
         dispose();
     }
-    
+
+    private void createActionRecord() {
+        jButtonLancar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionRecord();
+            }
+        });
+    }
+
+    private void actionRecord() {
+        if (JOptionPane.showConfirmDialog(this, "Confirma gravação?", "Mensage do sistema", JOptionPane.INFORMATION_MESSAGE)
+                != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        if (movimentStockController.persist()) {
+            finalizeMovementView();
+        }
+    }
+
     private void createActionCancel() {
         jButtonCancelar.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 finalizeMovementView();
             }
-            
+
         });
     }
-    
+
     @Override
     public void createActions() {
         createActionCancel();
+        createSelectProductAction();
+        createActionRecord();
     }
-    
+
     @Override
     public void configure() {
         createActions();
         setVisible(true);
     }
-    
+
     @Override
     public void updateModelFromViewValues() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void updateViewFromModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jFormattedTextField1.setText(movementStockModel.getData_execution().toString());
     }
-    
+
     @Override
     public void register(ObserverJInternalFrame o) {
         observerJInternalFrames.add(o);
     }
-    
+
     @Override
     public void updateObserversWasFinalized() {
         observerJInternalFrames.stream().forEach((observerJInternalFrame) -> {
             observerJInternalFrame.wasFinalized(this);
         });
     }
-    
+
+    private void createSelectProductAction() {
+        jButtonSelecionarItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectProductAction();
+            }
+        });
+    }
+
+    private void selectProductAction() {
+        movimentStockController.selectProduct();
+        jTextFieldDescricaoItem.setText(movimentStockController.getMovementProductStock().getDescricao());
+        jFormattedTextFieldValorAtualEstoque.setText(movimentStockController.getMovementProductStock().getEstoque().toString());
+
+    }
+
     @Override
     public void updateViews(String msg) {
         if (msg != null) {
@@ -288,7 +326,7 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
         }
         updateViewFromModel();
     }
-    
+
     @Override
     public void errorOcurred(String error) {
         if (error == null) {
@@ -297,10 +335,10 @@ public class MovementStockView extends javax.swing.JInternalFrame implements Vie
             JOptionPane.showMessageDialog(this, error);
         }
     }
-    
+
     public void atualizeModelFromViewValues() {
         movementStockModel.setQuantidade(new Double(jFormattedTextFieldQuantidade.getText()));
-        movementStockModel.setTipo_Movimento((String) jComboBox1.getSelectedItem());        
-        movementStockModel.setData_execution(new Date(System.currentTimeMillis()));        
+        movementStockModel.setTipo_Movimento((String) jComboBox1.getSelectedItem());
+        movementStockModel.setData_execution(new Date(System.currentTimeMillis()));
     }
 }

@@ -58,7 +58,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu9 = new javax.swing.JMenu();
         jMenuItemVendaAGranel = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItemMovimentacaoEstoque = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemClose = new javax.swing.JMenuItem();
 
@@ -77,7 +79,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
             .addGap(0, 257, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Manutencao");
+        jMenu1.setText("Manutenção");
 
         jMenu7.setText("Animais e Clientes");
 
@@ -121,7 +123,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenu1.add(jMenu6);
 
-        jMenu8.setText("Veterinaria");
+        jMenu8.setText("Veterinária");
 
         jMenuItemDrugsRecord.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemDrugsRecord.setText("Cadastro de Medicamentos");
@@ -169,15 +171,28 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
         jMenuBar1.add(jMenu9);
 
-        jMenu2.setText("Consultas");
+        jMenu2.setText("Operacionais");
+
+        jMenuItemMovimentacaoEstoque.setText("Movimentação de Estoque");
+        jMenuItemMovimentacaoEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMovimentacaoEstoqueActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemMovimentacaoEstoque);
+
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Relatorios");
+        jMenu3.setText("Relatórios");
+
+        jMenuItem2.setText("Medicamentos a serem comprados");
+        jMenu3.add(jMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
 
-        jMenuItemClose.setText("Sair");
+        jMenuItemClose.setText("Sair do sistema");
         jMenu4.add(jMenuItemClose);
 
         jMenuBar1.add(jMenu4);
@@ -228,6 +243,10 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemVendaAGranelActionPerformed
 
+    private void jMenuItemMovimentacaoEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMovimentacaoEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemMovimentacaoEstoqueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -241,12 +260,14 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemCompanyRecord;
     private javax.swing.JMenuItem jMenuItemCustomerRecord;
     private javax.swing.JMenuItem jMenuItemDrugsRecord;
     private javax.swing.JMenuItem jMenuItemLoginRecord;
+    private javax.swing.JMenuItem jMenuItemMovimentacaoEstoque;
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceOrder;
@@ -270,6 +291,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createDrugsAction();
         createLoginAction();
         createCloseAction();
+        createmovimentacaoEstoqueAction();
         createServiceOrderAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -300,6 +322,19 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
     private void productAction() {
         mainController.productAction();
+    }
+    
+    private void createmovimentacaoEstoqueAction() {
+        jMenuItemMovimentacaoEstoque.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                movimentacaoEstoqueAction();
+            }
+        });
+    }
+
+    private void movimentacaoEstoqueAction() {
+        mainController.movimentacaoEstoqueAction();
     }
 
     private void createServiceAction() {

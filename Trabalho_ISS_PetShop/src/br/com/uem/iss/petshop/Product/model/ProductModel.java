@@ -70,7 +70,7 @@ public class ProductModel extends AbstractModel {
             if (product.getDescricao().isEmpty() || product.getMarca().isEmpty() || product.getPreco() <= 0 || product.getUndade().isEmpty()) {
                 throw new Exception("Algum campo obrigatório está vazio!");                                
             }
-            productDAO.persist(product);
+            productDAO.persist(product);            
             updateObservers("Dados gravados com sucesso. " + "Poduto com código " + product.getID());
             return true;
         } catch (Exception e) {

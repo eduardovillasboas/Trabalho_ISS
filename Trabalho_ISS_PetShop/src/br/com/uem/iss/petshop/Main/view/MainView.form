@@ -153,15 +153,15 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Consultas"/>
+            <Property name="text" type="java.lang.String" value="Operacionais"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemMovimentacaoEstoque">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Medicamentos(por fornecedor)"/>
+                <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o de Estoque"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemMovimentacaoEstoqueActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

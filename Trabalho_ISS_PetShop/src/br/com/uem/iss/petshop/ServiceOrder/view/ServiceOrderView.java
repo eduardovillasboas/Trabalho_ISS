@@ -49,6 +49,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         serviceOrderModel = m;
         oberverJInternalFrames = new ArrayList<>();
         registerObservers();
+        DateUtil dateUtil = new DateUtil();
+        if (serviceOrderModel.getId() == null)
+            serviceOrderModel.setEmissionDate(dateUtil.getCurrentDate());
+            
+
         updateViewFromModel();
         
     }
@@ -110,6 +115,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jLabel13 = new javax.swing.JLabel();
         jComboBoxServiceOrderStatus = new javax.swing.JComboBox();
         jTextFieldVendor = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jTextFieldEmissionDate = new javax.swing.JTextField();
         jButtonCloseServiceOrder = new javax.swing.JButton();
         jButtonPrintServiceOrder = new javax.swing.JButton();
 
@@ -326,6 +333,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
 
         jTextFieldVendor.setText("jTextField3");
 
+        jLabel14.setText("Data de emissão:");
+
+        jTextFieldEmissionDate.setEditable(false);
+        jTextFieldEmissionDate.setText("jTextField1");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -337,7 +349,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel9))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -353,12 +366,15 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jTextFieldEntryValue, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel14))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxPaymentType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxPaymentType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jTextFieldEmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -382,9 +398,12 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
                         .addComponent(jTextFieldEntryValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel14)
+                    .addComponent(jTextFieldEmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -469,6 +488,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -492,6 +512,7 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextFieldCustomerLastName;
     private javax.swing.JTextField jTextFieldCustomerName;
     private javax.swing.JTextField jTextFieldCustomerPhone;
+    private javax.swing.JTextField jTextFieldEmissionDate;
     private javax.swing.JTextField jTextFieldEntryValue;
     private javax.swing.JTextField jTextFieldExecuteDate;
     private javax.swing.JTextField jTextFieldTotal;
@@ -803,6 +824,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         jTextAreaNote.setText(serviceOrderModel.getNote());
         jComboBoxServiceOrderStatus.setSelectedIndex(serviceOrderModel.getStatusIndex());
         jComboBoxPaymentType.setSelectedIndex(serviceOrderModel.getPaymentIndex());
+        String dateString = dateUtil.toString(serviceOrderModel.getEmissionDate());
+        jTextFieldEmissionDate.setText(dateString);
     }
 
     private void dynamicFillComponents() {

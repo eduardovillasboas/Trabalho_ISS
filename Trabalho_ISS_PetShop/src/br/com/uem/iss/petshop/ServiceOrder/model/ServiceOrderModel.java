@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -206,7 +208,18 @@ public class ServiceOrderModel extends AbstractModel{
     public List<Service> getServices() {
         return serviceOrder.getServices();
     }
+
+    public Date getEmissionDate() {
+        return serviceOrder.getEmissionDate();
+    }
     
+    public void setEmissionDate(Date date) {
+        this.serviceOrder.setEmissionDate(date);
+    }
+
+    public Long getId() {
+        return serviceOrder.getID();
+    }
 
     public interface ObserverTotalCalculed {
         public void totalWasCalculed(BigDecimal value);

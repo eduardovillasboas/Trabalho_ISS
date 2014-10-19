@@ -43,6 +43,18 @@ public class ServiceOrder implements Serializable, PetshopEntity {
     @JoinColumn(name = "customer_id")        
     private Customer customer;
     
+    @Temporal(TemporalType.DATE)
+    private Date emissionDate;
+    
+    public Date getEmissionDate() {
+        return emissionDate;
+    }
+    
+    public void setEmissionDate(Date date) {
+        this.emissionDate = date;
+    }
+
+    
     @ManyToOne
     @JoinColumn(name = "animal_id")
     private Animal animal;

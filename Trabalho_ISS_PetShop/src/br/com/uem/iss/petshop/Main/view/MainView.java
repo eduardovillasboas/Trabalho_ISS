@@ -64,6 +64,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItemDeliveryReceipt = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemClose = new javax.swing.JMenuItem();
 
@@ -201,6 +202,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItemDeliveryReceipt.setText("Comprovante de Entrega(impressao)");
         jMenu3.add(jMenuItemDeliveryReceipt);
 
+        jMenuItem3.setText("Relatório de Vendas");
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
@@ -272,6 +276,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAnimalRecord;
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemCompanyRecord;

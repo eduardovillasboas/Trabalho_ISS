@@ -56,6 +56,10 @@ public class MainController {
         mainView.createControls();
     }
 
+    public void serviceOrderReport() {
+        
+    }   
+
     public void reportDeliveryReceipt() {
         DeliveryReceiptModel deliveryReceiptModel = new DeliveryReceiptModel();
         DeliveryReceiptController deliveryReceiptController = new DeliveryReceiptController(mainView,deliveryReceiptModel);

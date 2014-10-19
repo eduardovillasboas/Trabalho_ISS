@@ -198,6 +198,11 @@
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Vendas"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemServiceOrderReport">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Relatorio de ordem de servico"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">

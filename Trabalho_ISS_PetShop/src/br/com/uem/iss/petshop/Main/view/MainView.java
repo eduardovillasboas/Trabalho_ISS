@@ -65,6 +65,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItemDeliveryReceipt = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemServiceOrderReport = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemClose = new javax.swing.JMenuItem();
 
@@ -205,6 +206,9 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         jMenuItem3.setText("Relatório de Vendas");
         jMenu3.add(jMenuItem3);
 
+        jMenuItemServiceOrderReport.setText("Relatorio de ordem de servico");
+        jMenu3.add(jMenuItemServiceOrderReport);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sair");
@@ -288,6 +292,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
     private javax.swing.JMenuItem jMenuItemPatologyRecord;
     private javax.swing.JMenuItem jMenuItemProductRecord;
     private javax.swing.JMenuItem jMenuItemServiceOrder;
+    private javax.swing.JMenuItem jMenuItemServiceOrderReport;
     private javax.swing.JMenuItem jMenuItemServiceRecord;
     private javax.swing.JMenuItem jMenuItemVacinaRecord;
     private javax.swing.JMenuItem jMenuItemVendaAGranel;
@@ -312,6 +317,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createmovimentacaoEstoqueAction();
         createServiceOrderAction();
         createDeliveryReceiptAction();
+        createActionServiceOrderReport();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -541,4 +547,19 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         mainController.reportDeliveryReceipt();
 
     }
+
+    private void createActionServiceOrderReport() {
+        jMenuItemServiceOrderReport.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionServiceOrderReport();
+            }
+        });
+    }
+    
+    private void actionServiceOrderReport() {
+        mainController.serviceOrderReport();
+    }
+    
 }

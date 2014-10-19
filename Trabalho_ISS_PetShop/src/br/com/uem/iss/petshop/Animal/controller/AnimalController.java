@@ -9,7 +9,7 @@ package br.com.uem.iss.petshop.Animal.controller;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
-import br.com.uem.iss.petshop.Animal.model.Animal_;
+import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.view.AnimalView;
 import br.com.uem.iss.petshop.Commons.ListSelectController;
 import br.com.uem.iss.petshop.Commons.StatusOperation;

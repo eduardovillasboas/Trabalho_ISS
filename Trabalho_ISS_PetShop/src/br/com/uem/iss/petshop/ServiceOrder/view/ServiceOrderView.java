@@ -12,7 +12,7 @@ import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
-import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder_;
+import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder;
 import br.com.uem.iss.petshop.Utils.DateUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

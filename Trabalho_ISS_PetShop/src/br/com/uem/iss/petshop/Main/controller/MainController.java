@@ -35,6 +35,8 @@ import br.com.uem.iss.petshop.Vacina.controller.FactoryVacinaController;
 import br.com.uem.iss.petshop.Vacina.model.VacinaListModel;
 import br.com.uem.iss.petshop.reports.DeliveryReceipt.controller.DeliveryReceiptController;
 import br.com.uem.iss.petshop.reports.DeliveryReceipt.model.DeliveryReceiptModel;
+import br.com.uem.iss.petshop.reports.ServiceOrder.controller.ServiceOrderReportController;
+import br.com.uem.iss.petshop.reports.ServiceOrder.model.ServiceOrderReportModel;
 
 /**
  *
@@ -57,7 +59,9 @@ public class MainController {
     }
 
     public void serviceOrderReport() {
-        
+        ServiceOrderReportModel serviceOrderReportModel = new ServiceOrderReportModel();
+        ServiceOrderReportController serviceOrderReportController = new ServiceOrderReportController(mainView, serviceOrderReportModel);
+        serviceOrderReportController.exec();
     }   
 
     public void reportDeliveryReceipt() {

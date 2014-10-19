@@ -9,6 +9,7 @@ package br.com.uem.iss.petshop.ServiceOrder.model;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -95,6 +96,14 @@ public class ServiceOrderListModel extends AbstractModelList{
     @Override
     public PetshopEntity getPetshopEntityAt(int value) {
         return serviceOrders.get(value);
+    }
+
+    public void initialize(Date initialDate, Date finalDate) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<ServiceOrder> getServiceOrders() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

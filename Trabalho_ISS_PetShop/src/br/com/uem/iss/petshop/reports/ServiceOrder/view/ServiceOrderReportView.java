@@ -6,6 +6,14 @@
 
 package br.com.uem.iss.petshop.reports.ServiceOrder.view;
 
+import br.com.uem.iss.petshop.Utils.DateUtil;
+import br.com.uem.iss.petshop.reports.ServiceOrder.controller.ServiceOrderReportController;
+import br.com.uem.iss.petshop.reports.ServiceOrder.model.ServiceOrderReportModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author EDUARDO
@@ -15,11 +23,26 @@ public class ServiceOrderReportView extends javax.swing.JDialog {
     /**
      * Creates new form ServiceOrderReportView
      */
-    public ServiceOrderReportView(java.awt.Frame parent, boolean modal) {
+    ServiceOrderReportController serviceOrderReportController;
+    ServiceOrderReportModel serviceOrderReportModel;
+    
+    public ServiceOrderReportView(java.awt.Frame parent, boolean modal, 
+            ServiceOrderReportController serviceOrderReportController,
+            ServiceOrderReportModel serviceOrderReportModel) {
         super(parent, modal);
         initComponents();
+        this.serviceOrderReportController = serviceOrderReportController;
+        this.serviceOrderReportModel = serviceOrderReportModel;
+        jTextFieldFinalDate.setText("");
+        jTextFieldInitialDate.setText("");
     }
 
+    public void configure() {
+        createActions();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,23 +55,23 @@ public class ServiceOrderReportView extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldInitialDate = new javax.swing.JTextField();
+        jTextFieldFinalDate = new javax.swing.JTextField();
         jButtonGenerate = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatorio de ordens de Servico");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Período"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ordens de Servico por Período"));
 
         jLabel1.setText("Data inicial:");
 
         jLabel2.setText("Data final:");
 
-        jTextField1.setText("jTextField1");
+        jTextFieldInitialDate.setText("jTextField1");
 
-        jTextField2.setText("jTextField2");
+        jTextFieldFinalDate.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -58,11 +81,11 @@ public class ServiceOrderReportView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldInitialDate, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(12, 12, 12)
-                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                .addComponent(jTextFieldFinalDate, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,8 +94,8 @@ public class ServiceOrderReportView extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldInitialDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFinalDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -120,7 +143,75 @@ public class ServiceOrderReportView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextFieldFinalDate;
+    private javax.swing.JTextField jTextFieldInitialDate;
     // End of variables declaration//GEN-END:variables
+
+    private void createActions() {
+        createActionGenerate();
+        createActionCancel();
+    }
+
+    private void createActionGenerate() {
+        jButtonGenerate.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionGenerate();
+            }
+        });
+    }
+
+    private void actionGenerate() {
+        DateUtil dateUtil = new DateUtil();
+        Date initialDate;
+        Date finalDate;
+        if (!dateUtil.isValid(jTextFieldInitialDate.getText())){
+            message("data inicial invalida!");
+            return;
+        }
+        //query.setParameter("date", new java.util.Date(), TemporalType.DATE);
+        if (!dateUtil.isValid(jTextFieldFinalDate.getText())){
+            message("data final invalida!");
+            return;
+        }
+        
+        initialDate = dateUtil.toDate(jTextFieldInitialDate.getText());
+        finalDate = dateUtil.toDate(jTextFieldFinalDate.getText());
+        
+        if (finalDate.before(initialDate)) {
+            message("A data inicial deve ser menor ou igual a data final");
+            return;
+        }
+            
+        if (serviceOrderReportController.generate(initialDate, finalDate))
+            message("Relatório de ordem de servico reports/"+ServiceOrderReportModel.REPORT_NAME+".pdf gerado com sucesso!");
+        else
+            message("Erro ao gerar o relatório de ordens de servico!");
+    }
+    
+    private void createActionCancel() {
+        jButtonCancel.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionCancel();
+            }
+        });
+    }
+    
+    private Boolean question(String question) {
+        return JOptionPane.showConfirmDialog(this, question, "Mensagem do Sistema", JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION;
+    }
+    
+    public void message(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Mensagem do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void actionCancel() {
+        if (!question("Deseja fechar a janela?")) {
+            return;
+        }
+        dispose();
+    }
 }

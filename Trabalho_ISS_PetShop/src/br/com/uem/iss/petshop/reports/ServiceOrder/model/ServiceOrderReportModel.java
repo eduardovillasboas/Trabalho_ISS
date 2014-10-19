@@ -6,10 +6,22 @@
 
 package br.com.uem.iss.petshop.reports.ServiceOrder.model;
 
+import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrder;
+import java.util.ArrayList;
+
 /**
  *
  * @author EDUARDO
  */
 public class ServiceOrderReportModel {
+
+    final public static String REPORT_NAME = "relatorio_ordem_servico";
+    public void initialize() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<ServiceOrderReport> generate(ArrayList<ServiceOrder> serviceOrders) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -294,6 +294,7 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
         createLoginAction();
         createCloseAction();
         createServiceOrderAction();
+        createDeliveryReceiptAction();
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
@@ -494,5 +495,20 @@ public class MainView extends javax.swing.JFrame implements ObserverJInternalFra
 
     private void serviceOrderAction() {
         mainController.serviceOrderAction();
+    }
+
+    private void createDeliveryReceiptAction() {
+        jMenuItemDeliveryReceipt.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionDeliveryReceipt();
+            }
+        });
+    }
+    
+    private void actionDeliveryReceipt() {
+        mainController.reportDeliveryReceipt();
+               
     }
 }

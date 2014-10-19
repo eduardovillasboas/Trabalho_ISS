@@ -11,6 +11,7 @@ import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import br.com.uem.iss.petshop.Service.model.Service;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Sale implements Serializable, PetshopEntity {
     public void setID(Long ID) {
         this.ID = ID;
     }
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<ItemSale> itens_sale;
 
     public List<ItemSale> getItens_sale() {
@@ -73,7 +74,7 @@ public class Sale implements Serializable, PetshopEntity {
     @Column(name = "valor")
     Double valor;
 
-    @Column(name = "forma_pagamento", length = 15)
+    @Column(name = "forma_pagamento")
     String forma_pagamento;
 
     public Animal getAnimal() {

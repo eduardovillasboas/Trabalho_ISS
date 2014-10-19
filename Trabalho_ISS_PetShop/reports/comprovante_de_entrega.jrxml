@@ -38,20 +38,20 @@
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[TITLE]]></text>
+					<text><![CDATA[Recibo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="966c24fb-d85d-4273-8515-27b5fc49ab96"/>
+					<reportElement x="320" y="43" width="255" height="20" forecolor="#FFFFFF" uuid="966c24fb-d85d-4273-8515-27b5fc49ab96"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Add a description here]]></text>
+					<text><![CDATA[Comprovante de entrega de animais]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="206">
+		<band height="260">
 			<textField>
 				<reportElement x="100" y="17" width="100" height="20" uuid="9cfecb13-3d84-45da-a67c-1782ce47900b"/>
 				<textFieldExpression><![CDATA[$F{companyName}]]></textFieldExpression>
@@ -83,43 +83,35 @@
 				<text><![CDATA[Nome do cliente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="53" width="100" height="20" uuid="ce0a84f8-9800-4f53-95d4-7d180fe4e507"/>
+				<reportElement x="0" y="96" width="100" height="20" uuid="ce0a84f8-9800-4f53-95d4-7d180fe4e507"/>
 				<text><![CDATA[Nome do animal:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="300" y="53" width="100" height="20" uuid="7a816cd6-849c-4376-a1c5-302786a43fd0"/>
+				<reportElement x="100" y="96" width="100" height="20" uuid="7a816cd6-849c-4376-a1c5-302786a43fd0"/>
 				<textFieldExpression><![CDATA[$F{animalName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="91" width="400" height="18" uuid="ec07a8bb-0d32-48eb-a6b5-aa65ff177448"/>
-				<textFieldExpression><![CDATA["Eu " + $F{customerName} + " declaro ter pego o animal " + $F{animalName} ]]></textFieldExpression>
+				<reportElement x="0" y="141" width="400" height="18" uuid="ec07a8bb-0d32-48eb-a6b5-aa65ff177448"/>
+				<textFieldExpression><![CDATA["Eu " + $F{customerName} + " declaro ter pego o animal " + $F{animalName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="109" width="222" height="20" uuid="2b4b99a5-f9fb-47b6-82d7-6832869a7b97"/>
+				<reportElement x="0" y="159" width="222" height="20" uuid="2b4b99a5-f9fb-47b6-82d7-6832869a7b97"/>
 				<textFieldExpression><![CDATA["em perfeitas condições de saude."]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="218" y="154" width="182" height="1" uuid="6fe25ac2-99a5-457a-afb9-3da7896524a4"/>
+				<reportElement x="219" y="208" width="182" height="1" uuid="6fe25ac2-99a5-457a-afb9-3da7896524a4"/>
 			</line>
 			<textField>
-				<reportElement x="261" y="165" width="100" height="20" uuid="f569fa91-35f4-4a1a-a3dd-7c819b661357"/>
+				<reportElement x="262" y="219" width="100" height="20" uuid="f569fa91-35f4-4a1a-a3dd-7c819b661357"/>
 				<textFieldExpression><![CDATA["Assinatura."]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="21">
-			<line>
-				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="daf47e5a-1611-4d9f-8ef5-b879f59b4102"/>
-			</line>
-		</band>
+		<band height="21"/>
 	</columnHeader>
 	<detail>
-		<band height="20">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="8e3f9fdc-b496-4f79-a6a4-2d9a437964b8"/>
-			</line>
-		</band>
+		<band height="20"/>
 	</detail>
 	<columnFooter>
 		<band/>

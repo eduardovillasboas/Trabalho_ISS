@@ -102,5 +102,56 @@ public class DateUtilTest {
         
 
     }
+
+    /**
+     * Test of getCurrentDate method, of class DateUtil.
+     */
+    @Test
+    public void testGetCurrentDate() {
+        System.out.println("getCurrentDate");
+        DateUtil instance = new DateUtil();
+        Date expResult = Calendar.getInstance().getTime();
+        Date result = instance.getCurrentDate();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isValid method, of class DateUtil.
+     */
+    @Test
+    public void testIsValid() {
+        System.out.println("isValid");
+        DateUtil instance = new DateUtil();
+        
+        Boolean result = instance.isValid("23/06/1982");
+        assertEquals(true, result);
+        
+        result = instance.isValid("31/06/2014");
+        assertEquals(true, result);
+        
+        result = instance.isValid("");
+        assertEquals(false, result);
+        
+    }
+
+    /**
+     * Test of before method, of class DateUtil.
+     */
+    @Test
+    public void testBefore() {
+        System.out.println("before");
+        Date date;
+        Date currentDate = Calendar.getInstance().getTime();
+        DateUtil instance = new DateUtil();
+        
+        date = instance.getCurrentDate();
+        boolean result = instance.before(date, currentDate);
+        assertEquals(false, result);
+        
+        date = instance.toDate("23/06/1982");
+        result = instance.before(date, currentDate);
+        assertEquals(true, result);
+        
+    }
     
 }

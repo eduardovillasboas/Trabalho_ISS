@@ -15,6 +15,7 @@ import br.com.uem.iss.petshop.reports.ServiceOrder.model.ServiceOrderReportModel
 import br.com.uem.iss.petshop.reports.ServiceOrder.view.ServiceOrderReportView;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -36,7 +37,7 @@ public class ServiceOrderReportController {
 
     public Boolean generate(Date initialDate, Date finalDate) {
         ArrayList<ServiceOrderReport> serviceOrdersReport = new ArrayList<>();
-        ArrayList<ServiceOrder> serviceOrders;
+        List<ServiceOrder> serviceOrders;
         
         ServiceOrderListModel serviceOrderListModel = new ServiceOrderListModel();
         serviceOrderListModel.initialize(initialDate, finalDate);

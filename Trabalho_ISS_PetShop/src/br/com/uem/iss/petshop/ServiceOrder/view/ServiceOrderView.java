@@ -536,6 +536,11 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
     @Override
     public void configure() {
         createActions();
+        if (serviceOrderModel.getId() == null){
+            jButtonPrintServiceOrder.setEnabled(false);
+        } else { 
+            jButtonPrintServiceOrder.setEnabled(true);
+        }
         setVisible(true);
     }
 

@@ -99,11 +99,18 @@ public class ServiceOrderListModel extends AbstractModelList{
     }
 
     public void initialize(Date initialDate, Date finalDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        initialize();
+        List<ServiceOrder> serviceOrdersLocal = new ArrayList<>();
+        for (ServiceOrder serviceOrder : this.serviceOrders) {
+            if (serviceOrder.getEmissionDate().before(initialDate) || serviceOrder.getEmissionDate().after(finalDate))
+                continue;
+            serviceOrdersLocal.add(serviceOrder);
+        }
+        this.serviceOrders = serviceOrdersLocal;
     }
 
-    public ArrayList<ServiceOrder> getServiceOrders() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
     }
     
 }

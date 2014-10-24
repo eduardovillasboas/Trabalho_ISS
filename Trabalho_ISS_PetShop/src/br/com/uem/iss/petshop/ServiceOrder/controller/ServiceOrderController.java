@@ -23,7 +23,7 @@ import br.com.uem.iss.petshop.ServiceOrder.view.ServiceOrderView;
  *
  * @author EDUARDO
  */
-public class ServiceOrderController implements ControllerInterface{
+public class ServiceOrderController implements ServiceOrderControllerInterface{
 
     final private ServiceOrderModel serviceOrderModel;
     final private ServiceOrderView serviceOrderView;
@@ -66,7 +66,9 @@ public class ServiceOrderController implements ControllerInterface{
         return serviceOrderModel.persist();
     }
 
+    @Override
     public void selectCustomer() {
+        
         ListSelectController listSelectController;
         CustomerListModel customerListModel = new CustomerListModel();
         customerListModel.initialize();
@@ -83,6 +85,7 @@ public class ServiceOrderController implements ControllerInterface{
         
     }
 
+    @Override
     public void selectAnimal() {
         ListSelectController listSelectController;
         AnimalListModel animalListModel = new AnimalListModel();
@@ -100,6 +103,7 @@ public class ServiceOrderController implements ControllerInterface{
 
     }
 
+    @Override
     public void addService() {
         ListSelectController listSelectController;
         ServiceListModel serviceListModel = new ServiceListModel();
@@ -116,16 +120,19 @@ public class ServiceOrderController implements ControllerInterface{
         
     }
 
+    @Override
     public void calculeTotal() {
         serviceOrderModel.calculeTotal();
     }
 
 
+    @Override
     public void removeService(int selected) {
         serviceOrderModel.remove(selected);
     }
 
-    public boolean canPrint() {
+    @Override
+    public Boolean canPrint() {
         return true;
     }
 }

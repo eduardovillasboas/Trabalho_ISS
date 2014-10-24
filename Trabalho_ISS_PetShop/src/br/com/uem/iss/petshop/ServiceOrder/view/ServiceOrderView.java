@@ -10,7 +10,6 @@ import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
-import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderControllerInterface;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
 import br.com.uem.iss.petshop.ServiceOrder.print.PrintableServiceOrder;
 import br.com.uem.iss.petshop.ServiceOrder.print.PrinterServiceOrder;
@@ -41,10 +40,10 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         initComponents();
     }
     */
-    final private ServiceOrderControllerInterface serviceOrderController;
+    final private ServiceOrderController serviceOrderController;
     final private ServiceOrderModel serviceOrderModel;
     final private ArrayList<ObserverJInternalFrame> oberverJInternalFrames;
-    public ServiceOrderView(ServiceOrderControllerInterface c, ServiceOrderModel m) {
+    public ServiceOrderView(ServiceOrderController c, ServiceOrderModel m) {
         initComponents();
         serviceOrderController = c;
         serviceOrderModel = m;
@@ -614,23 +613,16 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
             JOptionPane.showMessageDialog(this, "O campo Valor da entrada deve utilizar ponto(.) como separador!", "Mensagem do sistema", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-       
-        serviceOrderModel.setPaymentTypeByIndex(jComboBoxPaymentType.getSelectedIndex());
-        serviceOrderModel.setStatuByIndex(jComboBoxServiceOrderStatus.getSelectedIndex());
-        serviceOrderModel.setNote(jTextAreaNote.getText());
-        serviceOrderModel.setVendor(jTextFieldVendor.getText());
-        serviceOrderModel.setExecuteDate(dateUtil.toDate(jTextFieldExecuteDate.getText()));
+        setDataServiceOrder(dateUtil);
         try {
             serviceOrderModel.setEntryValue(new Double(jTextFieldEntryValue.getText()));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao converter o campo de entrada", "Erro do sistema", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Valor de entrada inválido", "Erro do sistema", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
         if (!serviceOrderController.persist()){
             return;
         }
-        
         finalizeServiceOrderView();
     }
     
@@ -872,6 +864,15 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
             else 
                 message("Erro ao gerar a impressao da ordem de servico!");
         }
+    }
+
+    private void setDataServiceOrder(DateUtil dateUtil) {
+        serviceOrderModel.setPaymentTypeByIndex(jComboBoxPaymentType.getSelectedIndex());
+        serviceOrderModel.setStatuByIndex(jComboBoxServiceOrderStatus.getSelectedIndex());
+        serviceOrderModel.setNote(jTextAreaNote.getText());
+        serviceOrderModel.setVendor(jTextFieldVendor.getText());
+        serviceOrderModel.setExecuteDate(dateUtil.toDate(jTextFieldExecuteDate.getText()));
+
     }
     
 }

@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.reports.DeliveryReceipt.model;
 
+import br.com.uem.iss.petshop.Animal.DAO.AnimalDAO;
 import br.com.uem.iss.petshop.Animal.model.Animal;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import br.com.uem.iss.petshop.Company.model.Company;
@@ -40,7 +41,7 @@ public class DeliveryReceipt {
     private CustomerModel customerModel;
     
     public DeliveryReceipt() {
-        animalModel = new AnimalModel();
+        animalModel = new AnimalModel(new AnimalDAO());
         companyModel = new CompanyModel();
         customerModel = new CustomerModel();
         Company company = getCompany();
@@ -63,18 +64,6 @@ public class DeliveryReceipt {
     
     public String getCompanyCity() {
         return companyModel.getCidade();
-    }
-    
-    public String getAnimalName() {
-        return animalModel.getName();
-    }
-    
-    public String getCustomerName() {
-        return customerModel.getName();
-    }
-    
-    public String getCustomerLastName() {
-        return customerModel.getLastName();
     }
     
     public String getDate(){

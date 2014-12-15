@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Animal.controller;
 
+import br.com.uem.iss.petshop.Animal.DAO.AnimalDAO;
 import br.com.uem.iss.petshop.Animal.model.AnimalModel;
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
@@ -20,7 +21,7 @@ public class FactoryAnimalController implements FactoryController {
 
     @Override
     public ControllerInterface factoty(PetshopEntity entity, ObserverJInternalFrame desktop, ObserverJInternalFrame listView) {
-        AnimalModel model = new AnimalModel();
+        AnimalModel model = new AnimalModel(new AnimalDAO());
         model.setEntity(entity);
         AnimalController c = new AnimalController(model, 
                                                   desktop, 

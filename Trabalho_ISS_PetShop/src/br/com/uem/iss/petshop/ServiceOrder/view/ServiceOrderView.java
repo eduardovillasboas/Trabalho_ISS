@@ -10,6 +10,7 @@ import br.com.uem.iss.petshop.Interfaces.ObserverJInternalFrame;
 import br.com.uem.iss.petshop.Interfaces.ObserverModel;
 import br.com.uem.iss.petshop.Interfaces.ViewInterface;
 import br.com.uem.iss.petshop.ServiceOrder.controller.ServiceOrderController;
+import br.com.uem.iss.petshop.ServiceOrder.controllerInterfaces.ServiceOrderControllerInterface;
 import br.com.uem.iss.petshop.ServiceOrder.model.ServiceOrderModel;
 import br.com.uem.iss.petshop.ServiceOrder.print.PrintableServiceOrder;
 import br.com.uem.iss.petshop.ServiceOrder.print.PrinterServiceOrder;
@@ -40,10 +41,10 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         initComponents();
     }
     */
-    final private ServiceOrderController serviceOrderController;
+    final private ServiceOrderControllerInterface serviceOrderController;
     final private ServiceOrderModel serviceOrderModel;
     final private ArrayList<ObserverJInternalFrame> oberverJInternalFrames;
-    public ServiceOrderView(ServiceOrderController c, ServiceOrderModel m) {
+    public ServiceOrderView(ServiceOrderControllerInterface c, ServiceOrderModel m) {
         initComponents();
         serviceOrderController = c;
         serviceOrderModel = m;
@@ -625,6 +626,8 @@ public class ServiceOrderView extends javax.swing.JInternalFrame
         }
         finalizeServiceOrderView();
     }
+    
+    
     
     private void createCancelAction() {
         jButtonCancel.addActionListener(new ActionListener() {

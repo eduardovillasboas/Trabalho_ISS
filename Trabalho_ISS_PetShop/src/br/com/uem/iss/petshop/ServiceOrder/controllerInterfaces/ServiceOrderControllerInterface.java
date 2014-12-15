@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.uem.iss.petshop.ServiceOrder.controller;
+package br.com.uem.iss.petshop.ServiceOrder.controllerInterfaces;
 
 import br.com.uem.iss.petshop.Interfaces.ControllerInterface;
 

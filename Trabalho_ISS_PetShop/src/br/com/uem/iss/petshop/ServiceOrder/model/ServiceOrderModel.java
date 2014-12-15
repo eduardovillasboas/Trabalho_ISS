@@ -245,11 +245,11 @@ public class ServiceOrderModel extends AbstractModel{
     }
 
     public interface ObserverServiceOrderChangeAnimal{
-        void animalChanged();
+        public void animalChanged();
     } 
     
     public interface ObserverServiceOrderChangeCustomer{
-        void customerChanged();
+        public void customerChanged();
     }
     
     private List<Object> paymentSituations;

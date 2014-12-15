@@ -23,7 +23,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class AnimalModel extends AbstractModel{
 
-    final private AnimalDAO animalDAO;
+    final private IAnimalDAO animalDAO;
     private Animal animal;
 
     public void setCustomer(List<Customer> customer) {
@@ -70,10 +70,10 @@ public class AnimalModel extends AbstractModel{
         animal.setWeight(weight);
     }
     
-    public AnimalModel() {
+    public AnimalModel(IAnimalDAO animalDAO) {
         super();
         animal = new Animal();
-        animalDAO = new AnimalDAO();
+        this.animalDAO = animalDAO;
     }
 
     

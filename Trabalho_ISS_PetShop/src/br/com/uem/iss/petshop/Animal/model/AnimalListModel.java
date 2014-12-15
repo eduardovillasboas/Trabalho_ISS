@@ -6,6 +6,7 @@
 
 package br.com.uem.iss.petshop.Animal.model;
 
+import br.com.uem.iss.petshop.Animal.DAO.AnimalDAO;
 import br.com.uem.iss.petshop.Abstract.model.AbstractModelList;
 import br.com.uem.iss.petshop.Interfaces.PetshopEntity;
 import java.util.ArrayList;
